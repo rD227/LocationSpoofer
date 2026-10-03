@@ -17,6 +17,7 @@
 package com.vincenthzr.locationspoofer.xposed.hooks
 
 import android.util.Log
+import com.vincenthzr.locationspoofer.xposed.hooks.vendor.profiles.versions.installAndroid11WifiScannerHooks
 import com.vincenthzr.locationspoofer.xposed.LocationHooker
 import com.vincenthzr.locationspoofer.xposed.diagnostics.HookStatus
 import com.vincenthzr.locationspoofer.xposed.hooks.vendor.SystemClassLocator
@@ -176,22 +177,13 @@ internal fun LocationHooker.hookSystemWifiService(classLoader: ClassLoader) {
 }
 
 internal fun LocationHooker.installWifiHooks(wifiServiceClass: Class<*>, classLoader: ClassLoader) {
+    if (LocationHooker.hasTypeByName(wifiServiceClass, "android.net.wifi.IWifiScanner")) {
+        installWifiScannerHooks(wifiServiceClass, classLoader)
+        return
+    }
     if (hookedCallbackClasses.putIfAbsent(wifiServiceClass, true) != null) {
         return
     }
-
-    val realCapabilities = listOf(
-        "[WPA2-PSK-CCMP][RSN-PSK-CCMP][ESS]",
-        "[WPA2-PSK-CCMP+TKIP][RSN-PSK-CCMP+TKIP][ESS]",
-        "[WPA2-PSK-CCMP][ESS][WPS]",
-        "[WPA-PSK-TKIP+CCMP][WPA2-PSK-TKIP+CCMP][ESS]",
-        "[RSN-PSK-CCMP][ESS]",
-        "[WPA2-EAP-CCMP][RSN-EAP-CCMP][ESS]",
-        "[ESS]",
-        "[WPA2-PSK-CCMP][RSN-PSK-CCMP][ESS][WPS]",
-        "[WPA2-SAE-CCMP][RSN-SAE-CCMP][ESS]",
-        "[WPA2-PSK+SAE-CCMP][RSN-PSK+SAE-CCMP][ESS]"
-    )
 
     // =========================================================================
     // 1. getScanResults：向目标应用派发伪造周边 Wi-Fi 列表
@@ -215,115 +207,9 @@ internal fun LocationHooker.installWifiHooks(wifiServiceClass: Class<*>, classLo
             // 透传给它（会暴露真实位置、与已伪造的 GPS 坐标产生矛盾触发风控），但也不能像旧版本
             // 那样用坐标 Hash 兜底伪造一批假热点——用户关闭该开关就是不想让 Wi-Fi 子系统参与模拟，
             // 正确行为是让目标应用看到"周边无 Wi-Fi"（空列表），而不是真实数据或另一份假数据。
-            val mockWifi = config.optBoolean("mock_wifi", true)
-
-            val fakeList = java.util.ArrayList<Any>()
-            val wifiObj = config.optJSONObject("wifi_json")
-
             try {
                 val scanResultClass = XposedHelpers.findClass("android.net.wifi.ScanResult", classLoader)
-                val baseTimestamp = android.os.SystemClock.elapsedRealtimeNanos()
-                val rng = Random()
-
-                fun addFakeScanResult(wifi: JSONObject) {
-                    val fakeScanResult = XposedHelpers.newInstance(scanResultClass)
-                    val ssidVal = wifi.optString("ssid", "")
-                    val bssidVal = wifi.optString("bssid", "")
-                    val finalSsid = if (ssidVal.isEmpty() || ssidVal == "<unknown ssid>") {
-                        "WIFI_${bssidVal.takeLast(5).replace(":", "")}"
-                    } else {
-                        ssidVal
-                    }
-                    XposedHelpers.setObjectField(fakeScanResult, "SSID", finalSsid)
-                    XposedHelpers.setObjectField(fakeScanResult, "BSSID", bssidVal)
-                    val level = wifi.optInt("level", -65)
-                    XposedHelpers.setIntField(fakeScanResult, "level", level)
-                    XposedHelpers.setIntField(fakeScanResult, "frequency", wifi.optInt("frequency", 2412))
-                    XposedHelpers.setObjectField(
-                        fakeScanResult,
-                        "capabilities",
-                        wifi.optString("capabilities", realCapabilities[rng.nextInt(realCapabilities.size)])
-                    )
-
-                    // 适配 Android 10+ (API 29+): 设置 wifiSsid 对象，防止高德/微信等 SDK 读不到 SSID
-                    try {
-                        val wifiSsidClass = XposedHelpers.findClassIfExists("android.net.wifi.WifiSsid", classLoader)
-                        if (wifiSsidClass != null) {
-                            val wifiSsidObj = XposedHelpers.callStaticMethod(
-                                wifiSsidClass,
-                                "fromBytes",
-                                finalSsid.toByteArray(Charsets.UTF_8)
-                            )
-                            if (wifiSsidObj != null) {
-                                try { XposedHelpers.setObjectField(fakeScanResult, "wifiSsid", wifiSsidObj) } catch (_: Throwable) {}
-                            }
-                        }
-                    } catch (_: Throwable) {}
-
-                    // 适配 ColorOS / OxygenOS / HyperOS: 必须初始化 informationElements 和 radioChainInfos，
-                    // 否则系统服务中的统计上报组件抛出 NPE
-                    try {
-                        val ieClass = XposedHelpers.findClassIfExists("android.net.wifi.ScanResult\$InformationElement", classLoader)
-                        if (ieClass != null) {
-                            val emptyIeArray = ReflectArray.newInstance(ieClass, 0)
-                            XposedHelpers.setObjectField(fakeScanResult, "informationElements", emptyIeArray)
-                        }
-                    } catch (_: Throwable) {}
-
-                    try {
-                        val rciClass = XposedHelpers.findClassIfExists("android.net.wifi.ScanResult\$RadioChainInfo", classLoader)
-                        if (rciClass != null) {
-                            val emptyRciArray = ReflectArray.newInstance(rciClass, 0)
-                            XposedHelpers.setObjectField(fakeScanResult, "radioChainInfos", emptyRciArray)
-                        }
-                    } catch (_: Throwable) {}
-
-                    try {
-                        val offsetNanos = (rng.nextInt(200_000) * 1000L)
-                        XposedHelpers.setLongField(fakeScanResult, "timestamp", (baseTimestamp - offsetNanos) / 1000)
-                    } catch (_: Throwable) {}
-
-                    fakeList.add(fakeScanResult)
-                }
-
-                if (mockWifi && wifiObj != null) {
-                    val isConnected = wifiObj.optBoolean("isConnected", false)
-                    val connectedWifi = if (isConnected) wifiObj.optJSONObject("connectedWifi") else null
-                    if (connectedWifi != null) {
-                        addFakeScanResult(connectedWifi)
-                    }
-
-                    val nearbyArray = wifiObj.optJSONArray("nearbyWifi")
-                    if (nearbyArray != null) {
-                        for (i in 0 until nearbyArray.length()) {
-                            val wifi = nearbyArray.getJSONObject(i)
-                            addFakeScanResult(wifi)
-                        }
-                    }
-                }
-
-                // 若没有采集或设置 Wi-Fi 列表，按坐标 Hash 稳定生成 5 个虚拟热点（仅在开关开启时兜底）
-                if (mockWifi && fakeList.isEmpty()) {
-                    val lat = config.optDouble("lat", 0.0)
-                    val lng = config.optDouble("lng", 0.0)
-                    val seed = ((lat * 100000).toLong() xor (lng * 100000).toLong())
-                    val random = Random(seed)
-                    for (i in 0 until 5) {
-                        val fakeWifi = JSONObject()
-                        fakeWifi.put("ssid", "WIFI_${random.nextInt(9000) + 1000}")
-                        val bssid = String.format(
-                            "%02x:%02x:%02x:%02x:%02x:%02x",
-                            random.nextInt(256), random.nextInt(256), random.nextInt(256),
-                            random.nextInt(256), random.nextInt(256), random.nextInt(256)
-                        )
-                        fakeWifi.put("bssid", bssid)
-                        fakeWifi.put("level", -40 - random.nextInt(50))
-                        fakeWifi.put("frequency", if (random.nextBoolean()) 2412 else 5180)
-                        fakeWifi.put("capabilities", "[WPA2-PSK-CCMP][ESS]")
-                        addFakeScanResult(fakeWifi)
-                    }
-                }
-
+                val fakeList = buildSystemWifiScanResults(config, classLoader)
                 logWifi("[SysWifi] Dispatched ${fakeList.size} fake scan results to ${explicitPkg ?: "caller"}")
 
                 // 核心修复: Android 8~15 中 WifiServiceImpl.getScanResults 返回类型通常是 ParceledListSlice<ScanResult>
@@ -506,66 +392,30 @@ internal fun LocationHooker.installWifiHooks(wifiServiceClass: Class<*>, classLo
         logWifi("[SysWifi] hook getConnectionInfo failed: $e")
     }
 
-    // =========================================================================
-    // 2.1 WifiScanningServiceImpl：拦截通过 WifiScanner.getSingleScanResults 获取热点的系统定位/反作弊 SDK
-    // =========================================================================
+    // Scanner services can register through a different class loader or later than Wi-Fi.
+    val scannerClass = SystemClassLocator.locate(SystemComponent.WIFI_SCANNER_SERVICE,
+        wifiServiceClass.classLoader ?: classLoader, extraLoaders = listOf(classLoader))
+    if (scannerClass != null) installWifiScannerHooks(scannerClass, scannerClass.classLoader ?: classLoader)
+}
+
+private fun LocationHooker.installWifiScannerHooks(scannerClass: Class<*>, loader: ClassLoader) {
+    if (hookedCallbackClasses.putIfAbsent(scannerClass, true) != null) return
     try {
-        // 扫描服务与 WifiServiceImpl 在同一个 APEX 里，优先用它的 ClassLoader
-        val scannerClass = SystemClassLocator.locate(
-            SystemComponent.WIFI_SCANNER_SERVICE, wifiServiceClass.classLoader ?: classLoader,
-            extraLoaders = listOf(classLoader)
-        )
-        if (scannerClass != null && hookedCallbackClasses.putIfAbsent(scannerClass, true) == null) {
-            val singleScanMethods = arrayOf("getSingleScanResults")
-            for (mName in singleScanMethods) {
-                XposedHelpers.hookAllMethods(scannerClass, mName) { chain, _ ->
-                    val config = readConfig() ?: return@hookAllMethods chain.proceed(chain.args.toTypedArray())
-                    if (!config.optBoolean("active", false)) {
-                        return@hookAllMethods chain.proceed(chain.args.toTypedArray())
-                    }
-                    val explicitPkg = SystemHookUtils.extractPackageName(chain.args)
-                    val overrideUid = SystemHookUtils.extractCallerUid(chain.args)
-                    val isTarget = SystemHookUtils.isTargetCaller(chain.thisObject, explicitPkg, config, overrideUid)
-                    if (!isTarget) {
-                        return@hookAllMethods chain.proceed(chain.args.toTypedArray())
-                    }
-                    val mockWifi = config.optBoolean("mock_wifi", true)
-                    val fakeList = java.util.ArrayList<Any>()
-                    if (!mockWifi) {
-                        // 与 getScanResults 一致：开关关闭时返回空列表，既不泄露真实热点也不伪造假数据
-                        logWifi("[SysWifi] WifiScanningServiceImpl.getSingleScanResults suppressed (mock_wifi off) for ${explicitPkg ?: "caller"}")
-                        return@hookAllMethods fakeList
-                    }
-                    val scanResultClass = XposedHelpers.findClass("android.net.wifi.ScanResult", classLoader)
-                    val baseTimestamp = android.os.SystemClock.elapsedRealtimeNanos()
-                    val rng = Random()
-                    val lat = config.optDouble("lat", 0.0)
-                    val lng = config.optDouble("lng", 0.0)
-                    val seed = ((lat * 100000).toLong() xor (lng * 100000).toLong())
-                    val random = Random(seed)
-                    for (i in 0 until 5) {
-                        val fakeScanResult = XposedHelpers.newInstance(scanResultClass)
-                        XposedHelpers.setObjectField(fakeScanResult, "SSID", "WIFI_${random.nextInt(9000) + 1000}")
-                        val bssid = String.format(
-                            "%02x:%02x:%02x:%02x:%02x:%02x",
-                            random.nextInt(256), random.nextInt(256), random.nextInt(256),
-                            random.nextInt(256), random.nextInt(256), random.nextInt(256)
-                        )
-                        XposedHelpers.setObjectField(fakeScanResult, "BSSID", bssid)
-                        XposedHelpers.setObjectField(fakeScanResult, "capabilities", "[WPA2-PSK-CCMP][ESS]")
-                        XposedHelpers.setIntField(fakeScanResult, "level", -40 - random.nextInt(50))
-                        XposedHelpers.setIntField(fakeScanResult, "frequency", if (random.nextBoolean()) 2412 else 5180)
-                        XposedHelpers.setLongField(fakeScanResult, "timestamp", baseTimestamp - (rng.nextInt(500) * 1000L))
-                        fakeList.add(fakeScanResult)
-                    }
-                    logWifi("[SysWifi] WifiScanningServiceImpl.getSingleScanResults intercepted for ${explicitPkg ?: "caller"}")
-                    return@hookAllMethods fakeList
-                }
+        if (android.os.Build.VERSION.SDK_INT == 30 && scannerClass.declaredMethods.none { it.name == "getSingleScanResults" }) {
+            installAndroid11WifiScannerHooks(scannerClass, loader)
+        } else {
+            XposedHelpers.hookAllMethods(scannerClass, "getSingleScanResults") { chain, method ->
+                val config = readConfig() ?: return@hookAllMethods chain.proceed(chain.args.toTypedArray())
+                if (!SystemHookUtils.isTargetCaller(chain.thisObject, SystemHookUtils.extractPackageName(chain.args),
+                        config, SystemHookUtils.extractCallerUid(chain.args))) return@hookAllMethods chain.proceed(chain.args.toTypedArray())
+                val results = buildSystemWifiScanResults(config, loader)
+                val type = (method as java.lang.reflect.Method).returnType
+                if (type.name.contains("ParceledListSlice")) XposedHelpers.newInstance(type, results) else results
             }
-            logWifi("[SysWifi] WifiScanningServiceImpl.getSingleScanResults hooked")
         }
-    } catch (t: Throwable) {
-        logWifi("[SysWifi] hook WifiScanningServiceImpl failed: $t")
+    } catch (error: Throwable) {
+        HookStatus.error("WifiScanner compatibility", error)
+        logWifi("[SysWifi] Scanner hook failed: $error")
     }
 }
 

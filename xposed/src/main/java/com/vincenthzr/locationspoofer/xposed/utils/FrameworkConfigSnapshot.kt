@@ -3,7 +3,7 @@ package com.vincenthzr.locationspoofer.xposed.utils
 import com.vincenthzr.locationspoofer.utils.FrameworkConfigChannel
 import org.json.JSONObject
 
-internal data class FrameworkConfigSnapshot(val config: JSONObject, val source: String, val publishedAt: Long) {
+internal data class FrameworkConfigSnapshot(val config: JSONObject, val source: String, val publishedAt: Long, val id: String) {
     companion object {
         fun decode(text: String, readFile: (String) -> String): FrameworkConfigSnapshot {
             val envelope = JSONObject(text)
@@ -17,7 +17,8 @@ internal data class FrameworkConfigSnapshot(val config: JSONObject, val source: 
             return FrameworkConfigSnapshot(
                 JSONObject(payload),
                 if (file.isEmpty()) "libxposed:remote-preferences" else "libxposed:remote-file",
-                envelope.getLong("published_at")
+                envelope.getLong("published_at"),
+                envelope.getString("id")
             )
         }
     }

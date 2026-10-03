@@ -283,7 +283,7 @@ class ConfigManager(private val context: Context, private val rootManager: RootM
 
                 override fun listFiles(): List<String> = service.listRemoteFiles().toList()
                 override fun deleteFile(name: String) { service.deleteRemoteFile(name) }
-            })
+            }, mirrorSnapshot = android.os.Build.VERSION.SDK_INT == 30)
             publicationPending = false
             // Migration runs only after the replacement channel accepted a complete snapshot.
             val now = System.currentTimeMillis()

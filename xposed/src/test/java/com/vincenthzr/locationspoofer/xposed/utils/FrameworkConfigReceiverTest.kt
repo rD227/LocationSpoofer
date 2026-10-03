@@ -55,7 +55,7 @@ class FrameworkConfigReceiverTest {
     @Test fun malformedUpdateKeepsValidConfigAndLaterUpdateRecovers() {
         val prefs = Preferences().apply { snapshot = snapshot() }
         val configs = mutableListOf<FrameworkConfigSnapshot>()
-        val errors = mutableListOf<Exception>()
+        val errors = mutableListOf<Throwable>()
         FrameworkConfigReceiver({ prefs.notifyingPrefs }, { error("Unexpected file") }, configs::add, errors::add).use {
             it.refresh()
             it.refresh()
@@ -110,5 +110,37 @@ class FrameworkConfigReceiverTest {
         assertThrows(IllegalArgumentException::class.java) { FrameworkConfigSnapshot.decode(future) { error("Unexpected file") } }
         val traversal = snapshot(file = "${FrameworkConfigChannel.FILE_PREFIX}../other.json")
         assertThrows(IllegalArgumentException::class.java) { FrameworkConfigSnapshot.decode(traversal) { error("Unexpected file") } }
+    }
+
+    @Test fun staleFrameworkCacheCannotReplayActiveAfterReconciledStop() {
+        val old = JSONObject(snapshot()).put("published_at", 1L).toString()
+        val stop = JSONObject(snapshot("{\"active\":false}")).put("published_at", 2L).toString()
+        val prefs = Preferences().apply { snapshot = old }
+        var file = stop
+        val configs = mutableListOf<FrameworkConfigSnapshot>()
+        val receiver = FrameworkConfigReceiver({ prefs.notifyingPrefs }, { file }, configs::add, {}, reconcileFile = true)
+        receiver.use {
+            it.refresh()
+            assertFalse(configs.last().config.getBoolean("active"))
+            assertEquals("libxposed:remote-file-reconciled", configs.last().source)
+            file = "{unfinished"
+            it.refresh()
+            assertEquals(2, configs.size)
+            file = stop
+            it.refresh()
+            assertEquals(2, configs.size)
+        }
+    }
+
+    @Test fun frameworkErrorDoesNotDisableScheduledReconciliation() {
+        val configs = mutableListOf<FrameworkConfigSnapshot>()
+        val stopped = CountDownLatch(1)
+        val receiver = FrameworkConfigReceiver({ throw LinkageError("Framework temporarily unavailable") },
+            { snapshot("{\"active\":false}") }, { configs.add(it); stopped.countDown() }, {}, reconcileFile = true)
+        receiver.use {
+            it.start()
+            assertTrue(stopped.await(3, TimeUnit.SECONDS))
+            assertFalse(configs.single().config.getBoolean("active"))
+        }
     }
 }

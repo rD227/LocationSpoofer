@@ -600,7 +600,8 @@ class LocationHooker : XposedModule() {
             },
             onError = { error ->
                 XposedBridge.log("[Config] Framework receive failed: ${error.javaClass.simpleName}: ${error.message}")
-            }
+            },
+            reconcileFile = android.os.Build.VERSION.SDK_INT == 30
         ).also { it.start() }
     }
 

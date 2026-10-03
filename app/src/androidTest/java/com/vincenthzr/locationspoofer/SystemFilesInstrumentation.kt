@@ -16,16 +16,23 @@ class SystemFilesInstrumentation : Instrumentation() {
     private var environmentRefresh = false
     private var moduleRuntime = false
     private var moduleHotReload = false
+    private var deployHotReload = false
 
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
         environmentRefresh = arguments?.getString("check") == "environment-refresh"
         moduleRuntime = arguments?.getString("check") == "module-runtime"
         moduleHotReload = arguments?.getString("check") == "module-hot-reload"
+        deployHotReload = arguments?.getString("check") == "module-hot-reload-active"
         start()
     }
 
     override fun onStart() {
+        if (deployHotReload) {
+            val output = reloadRunningModule()
+            finish(if (output.getString("result") == "PASS") -1 else 0, output)
+            return
+        }
         if (moduleHotReload) {
             val output = verifyModuleHotReload()
             finish(if (output.getString("result") == "PASS") -1 else 0, output)

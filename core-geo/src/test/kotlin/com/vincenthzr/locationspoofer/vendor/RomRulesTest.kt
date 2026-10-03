@@ -4,6 +4,14 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class RomRulesTest {
+    @Test
+    fun `LineageOS on Xiaomi hardware uses AOSP rather than HyperOS`() {
+        val profile = VendorProfile("Xiaomi", "Redmi", "Redmi 4X", "santoni", 30, "11",
+            mapOf("ro.lineage.version" to "18.1-20260524-UNOFFICIAL-Mi8937_4_19"))
+        assertEquals(RomFamily.AOSP, profile.family)
+        assertEquals("LineageOS 18.1 · Android 11", profile.systemLabel)
+        assertEquals(VendorScheme.AOSP, VendorScheme.forFamily(profile.family))
+    }
 
     private fun profile(manufacturer: String, brand: String = manufacturer, release: String = "15", prop: Pair<String, String>? = null) =
         VendorProfile(manufacturer, brand, "model", "device", 35, release, listOfNotNull(prop).toMap())

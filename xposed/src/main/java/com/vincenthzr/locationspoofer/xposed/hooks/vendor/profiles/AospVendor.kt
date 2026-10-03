@@ -32,6 +32,8 @@ object AospVendor : SystemHookVendor {
         )
         SystemComponent.LOCATION_PROVIDER_MANAGER -> listOf(
             "com.android.server.location.provider.LocationProviderManager",
+            "com.android.server.location.LocationManagerService\$LocationProviderManager",
+            "com.android.server.LocationManagerService\$LocationProviderManager",
         )
         SystemComponent.WIFI_SERVICE -> listOf(
             "com.android.server.wifi.WifiServiceImpl",

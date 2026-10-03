@@ -20,6 +20,7 @@ object RomRules {
 
     /** 采集设备画像时会尝试读取的系统属性——各 OEM 用来标识自身 ROM 与版本的关键属性都放这里。 */
     val PROBED_PROPS = listOf(
+        "ro.lineage.version",
         // 小米 HyperOS / MIUI
         "ro.mi.os.version.name",
         "ro.mi.os.version.code",
@@ -52,6 +53,7 @@ object RomRules {
         val names = setOf(p.manufacturer.lowercase(), p.brand.lowercase())
         fun brandIn(set: Set<String>) = names.any { it in set }
         return when {
+            p.hasProp("ro.lineage.version") -> RomFamily.AOSP
             p.hasProp("ro.mi.os.version.name") || p.hasProp("ro.miui.ui.version.name") || brandIn(XIAOMI_BRANDS) ->
                 RomFamily.HYPEROS_MIUI
             p.hasProp("ro.build.version.oplusrom") || p.hasProp("ro.build.version.opporom") || brandIn(OPLUS_BRANDS) ->
@@ -86,6 +88,7 @@ object RomRules {
 
     fun systemLabel(p: VendorProfile): String {
         val android = "Android ${p.release}"
+        if (p.hasProp("ro.lineage.version")) return "LineageOS ${p.prop("ro.lineage.version").substringBefore('-')} · $android"
         if (familyOf(p) == RomFamily.AOSP) return android
         val version = romVersion(p)
         return if (version.isBlank()) "${romName(p)} · $android" else "${romName(p)} $version · $android"

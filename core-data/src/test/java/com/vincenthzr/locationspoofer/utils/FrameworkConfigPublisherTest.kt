@@ -87,4 +87,25 @@ class FrameworkConfigPublisherTest {
         publisher.publish("{\"active\":false}", store)
         assertEquals(setOf("user-export.json"), store.files.keys)
     }
+
+    @Test fun reconciliationCopyIsSelfContainedAndOnlyFollowsSuccessfulCommit() {
+        val store = Store()
+        val publisher = FrameworkConfigPublisher()
+        val payload = JSONObject().put("route", "x".repeat(140_000)).toString()
+        publisher.publish(payload, store, mirrorSnapshot = true)
+        val current = store.files.getValue(FrameworkConfigChannel.CURRENT_SNAPSHOT_FILE)
+        val mirror = JSONObject(current.toString(Charsets.UTF_8))
+        assertFalse(mirror.has("file"))
+        assertEquals(payload, mirror.getString("payload"))
+        assertEquals(JSONObject(store.snapshot!!).getString("id"), mirror.getString("id"))
+        assertEquals(listOf("file", "commit", "file"), store.events)
+        store.accept = false
+        assertThrows(IllegalStateException::class.java) {
+            publisher.publish("{\"active\":false}", store, mirrorSnapshot = true)
+        }
+        assertArrayEquals(current, store.files.getValue(FrameworkConfigChannel.CURRENT_SNAPSHOT_FILE))
+        store.accept = true
+        publisher.publish("{\"active\":false}", store, mirrorSnapshot = true)
+        assertEquals(setOf(FrameworkConfigChannel.CURRENT_SNAPSHOT_FILE), store.files.keys)
+    }
 }

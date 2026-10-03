@@ -502,7 +502,9 @@ internal fun LocationHooker.hookConnectivityLayer(
                             } catch (e: Throwable) {
                             }
                         }
-                        XposedHelpers.setObjectField(nc, "mTransportInfo", fakeWifiInfo)
+                        // WifiInfo did not implement TransportInfo until Android 12.
+                        val field = nc.javaClass.getDeclaredField("mTransportInfo").apply { isAccessible = true }
+                        if (field.type.isInstance(fakeWifiInfo)) field.set(nc, fakeWifiInfo)
                     }
 
                     // 将 TRANSPORT_WIFI (1) 注入 NetworkCapabilities 中，以便 DevCheck 将其识别为 Wi-Fi

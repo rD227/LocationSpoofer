@@ -23,6 +23,31 @@ private suspend fun moduleService(): XposedService {
     error("Framework service unavailable")
 }
 
+/** Deploy installed code without changing the user's current simulation or rebooting. */
+internal fun Instrumentation.reloadRunningModule(): Bundle {
+    val output = Bundle()
+    try {
+        runBlocking {
+            val service = moduleService()
+            check(service.apiVersion >= 102)
+            val targets = service.runningTargets
+            check(targets.map { it.processName }.toSet() == setOf("system", "com.android.phone", "com.android.bluetooth"))
+            for (target in targets) {
+                val completion = CompletableDeferred<HotReloadResult>()
+                service.hotReloadModule(target, null) { _, result -> completion.complete(result) }
+                val result = withTimeout(30_000) { completion.await() }
+                output.putString(target.processName, "${result.status()}: ${result.message()}")
+                check(result.status() == HotReloadResult.Status.SUCCEEDED)
+            }
+            check(service.runningTargets.associate { it.processName to it.pid } == targets.associate { it.processName to it.pid })
+        }
+        output.putString("result", "PASS")
+    } catch (error: Throwable) {
+        output.putString("result", "FAIL: ${error.stackTraceToString()}")
+    }
+    return output
+}
+
 /** Module-scoped diagnostics; does not start or stop a simulation. */
 internal fun Instrumentation.verifyModuleRuntime(): Bundle {
     val output = Bundle()

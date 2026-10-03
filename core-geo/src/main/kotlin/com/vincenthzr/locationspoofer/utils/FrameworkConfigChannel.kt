@@ -8,6 +8,8 @@ object FrameworkConfigChannel {
     // Leave ample room for Binder's other in-flight transactions. Larger data uses an FD.
     const val INLINE_LIMIT_BYTES = 128 * 1024
     const val FILE_PREFIX = "locationspoofer-config-"
+    // Reconcile Android 11 framework preference caches through a fresh file descriptor.
+    const val CURRENT_SNAPSHOT_FILE = "locationspoofer-current.json"
 
     fun isConfigFile(name: String): Boolean =
         name.startsWith(FILE_PREFIX) && name.endsWith(".json") &&

@@ -24,7 +24,7 @@
 | OPPO ColorOS / 一加 OxygenOS | `ColorOs16Vendor`（API 36）/ `ColorOsVendor` | ⚠️ | ColorOS 16 / Android 16 | PJX110 部分实测；电话与蓝牙通过，持续定位及运动应用仍待复测；OxygenOS 未验证。见 [范围与截图](docs/adaptation/coloros16.md) |
 | 三星 One UI | `OneUiVendor` | ❔ | — | 同上 |
 | vivo OriginOS、荣耀 MagicOS、魅族 Flyme 等 | 无（落到 `AospVendor`） | ❔ | — | 尚无专用适配器 |
-| 原生 AOSP / 类原生 | `AospVendor` | ❔ | — | 基线适配器，尚无实机验证记录 |
+| 原生 AOSP / 类原生 | `AospVendor` | ⚠️ | LineageOS 18.1 / Android 11（API 30） | Redmi 4X 新版 GPS/network/fused/passive、单次定位、GNSS/NMEA、PendingIntent 与配置同步实测通过；用户确认高德网页可定位，其余系统及原生地图 App 未逐一复验，见 [范围与结果](docs/adaptation/android11-lineageos.md) |
 
 ### 按组件（HyperOS 4）
 
@@ -56,6 +56,7 @@
 | 设备 | 系统版本 | 验证日期 | 备注 |
 |---|---|---|---|
 | 小米 17 Pro Max | HyperOS 4 | 2026-09 | 全局方案开发与验证机 |
+| Redmi 4X (santoni) | LineageOS 18.1-20260524-UNOFFICIAL-Mi8937_4_19 / Android 11 | 2026-10 | Magisk + Vector 2.2（3080，API 102）；原版定位回调与新构建 12 项接口合约检查。保留原版未覆盖安装，新模块端到端未验证，见 [详情](docs/adaptation/android11-lineageos.md) |
 | REDMI K90 Ultra (M332BF / warsaw) | HyperOS 3 / OS3.0.308.0.WHPCNXM / Android 16 | 2026-09 | KernelSU (ksud 4.2.0) + LSPosed v2.2.0（7854），global v3.0.0-beta-2 (arm64-v8a)；实测定位注入可用（`getLastLocation` provider=fused/network），其余组件未逐一复验，见 [#74](https://github.com/HuangZhuoRui/LocationSpoofer/issues/74) |
 | PJX110 | ColorOS 16 / PJX110_16.0.1.301 / Android 16 | 2026-09 | LSPosed IT 2.1.1（7846），仅限上述部分验证 |
 

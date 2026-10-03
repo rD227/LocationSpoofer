@@ -14,7 +14,7 @@ internal interface FrameworkConfigStore {
 internal class FrameworkConfigPublisher {
     private var cleanupNeeded = true
 
-    fun publish(payload: String, store: FrameworkConfigStore): Long {
+    fun publish(payload: String, store: FrameworkConfigStore, mirrorSnapshot: Boolean = false): Long {
         val bytes = payload.toByteArray(Charsets.UTF_8)
         val publishedAt = System.currentTimeMillis()
         val file = if (bytes.size > FrameworkConfigChannel.INLINE_LIMIT_BYTES) {
@@ -32,6 +32,13 @@ internal class FrameworkConfigPublisher {
             }
             commitAttempted = true
             check(store.commit(snapshot.toString())) { "Framework rejected config publication" }
+            if (mirrorSnapshot) {
+                // Write only after a successful commit. Readers retain their last valid snapshot
+                // during a partial write and retry; this copy never depends on a deleted blob.
+                snapshot.remove("file")
+                snapshot.put("payload", payload)
+                store.writeFile(FrameworkConfigChannel.CURRENT_SNAPSHOT_FILE, snapshot.toString().toByteArray(Charsets.UTF_8))
+            }
         } catch (error: Exception) {
             // A lost Binder response does not prove the commit was rejected. Keep the file
             // until a later successful publication, so either possible pointer remains readable.

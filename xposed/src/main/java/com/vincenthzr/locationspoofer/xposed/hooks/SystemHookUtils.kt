@@ -253,12 +253,12 @@ object SystemHookUtils {
         if (isGlobalMode) {
             if (uid >= 10000) {
                 if (cleanPkg != null && !EXEMPT_PACKAGES.contains(cleanPkg)) {
-                    XposedBridge.log("[SysHook] GlobalMode match: explicitPkg=$explicitPackage (cleanPkg=$cleanPkg, uid=$uid)")
+                    logWhitelistMatch("global:$uid:$cleanPkg", "[SysHook] GlobalMode match: explicitPkg=$explicitPackage (cleanPkg=$cleanPkg, uid=$uid)")
                     return true
                 }
                 val nonExempt = callingPackages.filter { !EXEMPT_PACKAGES.contains(it.substringBefore(":")) }
                 if (nonExempt.isNotEmpty()) {
-                    XposedBridge.log("[SysHook] GlobalMode match: callingPkgs=$nonExempt (uid=$uid)")
+                    logWhitelistMatch("global:$uid", "[SysHook] GlobalMode match: callingPkgs=$nonExempt (uid=$uid)")
                     return true
                 }
             }

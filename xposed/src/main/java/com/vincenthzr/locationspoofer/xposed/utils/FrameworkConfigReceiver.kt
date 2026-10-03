@@ -10,7 +10,8 @@ internal class FrameworkConfigReceiver(
     private val getPreferences: () -> SharedPreferences,
     private val readFile: (String) -> String,
     private val onConfig: (FrameworkConfigSnapshot) -> Unit,
-    private val onError: (Exception) -> Unit
+    private val onError: (Throwable) -> Unit,
+    private val reconcileFile: Boolean = false
 ) : AutoCloseable {
     private val executor = Executors.newSingleThreadScheduledExecutor {
         Thread(it, "LocationSpoofer-ConfigReceiver").apply { isDaemon = true }
@@ -18,6 +19,8 @@ internal class FrameworkConfigReceiver(
     @Volatile private var closed = false
     private var preferences: SharedPreferences? = null
     private var lastSnapshot: String? = null
+    private var lastPublishedAt = Long.MIN_VALUE
+    private var lastSnapshotId: String? = null
     private var lastErrorAt = 0L
     // Keep a strong reference: SharedPreferences implementations may store weak listeners.
     private val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
@@ -41,21 +44,41 @@ internal class FrameworkConfigReceiver(
                 it.registerOnSharedPreferenceChangeListener(listener)
                 preferences = it
             }
-            val text = prefs.getString(FrameworkConfigChannel.SNAPSHOT_KEY, null) ?: return
-            if (text == lastSnapshot) return
-            val snapshot = FrameworkConfigSnapshot.decode(text, readFile)
-            if (closed) return
-            onConfig(snapshot)
-            lastSnapshot = text
-        } catch (error: Exception) {
+            prefs.getString(FrameworkConfigChannel.SNAPSHOT_KEY, null)?.let { accept(it) }
+        } catch (error: Throwable) {
             // Leave the last valid memory snapshot intact; a failed blob read is retried next tick.
             preferences?.let { runCatching { it.unregisterOnSharedPreferenceChangeListener(listener) } }
             preferences = null
-            val now = System.currentTimeMillis()
-            if (now - lastErrorAt >= 60_000) {
-                lastErrorAt = now
-                runCatching { onError(error) }
+            reportError(error)
+        }
+        if (reconcileFile && !closed) {
+            try {
+                // getString reads the framework's local cache; polling it cannot recover a lost
+                // Binder notification. openRemoteFile makes a fresh IPC request instead.
+                accept(readFile(FrameworkConfigChannel.CURRENT_SNAPSHOT_FILE), "libxposed:remote-file-reconciled")
+            } catch (_: java.io.FileNotFoundException) {
+                // Older module apps do not publish the reconciliation file.
+            } catch (error: Throwable) {
+                reportError(error)
             }
+        }
+    }
+
+    private fun accept(text: String, source: String? = null) {
+        if (text == lastSnapshot) return
+        val snapshot = FrameworkConfigSnapshot.decode(text, readFile)
+        if (closed || snapshot.id == lastSnapshotId || snapshot.publishedAt < lastPublishedAt) return
+        onConfig(if (source == null) snapshot else snapshot.copy(source = source))
+        lastSnapshot = text
+        lastPublishedAt = snapshot.publishedAt
+        lastSnapshotId = snapshot.id
+    }
+
+    private fun reportError(error: Throwable) {
+        val now = System.currentTimeMillis()
+        if (now - lastErrorAt >= 60_000) {
+            lastErrorAt = now
+            runCatching { onError(error) }
         }
     }
 
