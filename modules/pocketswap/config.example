@@ -1,0 +1,7 @@
+# Plain data only: no shell commands, spaces or inline comments.
+SIZE_MB=2048
+CHUNK_MB=512
+PRIORITY=1
+MIN_FREE_MB=1024
+# 0 refuses unencrypted storage. Change to 1 only if you accept that risk.
+ALLOW_UNENCRYPTED=0

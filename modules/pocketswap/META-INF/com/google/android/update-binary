@@ -1,0 +1,5 @@
+#!/sbin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+# Magisk Manager replaces this entry point with its own module installer.
+echo 'Install this ZIP through Magisk, KernelSU or APatch Manager. Recovery installation is unsupported.'
+exit 1
