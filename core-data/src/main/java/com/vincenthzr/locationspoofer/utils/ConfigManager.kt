@@ -278,7 +278,9 @@ class ConfigManager(private val context: Context, private val rootManager: RootM
                     prefs.edit().putString(FrameworkConfigChannel.SNAPSHOT_KEY, snapshot).commit()
 
                 override fun writeFile(name: String, payload: ByteArray) {
-                    ParcelFileDescriptor.AutoCloseOutputStream(service.openRemoteFile(name)).use { it.write(payload) }
+                    ParcelFileDescriptor.AutoCloseOutputStream(service.openRemoteFile(name)).use {
+                        overwriteFrameworkFile(it, payload)
+                    }
                 }
 
                 override fun listFiles(): List<String> = service.listRemoteFiles().toList()

@@ -20,6 +20,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.os.SystemClock
 import com.vincenthzr.locationspoofer.utils.GaitTemplate
@@ -38,10 +39,18 @@ object SensorStepHooker {
         val listener: Any,
         val sensor: Sensor?,
         val handler: Handler?
-    )
+    ) {
+        internal val schedule = StepEventSchedule()
+        internal var lastCounter: Long = Long.MIN_VALUE
+    }
 
     val capturedListeners = CopyOnWriteArrayList<CapturedSensorListener>()
     private val hookedListenerClasses = ConcurrentHashMap<Class<*>, Boolean>()
+    private val syntheticDelivery = ThreadLocal<Boolean>()
+    private var pumpThread: HandlerThread? = null
+    private var pumpHandler: Handler? = null
+    @Volatile private var pumpGeneration = 0L
+    private val mainHandler by lazy { Handler(Looper.getMainLooper()) }
 
     // 真实计步器自开机以来单调递增：换会话 / 摇杆每次写配置导致 start_timestamp 变化时，
     // 把已累计的步数接续为新的起点，而不是回到初始值
@@ -49,6 +58,7 @@ object SensorStepHooker {
     @Volatile private var stepBase: Double = INITIAL_BOOT_STEPS
     @Volatile private var lastStepsFloat: Double = INITIAL_BOOT_STEPS
     @Volatile private var lastStepInitTime: Long = 0L
+    private var lastStepSampleTime: Long = 0L
 
     private val noiseRng = java.util.Random()
     @Volatile private var cachedTemplateSource: String? = null
@@ -120,9 +130,11 @@ object SensorStepHooker {
                             }
                         }
 
-                        if (listener != null) {
-                            val targetSensor = sensor ?: getOrCreateMockSensor(Sensor.TYPE_STEP_COUNTER, classLoader)
-                            if (targetSensor != null && (targetSensor.type == Sensor.TYPE_STEP_COUNTER || targetSensor.type == Sensor.TYPE_STEP_DETECTOR || targetSensor.type == Sensor.TYPE_ACCELEROMETER)) {
+                        val virtual = sensor != null && (sensor === mockStepCounterSensor || sensor === mockStepDetectorSensor)
+                        val result = if (virtual && listener != null) true else chain.proceed(chain.args.toTypedArray())
+                        if (listener != null && result == true) {
+                            val targetSensor = sensor
+                            if (targetSensor != null && isSimulatedType(targetSensor.type)) {
                                 val entry = CapturedSensorListener(listener, targetSensor, handler)
                                 if (!capturedListeners.any { it.listener === listener && it.sensor?.type == targetSensor.type }) {
                                     capturedListeners.add(entry)
@@ -135,10 +147,11 @@ object SensorStepHooker {
 
                                 // 动态 Hook 该 Listener 的具体实现类中的 onSensorChanged 方法
                                 hookConcreteListenerClass(listener.javaClass, classLoader)
+                                startPumpIfNeeded()
                             }
                         }
 
-                        return@hookAllMethods chain.proceed(chain.args.toTypedArray())
+                        return@hookAllMethods result
                     }
                 } catch (_: Throwable) {}
             }
@@ -151,7 +164,9 @@ object SensorStepHooker {
                         val args = chain.args
                         val listener = args.firstOrNull { it != null && (it is SensorEventListener || LocationHooker.hasTypeByName(it.javaClass, "android.hardware.SensorEventListener")) }
                         if (listener != null) {
-                            capturedListeners.removeAll { it.listener === listener }
+                            val sensor = args.filterIsInstance<Sensor>().firstOrNull()
+                            capturedListeners.removeAll { it.listener === listener && (sensor == null || it.sensor === sensor) }
+                            if (!hasStepListeners()) stopPump()
                         }
                         return@hookAllMethods chain.proceed(chain.args.toTypedArray())
                     }
@@ -177,21 +192,9 @@ object SensorStepHooker {
 
                     if (handle != null && values != null) {
                         val sensorType = handleToTypeMap[handle]
-                        val speed = config.optDouble("speed_m_s", 0.0)
-
-                        if (sensorType == Sensor.TYPE_STEP_COUNTER) {
-                            // 仅对明确判定的计步器传感器进行步数计算，严禁误判光感/距离传感器
-                            val curSteps = calculateCurrentSteps(config)
-                            values[0] = curSteps.toFloat()
-                        } else if (sensorType == Sensor.TYPE_STEP_DETECTOR) {
-                            if (speed > 0.1) {
-                                values[0] = 1.0f
-                            }
-                        } else if (sensorType == Sensor.TYPE_ACCELEROMETER && values.size >= 3) {
-                            // 加速度计传感器：仅在运动中(speed > 0.1)叠加生理跑步/步行震动特征，静态时绝不篡改
-                            if (speed > 0.1) {
-                                applySyntheticVibration(values, config, speed)
-                            }
+                        if (sensorType == Sensor.TYPE_STEP_COUNTER || sensorType == Sensor.TYPE_STEP_DETECTOR) {
+                            // The cadence pump owns these streams; hardware events would double count.
+                            return@hookAllMethods null
                         }
                     }
                 }
@@ -204,10 +207,14 @@ object SensorStepHooker {
         capturedListeners.map { arrayOf<Any?>(it.listener, it.sensor, it.handler) }.toTypedArray(),
         stepBase, lastStepsFloat, lastStepInitTime,
         mockStepCounterSensor, mockStepDetectorSensor, mockAccelerometerSensor,
-        handleToTypeMap.map { arrayOf(it.key, it.value) }.toTypedArray()
+        handleToTypeMap.map { arrayOf(it.key, it.value) }.toTypedArray(), lastStepSampleTime
     )
 
-    internal fun clearReloadState() { capturedListeners.clear(); hookedListenerClasses.clear() }
+    internal fun clearReloadState() {
+        stopPump()
+        capturedListeners.clear()
+        hookedListenerClasses.clear()
+    }
 
     internal fun restoreReloadState(value: Any?) {
         val state = value as? Array<*> ?: return
@@ -215,6 +222,7 @@ object SensorStepHooker {
             capturedListeners.add(CapturedSensorListener(it[0]!!, it[1] as? Sensor, it[2] as? Handler))
             hookConcreteListenerClass(it[0]!!.javaClass, it[0]!!.javaClass.classLoader ?: ClassLoader.getSystemClassLoader())
         }
+        lastStepSampleTime = state.getOrNull(8) as? Long ?: 0L
         stepBase = state[1] as Double
         lastStepsFloat = state[2] as Double
         lastStepInitTime = state[3] as Long
@@ -230,26 +238,25 @@ object SensorStepHooker {
      * 动态 Hook 具体的 Listener 实现类（如 Keep 的 StepListener）
      */
     private fun hookConcreteListenerClass(clazz: Class<*>, classLoader: ClassLoader) {
-        if (hookedListenerClasses.putIfAbsent(clazz, true) == null) {
+        val targetClass = generateSequence(clazz) { it.superclass }.firstOrNull { type ->
+            type.declaredMethods.any { it.name == "onSensorChanged" }
+        } ?: return
+        if (hookedListenerClasses.putIfAbsent(targetClass, true) == null) {
             try {
-                XposedHelpers.hookAllMethods(clazz, "onSensorChanged") { chain, _ ->
+                XposedHelpers.hookAllMethods(targetClass, "onSensorChanged") { chain, _ ->
+                    if (syntheticDelivery.get() == true) return@hookAllMethods chain.proceed(chain.args.toTypedArray())
                     val event = chain.args.firstOrNull() as? SensorEvent
                     if (event != null && event.sensor != null) {
-                        val config = (XposedHelpers.module as? LocationHooker)?.readConfig()
-                        if (config != null && config.optBoolean("active", false) && config.optBoolean("enable_step_simulation", true)) {
-                            val speed = config.optDouble("speed_m_s", 0.0)
-                            if (event.sensor.type == Sensor.TYPE_STEP_COUNTER && event.values.isNotEmpty()) {
-                                val curSteps = calculateCurrentSteps(config)
-                                event.values[0] = curSteps.toFloat()
-                                event.timestamp = SystemClock.elapsedRealtimeNanos()
-                            } else if (event.sensor.type == Sensor.TYPE_STEP_DETECTOR && event.values.isNotEmpty()) {
-                                if (speed > 0.1) {
-                                    event.values[0] = 1.0f
-                                    event.timestamp = SystemClock.elapsedRealtimeNanos()
+                        val config = currentSimulationConfig()
+                        if (config != null) {
+                            when (event.sensor.type) {
+                                Sensor.TYPE_STEP_COUNTER, Sensor.TYPE_STEP_DETECTOR -> return@hookAllMethods null
+                                Sensor.TYPE_ACCELEROMETER, Sensor.TYPE_LINEAR_ACCELERATION, Sensor.TYPE_ACCELEROMETER_UNCALIBRATED -> {
+                                    val speed = motionSpeed(config)
+                                    if (event.values.size >= 3 && speed > 0.05) {
+                                        applySyntheticVibration(event.values, config, speed, event.sensor.type)
+                                    }
                                 }
-                            } else if (event.sensor.type == Sensor.TYPE_ACCELEROMETER && event.values.size >= 3 && speed > 0.1) {
-                                applySyntheticVibration(event.values, config, speed)
-                                event.timestamp = SystemClock.elapsedRealtimeNanos()
                             }
                         }
                     }
@@ -259,14 +266,16 @@ object SensorStepHooker {
         }
     }
 
-    private fun applySyntheticVibration(values: FloatArray, config: JSONObject, speed: Double) {
+    private fun applySyntheticVibration(values: FloatArray, config: JSONObject, speed: Double, type: Int) {
         val now = System.currentTimeMillis()
         val stepsFloat = calculateCurrentStepsFloat(config, now)
-        val motionSpeed = RouteEngine.calculateCurrentPosition(config, now).speed.toDouble().takeIf { it > 0.0 } ?: speed
-        val synthetic = RouteEngine.realismSession(config).accelerometer(stepsFloat, motionSpeed, gaitTemplate(config), noiseRng)
+        val synthetic = RouteEngine.realismSession(config).accelerometer(stepsFloat, speed, gaitTemplate(config), noiseRng)
         values[0] = synthetic[0]
         values[1] = synthetic[1]
-        values[2] = synthetic[2]
+        values[2] = synthetic[2] - if (type == Sensor.TYPE_LINEAR_ACCELERATION) 9.80665f else 0f
+        if (type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) {
+            for (index in 3 until values.size) values[index] = 0f
+        }
     }
 
     /** 用户录制的步态模板（配置里的编码字符串），按字符串内容缓存解码结果 */
@@ -286,27 +295,26 @@ object SensorStepHooker {
         calculateCurrentStepsFloat(config, now).toLong()
 
     /** 连续的累计步数：整数部分是步数，小数部分是当前这一步的相位，供加速度波形对齐 */
+    @Synchronized
     private fun calculateCurrentStepsFloat(config: JSONObject, now: Long): Double {
         val startTime = config.optLong("start_timestamp", now)
         if (lastStepInitTime != startTime) {
             lastStepInitTime = startTime
             stepBase = lastStepsFloat
+            lastStepSampleTime = now
         }
-
-        val speed = config.optDouble("speed_m_s", 0.0)
-        if (speed <= 0.05) return lastStepsFloat
-
-        val elapsedSec = ((now - startTime).coerceAtLeast(0L)) / 1000.0
-        val isAutoCadence = config.optBoolean("is_auto_cadence", true)
-        val baseCadence = if (isAutoCadence) {
-            calculateAutoCadence(speed)
-        } else {
-            config.optInt("step_cadence_spm", 165).coerceIn(60, 240)
-        }
-
-        val steps = stepBase + RouteEngine.realismSession(config, startTime).steps(baseCadence.toDouble(), elapsedSec)
-        lastStepsFloat = steps
-        return steps
+        val previousTime = lastStepSampleTime
+        lastStepSampleTime = now
+        val speed = motionSpeed(config, now)
+        if (speed <= 0.05 || previousTime == 0L || now <= previousTime) return lastStepsFloat
+        val baseCadence = if (config.optBoolean("is_auto_cadence", true)) calculateAutoCadence(speed)
+            else config.optInt("step_cadence_spm", 165).coerceIn(60, 240)
+        val session = RouteEngine.realismSession(config, startTime)
+        val elapsed = (now - startTime).coerceAtLeast(0L) / 1000.0
+        val previousElapsed = (previousTime - startTime).coerceAtLeast(0L) / 1000.0
+        lastStepsFloat += (session.steps(baseCadence.toDouble(), elapsed) -
+            session.steps(baseCadence.toDouble(), previousElapsed)).coerceAtLeast(0.0)
+        return lastStepsFloat
     }
 
     /**
@@ -323,78 +331,89 @@ object SensorStepHooker {
         }
     }
 
-    /**
-     * 由 ConfigPoller 每秒主动向监听器推送计步事件（仅在运动路线模拟中生效）
-     */
+    private fun isSimulatedType(type: Int): Boolean = type == Sensor.TYPE_STEP_COUNTER ||
+        type == Sensor.TYPE_STEP_DETECTOR || type == Sensor.TYPE_ACCELEROMETER ||
+        type == Sensor.TYPE_LINEAR_ACCELERATION || type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED
+
+    private fun currentSimulationConfig(): JSONObject? =
+        (XposedHelpers.module as? LocationHooker)?.readConfig()?.takeIf {
+            it.optBoolean("active", false) && it.optBoolean("enable_step_simulation", true)
+        }
+
+    private fun motionSpeed(config: JSONObject, now: Long = System.currentTimeMillis()): Double =
+        RouteEngine.calculateCurrentPosition(config, now).speed.toDouble()
+
+    /** The one-second config worker starts the pump; it does not clock individual steps. */
     fun dispatchStepEvents(config: JSONObject, classLoader: ClassLoader) {
-        if (!config.optBoolean("active", false)) return
-        val enableStep = config.optBoolean("enable_step_simulation", true)
-        if (!enableStep) return
+        if (currentSimulationConfig() == null) stopPump() else startPumpIfNeeded()
+    }
 
-        val speed = config.optDouble("speed_m_s", 0.0)
-        // 静态定位时绝不主动推送步频和加速度事件，保证主线程和人脸识别传感器纯净
-        if (speed <= 0.05) return
-
-        val now = System.currentTimeMillis()
-        val totalSteps = calculateCurrentSteps(config, now)
-
-        val listeners = capturedListeners.toList()
-        if (listeners.isEmpty()) return
-
-        for (entry in listeners) {
-            val listener = entry.listener
-            val sensor = entry.sensor ?: continue
-            val targetHandler = entry.handler ?: Handler(Looper.getMainLooper())
-
-            when (sensor.type) {
-                Sensor.TYPE_STEP_COUNTER -> {
-                    val event = createSensorEvent(sensor, floatArrayOf(totalSteps.toFloat()))
-                    if (event != null) {
-                        targetHandler.post {
-                            try {
-                                if (listener is SensorEventListener) {
-                                    listener.onSensorChanged(event)
-                                } else {
-                                    XposedHelpers.callMethod(listener, "onSensorChanged", event)
-                                }
-                            } catch (_: Throwable) {}
+    @Synchronized
+    private fun startPumpIfNeeded() {
+        if (pumpHandler != null || !hasStepListeners() || currentSimulationConfig() == null) return
+        val thread = HandlerThread("LocationSpoofer-steps").also { it.start() }
+        val handler = Handler(thread.looper)
+        pumpThread = thread
+        pumpHandler = handler
+        val generation = ++pumpGeneration
+        handler.post(object : Runnable {
+            override fun run() {
+                if (generation != pumpGeneration) return
+                val config = currentSimulationConfig()
+                if (config == null || !hasStepListeners()) {
+                    stopPump()
+                    return
+                }
+                val steps = calculateCurrentStepsFloat(config, System.currentTimeMillis())
+                val timestamp = SystemClock.elapsedRealtimeNanos()
+                for (entry in capturedListeners) {
+                    val sensor = entry.sensor ?: continue
+                    if (sensor.type == Sensor.TYPE_STEP_COUNTER) {
+                        val count = steps.toLong()
+                        if (entry.lastCounter != count) {
+                            entry.lastCounter = count
+                            deliver(entry, floatArrayOf(count.toFloat()), timestamp, generation)
+                        }
+                    } else if (sensor.type == Sensor.TYPE_STEP_DETECTOR) {
+                        for (stepTime in entry.schedule.advance(steps, timestamp)) {
+                            deliver(entry, floatArrayOf(1f), stepTime, generation)
                         }
                     }
                 }
-                Sensor.TYPE_STEP_DETECTOR -> {
-                    if (speed > 0.1) {
-                        val event = createSensorEvent(sensor, floatArrayOf(1.0f))
-                        if (event != null) {
-                            targetHandler.post {
-                                try {
-                                    if (listener is SensorEventListener) {
-                                        listener.onSensorChanged(event)
-                                    } else {
-                                        XposedHelpers.callMethod(listener, "onSensorChanged", event)
-                                    }
-                                } catch (_: Throwable) {}
-                            }
-                        }
-                    }
-                }
-                Sensor.TYPE_ACCELEROMETER -> {
-                    if (speed > 0.1) {
-                        val rawValues = floatArrayOf(0f, 0f, 9.8f)
-                        applySyntheticVibration(rawValues, config, speed)
-                        val event = createSensorEvent(sensor, rawValues)
-                        if (event != null) {
-                            targetHandler.post {
-                                try {
-                                    if (listener is SensorEventListener) {
-                                        listener.onSensorChanged(event)
-                                    } else {
-                                        XposedHelpers.callMethod(listener, "onSensorChanged", event)
-                                    }
-                                } catch (_: Throwable) {}
-                            }
-                        }
-                    }
-                }
+                if (generation == pumpGeneration) handler.postDelayed(this, 20L)
+            }
+        })
+    }
+
+    @Synchronized
+    private fun stopPump() {
+        ++pumpGeneration
+        pumpHandler?.removeCallbacksAndMessages(null)
+        pumpHandler = null
+        pumpThread?.quitSafely()
+        pumpThread = null
+        // A later enable must not count time spent with simulation disabled.
+        lastStepSampleTime = 0L
+    }
+
+    private fun hasStepListeners(): Boolean = capturedListeners.any {
+        it.sensor?.type == Sensor.TYPE_STEP_COUNTER || it.sensor?.type == Sensor.TYPE_STEP_DETECTOR
+    }
+
+    private fun deliver(entry: CapturedSensorListener, values: FloatArray, timestamp: Long, generation: Long) {
+        val sensor = entry.sensor ?: return
+        val event = createSensorEvent(sensor, values) ?: return
+        event.timestamp = timestamp
+        (entry.handler ?: mainHandler).post {
+            if (generation != pumpGeneration || capturedListeners.none { it === entry } || currentSimulationConfig() == null) return@post
+            syntheticDelivery.set(true)
+            try {
+                val listener = entry.listener
+                if (listener is SensorEventListener) listener.onSensorChanged(event)
+                else XposedHelpers.callMethod(listener, "onSensorChanged", event)
+            } catch (_: Throwable) {
+            } finally {
+                syntheticDelivery.remove()
             }
         }
     }
@@ -421,6 +440,9 @@ object SensorStepHooker {
             val sensor = constructor.newInstance() as Sensor
 
             setSensorField(sensor, "mType", type)
+            setSensorField(sensor, "mHandle", -10000 - type)
+            setSensorField(sensor, "mFlags", if (type == Sensor.TYPE_STEP_COUNTER) 2 else 6)
+            setSensorField(sensor, "mMaxRange", if (type == Sensor.TYPE_STEP_COUNTER) 16777216f else 1f)
             setSensorField(sensor, "mName", when(type) {
                 Sensor.TYPE_STEP_COUNTER -> "Step Counter Sensor"
                 Sensor.TYPE_STEP_DETECTOR -> "Step Detector Sensor"

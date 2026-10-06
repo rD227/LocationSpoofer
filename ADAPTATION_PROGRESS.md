@@ -56,7 +56,7 @@
 | 设备 | 系统版本 | 验证日期 | 备注 |
 |---|---|---|---|
 | 小米 17 Pro Max | HyperOS 4 | 2026-09 | 全局方案开发与验证机 |
-| Redmi 4X (santoni) | LineageOS 18.1-20260524-UNOFFICIAL-Mi8937_4_19 / Android 11 | 2026-10 | Magisk + Vector 2.2（3080，API 102）；原版定位回调与新构建 12 项接口合约检查。保留原版未覆盖安装，新模块端到端未验证，见 [详情](docs/adaptation/android11-lineageos.md) |
+| Redmi 4X (santoni) | LineageOS 18.1-20260524-UNOFFICIAL-Mi8937_4_19 / Android 11 | 2026-10 | Magisk + Vector 2.2（3080，API 102）；新版定位/GNSS/配置同步及独立传感器客户端实测通过；用户确认高德网页、支付宝定位可用。步频修复版的小程序自动暂停尚未复验，见 [详情](docs/adaptation/android11-lineageos.md) |
 | REDMI K90 Ultra (M332BF / warsaw) | HyperOS 3 / OS3.0.308.0.WHPCNXM / Android 16 | 2026-09 | KernelSU (ksud 4.2.0) + LSPosed v2.2.0（7854），global v3.0.0-beta-2 (arm64-v8a)；实测定位注入可用（`getLastLocation` provider=fused/network），其余组件未逐一复验，见 [#74](https://github.com/HuangZhuoRui/LocationSpoofer/issues/74) |
 | PJX110 | ColorOS 16 / PJX110_16.0.1.301 / Android 16 | 2026-09 | LSPosed IT 2.1.1（7846），仅限上述部分验证 |
 
