@@ -76,6 +76,7 @@ data class AppState(
     /** 已录制步态模板的步频（步/分钟），null 表示尚未录制 */
     val gaitTemplateCadence: Int? = null,
     val gaitTemplateStrides: Int = 0,
+    val gaitTemplateHasGyroscope: Boolean = false,
     val useGaitTemplate: Boolean = false,
     val gaitRecording: GaitRecordingState = GaitRecordingState.Idle,
     val keepLastMapPosition: Boolean = true,

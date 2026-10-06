@@ -312,6 +312,11 @@ private fun GaitCard(viewModel: MainViewModel, uiState: AppState, isDark: Boolea
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f)
                 )
                 if (cadence != null) {
+                    Text(
+                        text = stringResource(if (uiState.gaitTemplateHasGyroscope) R.string.gait_gyro_recorded else R.string.gait_gyro_default),
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
                     Spacer(Modifier.height(6.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(

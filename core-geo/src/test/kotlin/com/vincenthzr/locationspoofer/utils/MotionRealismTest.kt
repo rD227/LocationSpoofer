@@ -99,4 +99,38 @@ class MotionRealismTest {
         assertTrue(a === b)
         assertTrue(a !== c)
     }
+
+    @Test
+    fun `linear acceleration removes gravity in recorded device axes`() {
+        val template = GaitTemplate(FloatArray(64) { 9.80665f }, FloatArray(64), FloatArray(64), 120, 10)
+        val session = MotionRealism.Session(start, MotionRealism.Level.OFF, 0)
+        val linear = session.linearAcceleration(0.25, 1.4, template, Random(1))
+        for (axis in linear) assertEquals(0f, axis, 0.0001f)
+    }
+
+    @Test
+    fun `default gyro varies with stride has zero mean and stops at zero speed`() {
+        val session = MotionRealism.Session(start, MotionRealism.Level.OFF, 0)
+        val gyro = (0 until 1000).map { session.gyroscope(it / 500.0, 3.0, 180.0, null, Random(1)) }
+        for (axis in 0..2) {
+            assertEquals(0.0, gyro.map { it[axis] }.average(), 0.001)
+            assertTrue(gyro.maxOf { it[axis] } - gyro.minOf { it[axis] } > 0.4f)
+            assertTrue(gyro.all { it[axis].isFinite() && abs(it[axis]) < 5f })
+        }
+        assertTrue(session.gyroscope(0.2, 0.0, 180.0, null, Random(1)).all { it == 0f })
+    }
+
+    @Test
+    fun `recorded gyro uses stride phase and scales angular velocity with cadence`() {
+        val curve = FloatArray(64) { kotlin.math.sin(2 * Math.PI * it / 64).toFloat() }
+        val template = GaitTemplate(FloatArray(64), FloatArray(64), FloatArray(64) { 9.80665f },
+            120, 10, curve, curve, curve)
+        val session = MotionRealism.Session(start, MotionRealism.Level.OFF, 0)
+        val recorded = session.gyroscope(0.5, 3.0, 120.0, template, Random(1))
+        val faster = session.gyroscope(0.5, 3.0, 180.0, template, Random(1))
+        for (i in 0..2) {
+            assertEquals(1f, recorded[i], 0.0001f)
+            assertEquals(1.5f, faster[i], 0.0001f)
+        }
+    }
 }

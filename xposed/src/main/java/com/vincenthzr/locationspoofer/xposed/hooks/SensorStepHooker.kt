@@ -42,6 +42,8 @@ object SensorStepHooker {
     ) {
         internal val schedule = StepEventSchedule()
         internal var lastCounter: Long = Long.MIN_VALUE
+        internal var deliveryReported = false
+        internal var failureReported = false
     }
 
     val capturedListeners = CopyOnWriteArrayList<CapturedSensorListener>()
@@ -257,6 +259,19 @@ object SensorStepHooker {
                                         applySyntheticVibration(event.values, config, speed, event.sensor.type)
                                     }
                                 }
+                                Sensor.TYPE_GYROSCOPE,
+                                Sensor.TYPE_GYROSCOPE_UNCALIBRATED -> {
+                                    val speed = motionSpeed(config)
+
+                                    if (event.values.size >= 3 && speed > 0.05) {
+                                        applySyntheticGyroscope(
+                                            event.values,
+                                            config,
+                                            speed,
+                                            event.sensor.type
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -266,13 +281,36 @@ object SensorStepHooker {
         }
     }
 
+    private fun applySyntheticGyroscope(
+        values: FloatArray,
+        config: JSONObject,
+        speed: Double,
+        type: Int
+    ) {
+        val now = System.currentTimeMillis()
+        val steps = calculateCurrentStepsFloat(config, now)
+        val session = RouteEngine.realismSession(config)
+        val baseCadence = if (config.optBoolean("is_auto_cadence", true)) calculateAutoCadence(speed)
+            else config.optInt("step_cadence_spm", 165).coerceIn(60, 240)
+        val elapsed = (now - config.optLong("start_timestamp", now)).coerceAtLeast(0L) / 1000.0
+        val synthetic = session.gyroscope(steps, speed, session.cadence(baseCadence.toDouble(), elapsed), gaitTemplate(config), noiseRng)
+        synthetic.copyInto(values, endIndex = 3)
+        if (type == Sensor.TYPE_GYROSCOPE_UNCALIBRATED) {
+            // First three values include drift; the last three report our zero simulated drift.
+            for (index in 3 until values.size) values[index] = 0f
+        }
+    }
+
     private fun applySyntheticVibration(values: FloatArray, config: JSONObject, speed: Double, type: Int) {
         val now = System.currentTimeMillis()
         val stepsFloat = calculateCurrentStepsFloat(config, now)
-        val synthetic = RouteEngine.realismSession(config).accelerometer(stepsFloat, speed, gaitTemplate(config), noiseRng)
+        val session = RouteEngine.realismSession(config)
+        val synthetic = if (type == Sensor.TYPE_LINEAR_ACCELERATION)
+            session.linearAcceleration(stepsFloat, speed, gaitTemplate(config), noiseRng)
+        else session.accelerometer(stepsFloat, speed, gaitTemplate(config), noiseRng)
         values[0] = synthetic[0]
         values[1] = synthetic[1]
-        values[2] = synthetic[2] - if (type == Sensor.TYPE_LINEAR_ACCELERATION) 9.80665f else 0f
+        values[2] = synthetic[2]
         if (type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) {
             for (index in 3 until values.size) values[index] = 0f
         }
@@ -332,8 +370,12 @@ object SensorStepHooker {
     }
 
     private fun isSimulatedType(type: Int): Boolean = type == Sensor.TYPE_STEP_COUNTER ||
-        type == Sensor.TYPE_STEP_DETECTOR || type == Sensor.TYPE_ACCELEROMETER ||
-        type == Sensor.TYPE_LINEAR_ACCELERATION || type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED
+        type == Sensor.TYPE_STEP_DETECTOR ||
+        type == Sensor.TYPE_ACCELEROMETER ||
+        type == Sensor.TYPE_LINEAR_ACCELERATION ||
+        type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED ||
+        type == Sensor.TYPE_GYROSCOPE ||
+        type == Sensor.TYPE_GYROSCOPE_UNCALIBRATED
 
     private fun currentSimulationConfig(): JSONObject? =
         (XposedHelpers.module as? LocationHooker)?.readConfig()?.takeIf {
@@ -411,7 +453,15 @@ object SensorStepHooker {
                 val listener = entry.listener
                 if (listener is SensorEventListener) listener.onSensorChanged(event)
                 else XposedHelpers.callMethod(listener, "onSensorChanged", event)
-            } catch (_: Throwable) {
+                if (!entry.deliveryReported) {
+                    entry.deliveryReported = true
+                    android.util.Log.i("LocationSpoofer", "[SensorStep] First delivery: type=${sensor.type}, listener=${listener.javaClass.name}, thread=${Thread.currentThread().name}")
+                }
+            } catch (error: Throwable) {
+                if (!entry.failureReported) {
+                    entry.failureReported = true
+                    android.util.Log.e("LocationSpoofer", "[SensorStep] Callback failed: type=${sensor.type}, listener=${entry.listener.javaClass.name}", error)
+                }
             } finally {
                 syntheticDelivery.remove()
             }

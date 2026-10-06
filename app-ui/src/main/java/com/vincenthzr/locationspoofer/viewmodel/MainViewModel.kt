@@ -83,6 +83,7 @@ class MainViewModel(
             speedFluctuationPct = settingsRepository.speedFluctuationPct,
             gaitTemplateCadence = GaitTemplate.decode(settingsRepository.gaitTemplate)?.cadenceSpm,
             gaitTemplateStrides = GaitTemplate.decode(settingsRepository.gaitTemplate)?.strideCount ?: 0,
+            gaitTemplateHasGyroscope = GaitTemplate.decode(settingsRepository.gaitTemplate)?.hasGyroscope ?: false,
             useGaitTemplate = settingsRepository.useGaitTemplate,
             keepLastMapPosition = settingsRepository.keepLastMapPosition,
             savedLocations = settingsRepository.getSavedLocations(),

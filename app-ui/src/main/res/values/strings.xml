@@ -83,8 +83,10 @@
     <string name="speed_fluctuation_desc">During route simulation the speed slowly drifts within this range, so every kilometer has a slightly different pace</string>
     <string name="realism_next_session_hint">Changes take effect the next time you start spoofing</string>
     <string name="gait_title">Personal Gait</string>
-    <string name="gait_desc">Put the phone where you usually carry it (e.g. a pocket) and walk normally for 20 seconds. Your gait is replayed at the simulated cadence with natural step-to-step variation.</string>
-    <string name="gait_scope_hint">Step and accelerometer simulation only applies to apps checked in the LSPosed scope</string>
+    <string name="gait_desc">Carry the phone as usual (e.g. in a pocket) and walk for 20 seconds to record acceleration and gyroscope curves. Playback follows the current cadence; a default swing is used when no gyroscope recording is available.</string>
+    <string name="gait_scope_hint">Step, accelerometer and gyroscope simulation only applies to apps checked in the LSPosed scope</string>
+    <string name="gait_gyro_recorded">Personal gyroscope curve included</string>
+    <string name="gait_gyro_default">No gyroscope curve in this template; using default swing. Record again to add it.</string>
     <string name="gait_not_recorded">Not recorded yet, using the built-in gait waveform</string>
     <string name="gait_recorded_format">Recorded: %1$d steps/min, %2$d strides</string>
     <string name="gait_use_template">Use recorded gait</string>

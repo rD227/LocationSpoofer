@@ -88,8 +88,10 @@
     <string name="speed_fluctuation_desc">路线模拟时速度在该范围内缓慢起伏，每公里的配速不再完全相同</string>
     <string name="realism_next_session_hint">修改将在下次开始模拟时生效</string>
     <string name="gait_title">个人步态曲线</string>
-    <string name="gait_desc">把手机放在平时携带的位置（如裤兜），正常走路 20 秒完成录制。模拟时会按当前步频回放你的步态，并加入每一步的自然差异。</string>
-    <string name="gait_scope_hint">步数与加速度模拟只对 LSPosed 作用域中勾选的应用生效</string>
+    <string name="gait_desc">把手机放在平时携带的位置（如裤兜），正常走路 20 秒，录制加速度和陀螺仪曲线。模拟时按当前步频回放；没有陀螺仪记录时使用默认摆动曲线。</string>
+    <string name="gait_scope_hint">步数、加速度与陀螺仪模拟只对 LSPosed 作用域中勾选的应用生效</string>
+    <string name="gait_gyro_recorded">已包含个人陀螺仪曲线</string>
+    <string name="gait_gyro_default">此模板未包含陀螺仪曲线，使用默认摆动；重新录制可补充</string>
     <string name="gait_not_recorded">尚未录制，当前使用内置步态波形</string>
     <string name="gait_recorded_format">已录制：步频 %1$d 步/分钟，%2$d 个跨步</string>
     <string name="gait_use_template">使用录制的步态</string>

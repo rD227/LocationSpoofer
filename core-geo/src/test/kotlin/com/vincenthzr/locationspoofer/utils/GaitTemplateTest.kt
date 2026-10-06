@@ -77,4 +77,41 @@ class GaitTemplateTest {
         assertEquals(normal.average(), strong.average(), 0.01)
         assertTrue(strong.max() - strong.min() > normal.max() - normal.min())
     }
+
+    @Test
+    fun `gyro recording shares acceleration time origin despite different rate and delayed startup`() {
+        val acceleration = syntheticWalk(110.0, 20.0)
+        val gyro = acceleration.filterIndexed { index, _ -> index % 3 == 1 }.map {
+            GyroSample(it.timestampNanos, it.x * 0.1f, it.y * 0.1f, it.z * 0.1f)
+        }
+        val template = (GaitTemplate.extract(acceleration, gyro) as GaitTemplate.Extraction.Success).template
+        assertTrue(template.hasGyroscope)
+        for (i in 0 until GaitTemplate.SAMPLES) {
+            assertEquals(template.x[i] * 0.1f, template.gyroX!![i], 0.025f)
+            assertEquals(template.z[i] * 0.1f, template.gyroZ!![i], 0.04f)
+        }
+        val restored = GaitTemplate.decode(template.encode())!!
+        assertTrue(template.encode().startsWith("v2;"))
+        assertTrue(restored.hasGyroscope)
+        for (i in 0 until GaitTemplate.SAMPLES) {
+            assertEquals(template.gyroZ!![i], restored.gyroZ!![i], 0.001f)
+        }
+    }
+
+    @Test
+    fun `legacy templates and missing or interrupted gyro recordings fall back cleanly`() {
+        val acceleration = syntheticWalk(110.0, 20.0)
+        val legacy = (GaitTemplate.extract(acceleration) as GaitTemplate.Extraction.Success).template
+        assertTrue(legacy.encode().startsWith("v1;"))
+        assertNull(GaitTemplate.decode(legacy.encode())!!.sampleGyroscope(0.2, 1.0))
+        val interrupted = acceleration.filterIndexed { index, _ -> index < 100 || index > 300 }.map {
+            GyroSample(it.timestampNanos, 1f, 0f, 0f)
+        }
+        val fallback = (GaitTemplate.extract(acceleration, interrupted) as GaitTemplate.Extraction.Success).template
+        assertTrue(!fallback.hasGyroscope)
+        assertNull(GaitTemplate.decode(legacy.encode().replaceFirst("v1", "v2")))
+        val invalid = legacy.encode().split(';').toMutableList()
+        invalid[3] = "NaN," + invalid[3].substringAfter(',')
+        assertNull(GaitTemplate.decode(invalid.joinToString(";")))
+    }
 }

@@ -135,6 +135,55 @@ object MotionRealism {
             }
             return out
         }
+
+        /** Linear acceleration in the same device axes as the recorded template. */
+        fun linearAcceleration(stepsFloat: Double, speed: Double, template: GaitTemplate?, noise: Random): FloatArray {
+            val out = accelerometer(stepsFloat, speed, template, noise)
+            val gravity = template?.gravity() ?: floatArrayOf(0f, 0f, GRAVITY)
+            for (i in 0..2) out[i] -= gravity[i]
+            return out
+        }
+
+        /** Angular velocity (rad/s), synchronized to the same two-step stride as acceleration.
+         * The fallback models periodic pocket swing, not a calibrated measurement of a person.
+         */
+        fun gyroscope(
+            stepsFloat: Double,
+            speed: Double,
+            cadenceSpm: Double,
+            template: GaitTemplate?,
+            noise: Random
+        ): FloatArray {
+            if (speed <= 0.05 || cadenceSpm <= 0.0) return FloatArray(3)
+            val stride = stepsFloat / 2.0
+            val index = floor(stride).toLong()
+            val blend = (1 - cos(2 * PI * (stride - index) / 2)) / 2
+            val strength = 1 + level.stepAmplitudeVariation * (
+                hashUnit(startTimestamp xor STEP_SALT, index) * (1 - blend) +
+                    hashUnit(startTimestamp xor STEP_SALT, index + 1) * blend)
+            // Time-stretching an orientation curve scales angular velocity by the cadence ratio.
+            val recorded = template?.sampleGyroscope(stride, strength * cadenceSpm / template.cadenceSpm)
+            val out = recorded ?: run {
+                val phase = 2 * PI * stride
+                val omega = 2 * PI * cadenceSpm / 120.0
+                val swing = (0.08 + 0.025 * speed.coerceIn(0.0, 6.0)) * strength
+                floatArrayOf(
+                    (swing * omega * cos(phase)).toFloat(),
+                    (0.55 * swing * omega * cos(phase + 0.9)).toFloat(),
+                    (0.35 * swing * omega * cos(phase - 0.6) +
+                        0.10 * swing * 2 * omega * cos(2 * phase)).toFloat()
+                )
+            }
+            // This is angular-rate noise; accelerometer noise has different units.
+            val angularNoise = when (level) {
+                Level.OFF -> 0.0
+                Level.LOW -> 0.002
+                Level.MEDIUM -> 0.004
+                Level.HIGH -> 0.007
+            }
+            if (angularNoise > 0) for (i in 0..2) out[i] += (noise.nextGaussian() * angularNoise).toFloat()
+            return out
+        }
     }
 
     @Volatile

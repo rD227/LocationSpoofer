@@ -7,11 +7,13 @@ import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 data class AccelSample(val timestampNanos: Long, val x: Float, val y: Float, val z: Float)
+data class GyroSample(val timestampNanos: Long, val x: Float, val y: Float, val z: Float)
 
 /**
- * 用户录制的个人步态模板：一个跨步（左右脚各一步）周期内三个轴的平均加速度曲线，含重力。
+ * 用户录制的个人步态模板：一个跨步（左右脚各一步）周期内的三轴加速度（含重力），
+ * 以及可选的三轴角速度（rad/s）。v1 模板仅含加速度，v2 同时保存陀螺仪曲线。
  *
- * 只保存平均后的单个周期而不是原始录音：一是体积小（约 1KB，可以直接放进配置文件跨进程下发），
+ * 只保存平均后的单个周期而不是原始记录：一是体积小（约 1–3KB，可以直接放进配置文件跨进程下发），
  * 二是回放时由 [MotionRealism] 按当前步频拉伸、逐步叠加力度差异和噪声，避免原样循环同一段录音被识破。
  */
 class GaitTemplate(
@@ -19,13 +21,41 @@ class GaitTemplate(
     val y: FloatArray,
     val z: FloatArray,
     val cadenceSpm: Int,
-    val strideCount: Int
+    val strideCount: Int,
+    val gyroX: FloatArray? = null,
+    val gyroY: FloatArray? = null,
+    val gyroZ: FloatArray? = null
 ) {
     init {
         require(x.size == SAMPLES && y.size == SAMPLES && z.size == SAMPLES)
+        require(listOf(x, y, z).all { axis -> axis.all { it.isFinite() } })
+        require(cadenceSpm > 0 && strideCount > 0)
+        val gyro = listOf(gyroX, gyroY, gyroZ)
+        require(gyro.all { it == null } || gyro.all { axis ->
+            axis != null && axis.size == SAMPLES && axis.all { it.isFinite() }
+        })
     }
 
     private val mean = floatArrayOf(x.average().toFloat(), y.average().toFloat(), z.average().toFloat())
+    val hasGyroscope: Boolean get() = gyroX != null
+
+    /** Mean gravity direction in the recorded device axes; magnitude is one g. */
+    fun gravity(): FloatArray {
+        val norm = sqrt(mean.sumOf { it.toDouble() * it })
+        return if (norm > 1e-6) FloatArray(3) { (mean[it] * 9.80665 / norm).toFloat() }
+        else floatArrayOf(0f, 0f, 9.80665f)
+    }
+
+    /** Recorded angular velocity in rad/s, sharing the accelerometer stride phase. */
+    fun sampleGyroscope(stridePhase: Double, strength: Double): FloatArray? {
+        if (!hasGyroscope) return null
+        val pos = (stridePhase - floor(stridePhase)) * SAMPLES
+        return arrayOf(gyroX!!, gyroY!!, gyroZ!!).map {
+            val i = pos.toInt() % SAMPLES
+            val fraction = pos - floor(pos)
+            ((it[i] * (1 - fraction) + it[(i + 1) % SAMPLES] * fraction) * strength).toFloat()
+        }.toFloatArray()
+    }
 
     /**
      * @param stridePhase 跨步相位，只取小数部分
@@ -44,8 +74,9 @@ class GaitTemplate(
     }
 
     fun encode(): String = buildString {
-        append(VERSION).append(';').append(cadenceSpm).append(';').append(strideCount)
-        for (axis in arrayOf(x, y, z)) {
+        append(if (hasGyroscope) VERSION else LEGACY_VERSION).append(';').append(cadenceSpm).append(';').append(strideCount)
+        val axes = listOf(x, y, z) + if (hasGyroscope) listOf(gyroX!!, gyroY!!, gyroZ!!) else emptyList()
+        for (axis in axes) {
             append(';')
             axis.joinTo(this, ",") { String.format(Locale.US, "%.3f", it) }
         }
@@ -62,16 +93,19 @@ class GaitTemplate(
         const val SAMPLES = 64
         const val MIN_RECORDING_SEC = 8.0
         const val MIN_STRIDES = 4
-        private const val VERSION = "v1"
+        private const val LEGACY_VERSION = "v1"
+        private const val VERSION = "v2"
         private const val RATE_HZ = 50.0
 
         fun decode(encoded: String?): GaitTemplate? {
             if (encoded.isNullOrBlank()) return null
             return try {
                 val parts = encoded.split(';')
-                if (parts.size != 6 || parts[0] != VERSION) return null
-                val axes = parts.subList(3, 6).map { p -> p.split(',').map { it.toFloat() }.toFloatArray() }
-                GaitTemplate(axes[0], axes[1], axes[2], parts[1].toInt(), parts[2].toInt())
+                val hasGyro = parts[0] == VERSION && parts.size == 9
+                if (!hasGyro && !(parts[0] == LEGACY_VERSION && parts.size == 6)) return null
+                val axes = parts.drop(3).map { p -> p.split(',').map { it.toFloat() }.toFloatArray() }
+                GaitTemplate(axes[0], axes[1], axes[2], parts[1].toInt(), parts[2].toInt(),
+                    axes.getOrNull(3), axes.getOrNull(4), axes.getOrNull(5))
             } catch (_: Exception) {
                 null
             }
@@ -82,7 +116,7 @@ class GaitTemplate(
          * 重采样到固定频率 → 用加速度模长的自相关求出单步周期 → 找出每一步的冲击峰 →
          * 以"同一只脚起步"的相邻两步为一个跨步切片 → 各跨步重采样到 [SAMPLES] 点后取平均。
          */
-        fun extract(samples: List<AccelSample>): Extraction {
+        fun extract(samples: List<AccelSample>, gyroscope: List<GyroSample> = emptyList()): Extraction {
             if (samples.size < 2) return Extraction.Failure(Reason.TOO_SHORT)
             val sorted = samples.sortedBy { it.timestampNanos }
             val durationSec = (sorted.last().timestampNanos - sorted.first().timestampNanos) / 1e9
@@ -120,11 +154,25 @@ class GaitTemplate(
 
             val meanStrideSec = strides.map { (it.last + 1 - it.first) / RATE_HZ }.average()
             val cadence = (120.0 / meanStrideSec).roundToInt()
-            return Extraction.Success(GaitTemplate(average(rx), average(ry), average(rz), cadence, strides.size))
+            // Use accelerometer timestamps and stride boundaries for BOTH streams. Independently
+            // normalizing each recording would shift the gyro phase when sensor startup is delayed.
+            val gyro = gyroscope.filter { it.x.isFinite() && it.y.isFinite() && it.z.isFinite() }
+                .sortedBy { it.timestampNanos }
+                .distinctBy { it.timestampNanos }
+                .map { AccelSample(it.timestampNanos, it.x, it.y, it.z) }
+            val t0 = sorted.first().timestampNanos
+            val firstStrideTime = t0 + (strides.first().first / RATE_HZ * 1e9).toLong()
+            val lastStrideTime = t0 + ((strides.last().last + 1) / RATE_HZ * 1e9).toLong()
+            val usableGyro = gyro.size >= 2 && gyro.first().timestampNanos <= firstStrideTime &&
+                gyro.last().timestampNanos >= lastStrideTime &&
+                gyro.zipWithNext().none { (a, b) -> b.timestampNanos - a.timestampNanos > 250_000_000L }
+            val gyroAxes = if (usableGyro) listOf<(AccelSample) -> Float>({ it.x }, { it.y }, { it.z })
+                .map { average(resample(gyro, n, t0, it)) } else emptyList()
+            return Extraction.Success(GaitTemplate(average(rx), average(ry), average(rz), cadence, strides.size,
+                gyroAxes.getOrNull(0), gyroAxes.getOrNull(1), gyroAxes.getOrNull(2)))
         }
 
-        private fun resample(sorted: List<AccelSample>, n: Int, axis: (AccelSample) -> Float): FloatArray {
-            val t0 = sorted.first().timestampNanos
+        private fun resample(sorted: List<AccelSample>, n: Int, t0: Long = sorted.first().timestampNanos, axis: (AccelSample) -> Float): FloatArray {
             val out = FloatArray(n)
             var j = 0
             for (i in 0 until n) {
