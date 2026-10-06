@@ -1,6 +1,0 @@
-id=pocketswap
-name=PocketSwap - Fallback swap
-version=1.0.0
-versionCode=10000
-author=xvsu
-description=2 GiB encrypted disk swap after zRAM; unlock-aware, script-only, with capability checks and safe cleanup.

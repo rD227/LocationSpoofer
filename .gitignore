@@ -45,3 +45,8 @@ app/scoped/
 
 # Custom Gradle Home
 .gradle_home/
+
+#moudle
+
+modules/
+tools/
