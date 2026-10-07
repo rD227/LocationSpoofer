@@ -41,8 +41,8 @@ private fun stepCounterParameters(json: JSONObject, now: Long): StepCounterClock
             end = epoch + (high * 1000).toLong()
         }
     }
-    val cadence = if (json.optBoolean("is_auto_cadence", true)) StepCounterClock.autoCadence(speed)
-        else json.optInt("step_cadence_spm", 165).coerceIn(80, 240)
+    val cadence = if (json.optBoolean("is_auto_cadence", false)) StepCounterClock.autoCadence(speed)
+        else json.optInt("step_cadence_spm", 130).coerceIn(80, 240)
     return StepCounterClock.Parameters(epoch, cadence.toDouble(),
         json.optBoolean("active") && json.optBoolean("enable_step_simulation", true) &&
             (validRoute || joystick) && speed > 0.05,

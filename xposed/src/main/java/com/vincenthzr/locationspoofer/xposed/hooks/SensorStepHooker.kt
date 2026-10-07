@@ -28,6 +28,7 @@ import android.content.Context
 import com.vincenthzr.locationspoofer.utils.GaitTemplate
 import com.vincenthzr.locationspoofer.utils.GaitAttitude
 import com.vincenthzr.locationspoofer.utils.StepCounterClock
+import com.vincenthzr.locationspoofer.xposed.BuildConfig
 import com.vincenthzr.locationspoofer.xposed.LocationHooker
 import com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics
 import com.vincenthzr.locationspoofer.xposed.utils.RouteEngine
@@ -79,12 +80,10 @@ object SensorStepHooker {
     @Volatile private var cachedTemplate: GaitTemplate? = null
     @Volatile private var cachedBootCount: Long? = null
 
-    // 缓存虚拟 Sensor 实例
     private var mockStepCounterSensor: Sensor? = null
     private var mockStepDetectorSensor: Sensor? = null
     private var mockAccelerometerSensor: Sensor? = null
 
-    // 跟踪 handle 到 sensor type 的映射
     private val handleToTypeMap = ConcurrentHashMap<Int, Int>()
 
     fun hookSensorStepSimulation(classLoader: ClassLoader) {
@@ -96,7 +95,6 @@ object SensorStepHooker {
         for (className in targetClasses) {
             val managerClass = XposedHelpers.findClassIfExists(className, classLoader) ?: continue
 
-            // 1. Hook getDefaultSensor: 当设备无物理计步传感器时注入虚拟 Sensor
             try {
                 XposedHelpers.hookAllMethods(managerClass, "getDefaultSensor") { chain, _ ->
                     val result = chain.proceed(chain.args.toTypedArray())
@@ -108,7 +106,6 @@ object SensorStepHooker {
                 }
             } catch (_: Throwable) {}
 
-            // 2. Hook getSensorList
             try {
                 XposedHelpers.hookAllMethods(managerClass, "getSensorList") { chain, _ ->
                     val result = chain.proceed(chain.args.toTypedArray())
@@ -123,7 +120,6 @@ object SensorStepHooker {
                 }
             } catch (_: Throwable) {}
 
-            // 3. Hook registerListener / registerListenerImpl
             val regMethods = listOf("registerListener", "registerListenerImpl")
             for (methodName in regMethods) {
                 try {
@@ -147,7 +143,7 @@ object SensorStepHooker {
 
                         val virtual = sensor != null && (sensor === mockStepCounterSensor || sensor === mockStepDetectorSensor)
                         val result = if (virtual && listener != null) true else chain.proceed(chain.args.toTypedArray())
-                        if (listener != null && sensor != null) {
+                        if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS && listener != null && sensor != null) {
                             runCatching { StepPipelineDiagnostics.registration(listener, sensor, result == true) }
                             runCatching { StepPipelineDiagnostics.install(listener.javaClass.classLoader ?: classLoader) }
                         }
@@ -167,7 +163,8 @@ object SensorStepHooker {
                                 if (queue != null) entry.frameworkQueue = queue
                                 if (existing == null) {
                                     capturedListeners.add(entry)
-                                    if (targetSensor.type == Sensor.TYPE_STEP_COUNTER || targetSensor.type == Sensor.TYPE_STEP_DETECTOR) {
+                                    if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS &&
+                                        (targetSensor.type == Sensor.TYPE_STEP_COUNTER || targetSensor.type == Sensor.TYPE_STEP_DETECTOR)) {
                                         android.util.Log.i("LocationSpoofer", "[SensorStep] Captured: type=${targetSensor.type}, listener=${listener.javaClass.name}, thread=${resolvedHandler?.looper?.thread?.name ?: "main"}")
                                     }
                                 }
@@ -206,7 +203,6 @@ object SensorStepHooker {
             }
         }
 
-        // 5. Hook SystemSensorManager$SensorEventQueue.dispatchSensorEvent 底层原生分发接口
         hookSensorEventQueue(classLoader)
     }
 
@@ -338,7 +334,9 @@ object SensorStepHooker {
                     calculateCurrentStepsFloat(config, now), speed, gaitTemplate(config), heading))
             }
         }
-        runCatching { StepPipelineDiagnostics.motionRewrite(type, originalFirst, originalSecond, originalThird, values) }
+        if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS) {
+            runCatching { StepPipelineDiagnostics.motionRewrite(type, originalFirst, originalSecond, originalThird, values) }
+        }
     }
 
     private fun applySyntheticGyroscope(
@@ -351,8 +349,8 @@ object SensorStepHooker {
         val steps = calculateCurrentStepsFloat(config, now)
         val session = RouteEngine.realismSession(config)
         val clock = StepCounterClock.decode(config.optString(StepCounterClock.CONFIG_KEY))
-        val baseCadence = clock?.parameters?.cadenceSpm ?: if (config.optBoolean("is_auto_cadence", true)) calculateAutoCadence(speed).toDouble()
-            else config.optInt("step_cadence_spm", 165).coerceIn(80, 240).toDouble()
+        val baseCadence = clock?.parameters?.cadenceSpm ?: if (config.optBoolean("is_auto_cadence", false)) calculateAutoCadence(speed).toDouble()
+            else config.optInt("step_cadence_spm", 130).coerceIn(80, 240).toDouble()
         val elapsed = (now - config.optLong("start_timestamp", now)).coerceAtLeast(0L) / 1000.0
         val synthetic = session.gyroscope(steps, speed, session.boundedCadence(baseCadence, elapsed), gaitTemplate(config), noiseRng)
         synthetic.copyInto(values, endIndex = 3)
@@ -386,9 +384,6 @@ object SensorStepHooker {
         return cachedTemplate
     }
 
-    /**
-     * 计算当前仿真总步数
-     */
     fun calculateCurrentSteps(config: JSONObject, now: Long = System.currentTimeMillis()): Long =
         calculateCurrentStepsFloat(config, now).toLong()
 
@@ -423,9 +418,9 @@ object SensorStepHooker {
     private fun legacyStepClock(config: JSONObject, now: Long): StepCounterClock.State {
         val epoch = config.optLong("start_timestamp", now).takeIf { it > 0 } ?: now
         val speed = motionSpeed(config, now)
-        val baseCadence = if (config.optBoolean("is_auto_cadence", true))
+        val baseCadence = if (config.optBoolean("is_auto_cadence", false))
             calculateAutoCadence(config.optDouble("speed_m_s", speed))
-        else config.optInt("step_cadence_spm", 165).coerceIn(80, 240)
+        else config.optInt("step_cadence_spm", 130).coerceIn(80, 240)
         return StepCounterClock.State(StepCounterClock.INITIAL_STEPS, epoch,
             StepCounterClock.Parameters(epoch, baseCadence.toDouble(), speed > 0.05,
                 realismLevel = config.optInt("realism_level"),
@@ -545,9 +540,11 @@ object SensorStepHooker {
                 }
                 if (!entry.deliveryReported) {
                     entry.deliveryReported = true
-                    android.util.Log.i("LocationSpoofer", "[SensorStep] First delivery: type=${sensor.type}, listener=${listener.javaClass.name}, thread=${Thread.currentThread().name}, path=${if (queue != null) "framework" else "virtual"}")
+                    if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS) {
+                        android.util.Log.i("LocationSpoofer", "[SensorStep] First delivery: type=${sensor.type}, listener=${listener.javaClass.name}, thread=${Thread.currentThread().name}, path=${if (queue != null) "framework" else "virtual"}")
+                    }
                 }
-                reportDeliveryWindow(entry, values[0])
+                if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS) reportDeliveryWindow(entry, values[0])
             } catch (error: Throwable) {
                 if (!entry.failureReported) {
                     entry.failureReported = true

@@ -85,6 +85,8 @@ class MainViewModel(
             routeSimMode = runCatching { SimMode.valueOf(settingsRepository.routeSimMode) }
                 .getOrDefault(SimMode.WALKING),
             customSpeedMs = settingsRepository.customSpeedMs,
+            stepCadenceSpm = settingsRepository.stepCadenceSpm,
+            isAutoCadence = settingsRepository.isAutoCadence,
             gaitTemplateCadence = GaitTemplate.decode(settingsRepository.gaitTemplate)?.cadenceSpm,
             gaitTemplateStrides = GaitTemplate.decode(settingsRepository.gaitTemplate)?.strideCount ?: 0,
             gaitTemplateHasGyroscope = GaitTemplate.decode(settingsRepository.gaitTemplate)?.hasGyroscope ?: false,

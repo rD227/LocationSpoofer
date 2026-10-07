@@ -159,6 +159,16 @@ class SettingsManager(context: Context) {
                 .putString("custom_speed_ms", value.coerceIn(0.1, 100.0).toString()).apply()
         }
 
+    /** 默认固定为 130 步/分；波形相位和累计计步共用此频率。 */
+    var stepCadenceSpm: Int
+        get() = prefs.getInt("step_cadence_spm", 130).coerceIn(80, 240)
+        set(value) = prefs.edit().putInt("step_cadence_spm", value.coerceIn(80, 240)).apply()
+
+    /** 自动步频为可选模式，选择后与手动步频一并保存。 */
+    var isAutoCadence: Boolean
+        get() = prefs.getBoolean("is_auto_cadence", false)
+        set(value) = prefs.edit().putBoolean("is_auto_cadence", value).apply()
+
     /** 录制的个人步态模板（GaitTemplate.encode() 的结果），空串表示未录制 */
     var gaitTemplate: String
         get() = prefs.getString("gait_template", "") ?: ""

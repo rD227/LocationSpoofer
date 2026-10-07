@@ -1,0 +1,945 @@
+Captured at: 12:00:56.299
+Sensor Device:
+Total 33 h/w sensors, 33 running 0 disabled clients:
+0x0000000b) active-count = 4; sampling_period(ms) = {200.0, 200.0, 10.0, 10.0}, selected = 10.00 ms; batching_period(ms) = {2000.0, 0.0, 5000.0, 0.0}, selected = 0.00 ms
+0x00000015) active-count = 2; sampling_period(ms) = {200.0, 10.0}, selected = 10.00 ms; batching_period(ms) = {0.0, 0.0}, selected = 0.00 ms
+0x00000029) active-count = 1; sampling_period(ms) = {10.0}, selected = 10.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x0000005b) active-count = 1; sampling_period(ms) = {10.0}, selected = 10.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x00000065) active-count = 1; sampling_period(ms) = {10.0}, selected = 10.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x0000006f) active-count = 1; sampling_period(ms) = {10.0}, selected = 10.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x000000ac) active-count = 1; sampling_period(ms) = {1.0}, selected = 1.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x000000bf) active-count = 1; sampling_period(ms) = {5000.0}, selected = 5000.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x00000110) active-count = 1; sampling_period(ms) = {66.7}, selected = 66.67 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x00000426) active-count = 1; sampling_period(ms) = {1.0}, selected = 1.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x000007ef) active-count = 2; sampling_period(ms) = {250.0, 250.0}, selected = 250.00 ms; batching_period(ms) = {0.0, 0.0}, selected = 0.00 ms
+Sensor List:
+0x0000000b) lsm6dsm Accelerometer Non-wakeup | STMicro         | ver: 142606 | type: android.sensor.accelerometer(1) | perm: n/a | flags: 0x00000980
+	continuous | minRate=1.00Hz | maxRate=415.97Hz | FIFO (max,reserved) = (10000, 3000) events | non-wakeUp | 
+	highest rate level = 3, support shared mem: gralloc, 
+0x00000015) mmc5603x Magnetometer Non-wakeup | memsic          | ver: 10220072 | type: android.sensor.magnetic_field(2) | perm: n/a | flags: 0x00000880
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (10000, 100) events | non-wakeUp | 
+	highest rate level = 1, support shared mem: gralloc, 
+0x0000001f) Rotation Vector  Non-wakeup | qualcomm        | ver: 1 | type: android.sensor.orientation(3) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x00000029) lsm6dsm Gyroscope Non-wakeup | STMicro         | ver: 142606 | type: android.sensor.gyroscope(4) | perm: n/a | flags: 0x000009c0
+	continuous | minRate=1.00Hz | maxRate=415.97Hz | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | has-additional-info, 
+	highest rate level = 3, support shared mem: gralloc, 
+0x00000052) proximity                 | OnePlus         | ver: 312 | type: android.sensor.proximity(8) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 300) events | wakeUp | 
+0x0000005b) gravity  Non-wakeup       | qualcomm        | ver: 1 | type: android.sensor.gravity(9) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (10000, 300) events | non-wakeUp | 
+0x00000065) linear_acceleration       | qualcomm        | ver: 1 | type: android.sensor.linear_acceleration(10) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (10000, 300) events | non-wakeUp | 
+0x0000006f) Rotation Vector  Non-wakeup | qualcomm        | ver: 1 | type: android.sensor.rotation_vector(11) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x0000008d) mmc5603x Magnetometer-Uncalibrated Non-wakeup | memsic          | ver: 10220072 | type: android.sensor.magnetic_field_uncalibrated(14) | perm: n/a | flags: 0x00000880
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (10000, 100) events | non-wakeUp | 
+	highest rate level = 1, support shared mem: gralloc, 
+0x00000097) Game Rotation Vector  Non-wakeup | qualcomm        | ver: 1 | type: android.sensor.game_rotation_vector(15) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (10000, 300) events | non-wakeUp | 
+0x000000a1) lsm6dsm Gyroscope-Uncalibrated Non-wakeup | STMicro         | ver: 142606 | type: android.sensor.gyroscope_uncalibrated(16) | perm: n/a | flags: 0x000009c0
+	continuous | minRate=1.00Hz | maxRate=415.97Hz | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | has-additional-info, 
+	highest rate level = 3, support shared mem: gralloc, 
+0x000000ac) sns_smd  Wakeup           | qualcomm        | ver: 1 | type: android.sensor.significant_motion(17) | perm: n/a | flags: 0x00000005
+	one-shot | maxDelay=0us | minDelay=-1us | no batching | wakeUp | 
+0x000000b5) pedometer  Non-wakeup     | qualcomm        | ver: 1 | type: android.sensor.step_detector(18) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000006
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 300) events | non-wakeUp | 
+0x000000bf) pedometer  Non-wakeup     | qualcomm        | ver: 1 | type: android.sensor.step_counter(19) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000002
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 300) events | non-wakeUp | 
+0x000000c9) sns_geomag_rv  Non-wakeup | qualcomm        | ver: 1 | type: android.sensor.geomagnetic_rotation_vector(20) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x000000de) pick_up_motion  Wakeup    | oplus           | ver: 1 | type: android.sensor.tilt_detector(22) | perm: n/a | flags: 0x00000007
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x0000010f) Device Orientation  Non-wakeup | qualcomm        | ver: 1 | type: android.sensor.device_orientation(27) | perm: n/a | flags: 0x00000002
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x00000110) Device Orientation  Wakeup | qualcomm        | ver: 1 | type: android.sensor.device_orientation(27) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x00000123) stationary_detect         | qualcomm        | ver: 1 | type: android.sensor.stationary_detect(29) | perm: n/a | flags: 0x00000004
+	one-shot | maxDelay=0us | minDelay=-1us | no batching | non-wakeUp | 
+0x0000012d) motion_detect             | qualcomm        | ver: 1 | type: android.sensor.motion_detect(30) | perm: n/a | flags: 0x00000004
+	one-shot | maxDelay=0us | minDelay=-1us | no batching | non-wakeUp | 
+0x0000015f) lsm6dsm Accelerometer-Uncalibrated Non-wakeup | STMicro         | ver: 142606 | type: android.sensor.accelerometer_uncalibrated(35) | perm: n/a | flags: 0x00000980
+	continuous | minRate=1.00Hz | maxRate=415.97Hz | FIFO (max,reserved) = (10000, 3000) events | non-wakeUp | 
+	highest rate level = 3, support shared mem: gralloc, 
+0x00000426) camera_protect  Wakeup    | oplus           | ver: 1 | type:       camera_protect(33171006) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x00000444) free_fall  Wakeup         | oplus           | ver: 1 | type:            free_fall(33171009) | perm: n/a | flags: 0x00000007
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x000004d9) sensor_logger  Non-wakeup | oplus           | ver: 1 | type: qti.sensor.sensor_logger(33171024) | perm: n/a | flags: 0x00000002
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x000004ee) amd_oplus  Wakeup         | oplus           | ver: 1 | type:       qti.sensor.amd(33171026) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x0000050b) SX9324_SAR  Non-wakeup    | Semtech         | ver: 4096 | type:      qti.sensor.sars(33171029) | perm: n/a | flags: 0x00000002
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x0000052a) lux_aod  Wakeup           | oplus           | ver: 1 | type:   qti.sensor.lux_aod(33171032) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x0000053e) pedometer_minute  Wakeup  | oplus           | ver: 1 | type: qti.sensor.pedometer_minute(33171034) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x0000055c) oplus_activity_recognition  Wakeup | oplus           | ver: 1 | type: qti.sensor.oplus_activity_recognition(33171037) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | wakeUp | 
+0x00000656) Infrared_Proximity        | sensortek       | ver: 312 | type: oneplus.sensor.infrared.proximity(33171062) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 300) events | wakeUp | 
+0x000007ef) stk_stk2232 wise Light Sensor Non-wakeup | sensortek       | ver: 312 | type: android.sensor.light(5) | perm: n/a | flags: 0x00000002
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 0) events | non-wakeUp | 
+0x00002ae6) Elliptic Promixity        | OnePlus         | ver: 312 | type: oneplus.sensor.ultrasound.proximity(33171998) | perm: n/a | flags: 0x00000003
+	on-change | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (10000, 300) events | wakeUp | 
+0x01000001) UDFPS Sensor              | The LineageOS Project | ver: 1 | type: org.lineageos.sensor.udfps(65537) | perm: n/a | flags: 0x00000005
+	one-shot | maxDelay=0us | minDelay=-1us | no batching | wakeUp | 
+0x5f636779) Corrected Gyroscope Sensor | AOSP            | ver: 1 | type: android.sensor.gyroscope(4) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f676172) Game Rotation Vector Sensor | AOSP            | ver: 3 | type: android.sensor.game_rotation_vector(15) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f676273) Gyroscope Bias (debug)    | AOSP            | ver: 1 | type: android.sensor.accelerometer(1) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f67656f) GeoMag Rotation Vector Sensor | AOSP            | ver: 3 | type: android.sensor.geomagnetic_rotation_vector(20) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f677276) Gravity Sensor            | AOSP            | ver: 3 | type: android.sensor.gravity(9) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f6c696e) Linear Acceleration Sensor | AOSP            | ver: 3 | type: android.sensor.linear_acceleration(10) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f726f76) Rotation Vector Sensor    | AOSP            | ver: 3 | type: android.sensor.rotation_vector(11) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+0x5f797072) Orientation Sensor        | AOSP            | ver: 1 | type: android.sensor.orientation(3) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=415.97Hz | no batching | non-wakeUp | 
+Fusion States:
+9-axis fusion disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+game fusion(no mag) disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+geomag fusion (no gyro) disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+Recent Sensor events:
+UDFPS Sensor: last 3 events
+	 1 (ts=72493.549670802, wall=07:19:50.564) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 
+	 2 (ts=74828.311912383, wall=07:58:45.320) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 
+	 3 (ts=75517.631125185, wall=08:10:14.646) 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 
+pedometer  Non-wakeup: last 50 events
+	 1 (ts=119.203086798, wall=14:28:19.261) 0, 
+	 2 (ts=119.203086275, wall=14:28:23.955) 0, 
+	 3 (ts=119.203086112, wall=14:37:47.836) 0, 
+	 4 (ts=119.203086164, wall=14:37:48.886) 0, 
+	 5 (ts=119.203086570, wall=14:42:48.688) 0, 
+	 6 (ts=119.203086101, wall=14:42:49.574) 0, 
+	 7 (ts=119.203085883, wall=14:47:48.141) 0, 
+	 8 (ts=119.203085830, wall=14:47:48.742) 0, 
+	 9 (ts=119.203085977, wall=14:52:49.316) 0, 
+	10 (ts=119.203085820, wall=14:52:50.266) 0, 
+	11 (ts=119.203085602, wall=14:57:48.394) 0, 
+	12 (ts=119.203085653, wall=14:57:49.802) 0, 
+	13 (ts=119.203080862, wall=18:34:00.951) 0, 
+	14 (ts=119.203080860, wall=18:34:04.546) 0, 
+	15 (ts=119.203080970, wall=18:42:54.541) 0, 
+	16 (ts=119.203080605, wall=18:42:55.239) 0, 
+	17 (ts=119.203080492, wall=18:47:53.670) 0, 
+	18 (ts=119.203080492, wall=18:47:53.753) 0, 
+	19 (ts=119.203080429, wall=18:52:54.072) 0, 
+	20 (ts=119.203080324, wall=18:52:55.573) 0, 
+	21 (ts=119.203080262, wall=18:57:55.076) 0, 
+	22 (ts=119.203080522, wall=18:57:56.251) 0, 
+	23 (ts=119.203080253, wall=19:02:54.403) 0, 
+	24 (ts=119.203080095, wall=19:02:55.045) 0, 
+	25 (ts=119.203080346, wall=19:07:54.689) 0, 
+	26 (ts=119.203079930, wall=19:07:55.415) 0, 
+	27 (ts=37998.866776032, wall=21:44:55.865) 0, 
+	28 (ts=38003.361113584, wall=21:45:00.357) 0, 
+	29 (ts=42346.827100413, wall=00:16:30.047) 0, 
+	30 (ts=42346.827094065, wall=00:16:31.644) 0, 
+	31 (ts=42346.827094221, wall=00:16:32.748) 0, 
+	32 (ts=42346.827085398, wall=03:05:58.496) 0, 
+	33 (ts=42346.827085216, wall=03:09:20.926) 0, 
+	34 (ts=42346.827077353, wall=05:44:45.741) 0, 
+	35 (ts=42346.827077440, wall=05:47:40.344) 0, 
+	36 (ts=42346.827072647, wall=08:28:08.690) 0, 
+	37 (ts=42346.827073168, wall=08:28:08.886) 0, 
+	38 (ts=80021.385871719, wall=09:25:18.381) 0, 
+	39 (ts=80096.914583519, wall=09:26:33.932) 0, 
+	40 (ts=80096.914583320, wall=10:11:04.903) 0, 
+	41 (ts=80096.914583059, wall=10:11:05.870) 0, 
+	42 (ts=80096.914582289, wall=10:37:53.023) 0, 
+	43 (ts=80096.914582446, wall=10:37:53.603) 0, 
+	44 (ts=80096.914582436, wall=10:42:52.428) 0, 
+	45 (ts=80096.914582227, wall=10:42:53.294) 0, 
+	46 (ts=80096.914581957, wall=10:47:52.870) 0, 
+	47 (ts=80096.914582165, wall=10:47:53.520) 0, 
+	48 (ts=85297.486829214, wall=11:12:08.719) 0, 
+	49 (ts=85297.486829161, wall=11:12:10.672) 0, 
+	50 (ts=85297.486828457, wall=11:56:38.651) 0, 
+lsm6dsm Gyroscope-Uncalibrated Non-wakeup: last 10 events
+	 1 (ts=84328.745727257, wall=10:37:05.751) -0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 2 (ts=84328.755321528, wall=10:37:05.761) 0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 3 (ts=84328.764916736, wall=10:37:05.771) -0.00, 0.01, -0.00, 0.00, 0.01, 0.00, 
+	 4 (ts=84328.774512622, wall=10:37:05.780) -0.00, 0.01, -0.00, 0.00, 0.01, 0.00, 
+	 5 (ts=84328.784107726, wall=10:37:05.790) 0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 6 (ts=84328.793701997, wall=10:37:05.799) -0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 7 (ts=84328.803297153, wall=10:37:05.809) 0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 8 (ts=84328.812893091, wall=10:37:05.818) -0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	 9 (ts=84328.822488195, wall=10:37:05.828) 0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+	10 (ts=84328.832083247, wall=10:37:05.840) 0.00, 0.01, 0.00, 0.00, 0.01, 0.00, 
+Device Orientation  Wakeup: last 10 events
+	 1 (ts=80006.199756979, wall=09:25:03.224) 4.00, 
+	 2 (ts=80013.692300886, wall=09:25:10.716) 0.00, 
+	 3 (ts=80016.138650729, wall=09:25:13.164) 4.00, 
+	 4 (ts=80775.253715871, wall=09:37:52.277) 3.00, 
+	 5 (ts=80775.637534101, wall=09:37:52.660) 4.00, 
+	 6 (ts=84117.275644576, wall=10:33:34.301) 4.00, 
+	 7 (ts=85232.476294776, wall=10:52:09.501) 4.00, 
+	 8 (ts=85286.898517359, wall=10:53:03.922) 4.00, 
+	 9 (ts=88318.796883964, wall=11:43:35.819) 4.00, 
+	10 (ts=88925.501699617, wall=11:53:42.524) 4.00, 
+Rotation Vector  Non-wakeup: last 10 events
+	 1 (ts=89359.193529510, wall=12:00:56.210) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 2 (ts=89359.203126385, wall=12:00:56.220) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 3 (ts=89359.212722323, wall=12:00:56.230) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 4 (ts=89359.222317531, wall=12:00:56.239) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 5 (ts=89359.231913573, wall=12:00:56.249) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 6 (ts=89359.241510396, wall=12:00:56.259) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 7 (ts=89359.251106333, wall=12:00:56.268) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 8 (ts=89359.260701541, wall=12:00:56.277) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	 9 (ts=89359.270297583, wall=12:00:56.287) -0.04, -0.04, -0.99, 0.14, 0.00, 
+	10 (ts=89359.279894406, wall=12:00:56.297) -0.04, -0.04, -0.99, 0.14, 0.00, 
+linear_acceleration: last 10 events
+	 1 (ts=89359.203126385, wall=12:00:56.210) 0.01, -0.00, -0.01, 
+	 2 (ts=89359.212722323, wall=12:00:56.220) 0.00, 0.00, 0.02, 
+	 3 (ts=89359.222317531, wall=12:00:56.229) 0.00, 0.00, -0.02, 
+	 4 (ts=89359.231913573, wall=12:00:56.239) 0.01, -0.01, 0.01, 
+	 5 (ts=89359.241510396, wall=12:00:56.249) 0.01, 0.01, 0.02, 
+	 6 (ts=89359.251106333, wall=12:00:56.259) -0.00, 0.01, -0.05, 
+	 7 (ts=89359.260701541, wall=12:00:56.267) 0.00, -0.01, 0.01, 
+	 8 (ts=89359.270297583, wall=12:00:56.277) 0.00, 0.00, 0.02, 
+	 9 (ts=89359.279894406, wall=12:00:56.287) -0.01, 0.00, -0.03, 
+	10 (ts=89359.289490344, wall=12:00:56.297) -0.02, 0.01, 0.05, 
+gravity  Non-wakeup: last 10 events
+	 1 (ts=89359.203126385, wall=12:00:56.210) 0.97, 0.63, 9.74, 
+	 2 (ts=89359.212722323, wall=12:00:56.220) 0.97, 0.63, 9.74, 
+	 3 (ts=89359.222317531, wall=12:00:56.230) 0.97, 0.63, 9.74, 
+	 4 (ts=89359.231913573, wall=12:00:56.239) 0.97, 0.63, 9.74, 
+	 5 (ts=89359.241510396, wall=12:00:56.249) 0.97, 0.63, 9.74, 
+	 6 (ts=89359.251106333, wall=12:00:56.259) 0.97, 0.63, 9.74, 
+	 7 (ts=89359.260701541, wall=12:00:56.267) 0.97, 0.63, 9.74, 
+	 8 (ts=89359.270297583, wall=12:00:56.277) 0.97, 0.63, 9.74, 
+	 9 (ts=89359.279894406, wall=12:00:56.286) 0.97, 0.63, 9.74, 
+	10 (ts=89359.289490344, wall=12:00:56.296) 0.97, 0.63, 9.74, 
+proximity: last 15 events
+	 1 (ts=60.031237267, wall=11:12:39.845) 5.00, 0.00, 0.00, 
+	 2 (ts=93.125331265, wall=11:13:10.121) 5.00, 0.00, 0.00, 
+	 3 (ts=98.170229075, wall=11:13:15.170) 5.00, 0.00, 0.00, 
+	 4 (ts=37978.757592125, wall=21:44:35.754) 5.00, 0.00, 0.00, 
+	 5 (ts=72493.965996947, wall=07:19:50.964) 5.00, 0.00, 0.00, 
+	 6 (ts=74828.708718060, wall=07:58:45.706) 5.00, 0.00, 0.00, 
+	 7 (ts=75518.029260966, wall=08:10:15.027) 5.00, 0.00, 0.00, 
+	 8 (ts=78781.091332811, wall=09:04:38.088) 5.00, 0.00, 0.00, 
+	 9 (ts=78783.799418018, wall=09:04:40.796) 5.00, 0.00, 0.00, 
+	10 (ts=79941.200409138, wall=09:23:58.196) 5.00, 0.00, 0.00, 
+	11 (ts=84117.358221972, wall=10:33:34.357) 5.00, 0.00, 0.00, 
+	12 (ts=85232.028313943, wall=10:52:09.025) 5.00, 0.00, 0.00, 
+	13 (ts=85286.869067463, wall=10:53:03.867) 5.00, 0.00, 0.00, 
+	14 (ts=88318.879439744, wall=11:43:35.877) 5.00, 0.00, 0.00, 
+	15 (ts=88925.588511804, wall=11:53:42.585) 5.00, 0.00, 0.00, 
+stk_stk2232 wise Light Sensor Non-wakeup: last 50 events
+	 1 (ts=89349.088355969, wall=12:00:46.085) 54.21, 56.00, 1.00, 
+	 2 (ts=89349.293308521, wall=12:00:46.290) 54.21, 57.00, 1.00, 
+	 3 (ts=89349.498248104, wall=12:00:46.494) 54.21, 57.00, 1.00, 
+	 4 (ts=89349.703231698, wall=12:00:46.700) 54.21, 57.00, 1.00, 
+	 5 (ts=89349.908205656, wall=12:00:46.904) 54.21, 57.00, 1.00, 
+	 6 (ts=89350.113161489, wall=12:00:47.115) 55.53, 58.00, 1.00, 
+	 7 (ts=89350.318114979, wall=12:00:47.315) 55.53, 57.00, 1.00, 
+	 8 (ts=89350.523072635, wall=12:00:47.519) 55.53, 57.00, 1.00, 
+	 9 (ts=89350.728019614, wall=12:00:47.724) 55.53, 57.00, 1.00, 
+	10 (ts=89350.933009094, wall=12:00:47.929) 55.53, 57.00, 1.00, 
+	11 (ts=89351.137984146, wall=12:00:48.134) 55.53, 57.00, 1.00, 
+	12 (ts=89351.342928885, wall=12:00:48.342) 55.53, 58.00, 1.00, 
+	13 (ts=89351.547816646, wall=12:00:48.544) 55.53, 57.00, 1.00, 
+	14 (ts=89351.752724406, wall=12:00:48.749) 55.53, 57.00, 1.00, 
+	15 (ts=89351.957675344, wall=12:00:48.954) 55.53, 57.00, 1.00, 
+	16 (ts=89352.162650708, wall=12:00:49.159) 55.53, 56.00, 1.00, 
+	17 (ts=89352.367678260, wall=12:00:49.364) 55.53, 57.00, 1.00, 
+	18 (ts=89352.572686489, wall=12:00:49.570) 55.53, 57.00, 1.00, 
+	19 (ts=89352.777713781, wall=12:00:49.774) 55.53, 58.00, 1.00, 
+	20 (ts=89352.982741958, wall=12:00:49.979) 55.53, 57.00, 1.00, 
+	21 (ts=89353.187777114, wall=12:00:50.190) 54.21, 57.00, 1.00, 
+	22 (ts=89353.392776854, wall=12:00:50.389) 54.21, 58.00, 1.00, 
+	23 (ts=89353.597759979, wall=12:00:50.594) 54.21, 58.00, 1.00, 
+	24 (ts=89353.802760135, wall=12:00:50.799) 54.21, 58.00, 1.00, 
+	25 (ts=89354.007700760, wall=12:00:51.004) 54.21, 57.00, 1.00, 
+	26 (ts=89354.212624041, wall=12:00:51.209) 54.21, 58.00, 1.00, 
+	27 (ts=89354.417548885, wall=12:00:51.414) 54.21, 57.00, 1.00, 
+	28 (ts=89354.622527375, wall=12:00:51.619) 54.21, 57.00, 1.00, 
+	29 (ts=89354.827511437, wall=12:00:51.825) 54.21, 58.00, 1.00, 
+	30 (ts=89355.032479250, wall=12:00:52.029) 54.21, 58.00, 1.00, 
+	31 (ts=89355.237420135, wall=12:00:52.234) 54.21, 57.00, 1.00, 
+	32 (ts=89355.442423312, wall=12:00:52.441) 54.21, 57.00, 1.00, 
+	33 (ts=89355.647434302, wall=12:00:52.644) 54.21, 57.00, 1.00, 
+	34 (ts=89355.852445448, wall=12:00:52.849) 54.21, 57.00, 1.00, 
+	35 (ts=89356.057426021, wall=12:00:53.054) 54.21, 57.00, 1.00, 
+	36 (ts=89356.262459302, wall=12:00:53.264) 55.09, 58.00, 1.00, 
+	37 (ts=89356.467584562, wall=12:00:53.464) 55.09, 58.00, 1.00, 
+	38 (ts=89356.672711698, wall=12:00:53.669) 55.09, 57.00, 1.00, 
+	39 (ts=89356.877824666, wall=12:00:53.874) 55.09, 57.00, 1.00, 
+	40 (ts=89357.082973000, wall=12:00:54.081) 55.09, 56.00, 1.00, 
+	41 (ts=89357.288106177, wall=12:00:54.284) 55.09, 57.00, 1.00, 
+	42 (ts=89357.493218312, wall=12:00:54.490) 55.09, 58.00, 1.00, 
+	43 (ts=89357.698355344, wall=12:00:54.695) 55.09, 57.00, 1.00, 
+	44 (ts=89357.903481125, wall=12:00:54.900) 55.09, 57.00, 1.00, 
+	45 (ts=89358.108619146, wall=12:00:55.105) 55.09, 58.00, 1.00, 
+	46 (ts=89358.313750344, wall=12:00:55.310) 55.09, 57.00, 1.00, 
+	47 (ts=89358.518872687, wall=12:00:55.515) 55.09, 58.00, 1.00, 
+	48 (ts=89358.724034927, wall=12:00:55.721) 55.09, 58.00, 1.00, 
+	49 (ts=89358.929198937, wall=12:00:55.925) 55.09, 57.00, 1.00, 
+	50 (ts=89359.134291646, wall=12:00:56.131) 55.09, 57.00, 1.00, 
+Game Rotation Vector  Non-wakeup: last 10 events
+	 1 (ts=89120.943866945, wall=11:56:57.956) 0.03, -0.05, -0.00, 1.00, 
+	 2 (ts=89120.963059341, wall=11:56:57.975) 0.03, -0.05, -0.00, 1.00, 
+	 3 (ts=89120.982253456, wall=11:56:57.994) 0.03, -0.05, -0.00, 1.00, 
+	 4 (ts=89121.001445851, wall=11:56:58.013) 0.03, -0.05, -0.00, 1.00, 
+	 5 (ts=89121.020639914, wall=11:56:58.032) 0.03, -0.05, -0.00, 1.00, 
+	 6 (ts=89121.039832310, wall=11:56:58.051) 0.03, -0.05, -0.00, 1.00, 
+	 7 (ts=89121.059026372, wall=11:56:58.070) 0.03, -0.05, -0.00, 1.00, 
+	 8 (ts=89121.078218820, wall=11:56:58.091) 0.03, -0.05, -0.00, 1.00, 
+	 9 (ts=89121.097412883, wall=11:56:58.109) 0.03, -0.05, -0.00, 1.00, 
+	10 (ts=89121.116605279, wall=11:56:58.128) 0.03, -0.05, -0.00, 1.00, 
+lsm6dsm Gyroscope Non-wakeup: last 10 events
+	 1 (ts=89359.203126385, wall=12:00:56.210) -0.00, -0.00, -0.00, 
+	 2 (ts=89359.212722323, wall=12:00:56.220) 0.00, -0.00, -0.00, 
+	 3 (ts=89359.222317531, wall=12:00:56.229) 0.00, 0.00, -0.00, 
+	 4 (ts=89359.231913573, wall=12:00:56.239) -0.00, -0.00, -0.00, 
+	 5 (ts=89359.241510396, wall=12:00:56.249) 0.00, 0.00, -0.00, 
+	 6 (ts=89359.251106333, wall=12:00:56.259) -0.00, 0.00, -0.00, 
+	 7 (ts=89359.260701541, wall=12:00:56.267) -0.00, 0.00, -0.00, 
+	 8 (ts=89359.270297583, wall=12:00:56.277) 0.00, 0.00, -0.00, 
+	 9 (ts=89359.279894406, wall=12:00:56.286) -0.00, -0.00, -0.00, 
+	10 (ts=89359.289490344, wall=12:00:56.296) 0.00, -0.00, -0.00, 
+mmc5603x Magnetometer-Uncalibrated Non-wakeup: last 10 events
+	 1 (ts=84328.661533820, wall=10:37:05.657) -27.94, 32.63, 86.91, -32.22, 73.02, 168.42, 
+	 2 (ts=84328.681533820, wall=10:37:05.677) -27.89, 32.62, 86.90, -32.22, 73.02, 168.42, 
+	 3 (ts=84328.701533820, wall=10:37:05.697) -27.82, 32.65, 86.88, -32.22, 73.02, 168.42, 
+	 4 (ts=84328.721533820, wall=10:37:05.717) -27.89, 32.63, 86.92, -32.22, 73.02, 168.42, 
+	 5 (ts=84328.741533820, wall=10:37:05.737) -27.96, 32.66, 86.90, -32.22, 73.02, 168.42, 
+	 6 (ts=84328.761533820, wall=10:37:05.757) -27.91, 32.65, 86.89, -32.22, 73.02, 168.42, 
+	 7 (ts=84328.781533820, wall=10:37:05.777) -27.96, 32.67, 86.84, -32.22, 73.02, 168.42, 
+	 8 (ts=84328.801533820, wall=10:37:05.797) -27.95, 32.71, 86.85, -32.22, 73.02, 168.42, 
+	 9 (ts=84328.821533820, wall=10:37:05.817) -27.99, 32.74, 86.84, -32.22, 73.02, 168.42, 
+	10 (ts=84328.841533820, wall=10:37:05.840) -28.04, 32.77, 86.86, -32.22, 73.02, 168.42, 
+mmc5603x Magnetometer Non-wakeup: last 10 events
+	 1 (ts=89359.212843156, wall=12:00:56.210) -22.50, -59.66, -57.60, 
+	 2 (ts=89359.222843156, wall=12:00:56.220) -22.48, -59.68, -57.63, 
+	 3 (ts=89359.232843156, wall=12:00:56.230) -22.51, -59.67, -57.65, 
+	 4 (ts=89359.242843156, wall=12:00:56.239) -22.50, -59.61, -57.66, 
+	 5 (ts=89359.252843156, wall=12:00:56.249) -22.46, -59.60, -57.73, 
+	 6 (ts=89359.262843156, wall=12:00:56.259) -22.48, -59.56, -57.78, 
+	 7 (ts=89359.272843156, wall=12:00:56.268) -22.52, -59.54, -57.74, 
+	 8 (ts=89359.282843156, wall=12:00:56.278) -22.59, -59.50, -57.73, 
+	 9 (ts=89359.292843156, wall=12:00:56.288) -22.64, -59.51, -57.74, 
+	10 (ts=89359.302843156, wall=12:00:56.298) -22.67, -59.46, -57.67, 
+lsm6dsm Accelerometer Non-wakeup: last 50 events
+	 1 (ts=89358.824096125, wall=12:00:55.826) 0.98, 0.64, 9.76, 
+	 2 (ts=89358.833692062, wall=12:00:55.836) 0.96, 0.64, 9.83, 
+	 3 (ts=89358.843287271, wall=12:00:55.845) 0.98, 0.63, 9.79, 
+	 4 (ts=89358.852883312, wall=12:00:55.855) 0.96, 0.64, 9.77, 
+	 5 (ts=89358.862480135, wall=12:00:55.864) 0.98, 0.62, 9.86, 
+	 6 (ts=89358.872076073, wall=12:00:55.874) 0.99, 0.64, 9.78, 
+	 7 (ts=89358.881671333, wall=12:00:55.884) 0.96, 0.65, 9.77, 
+	 8 (ts=89358.891267323, wall=12:00:55.893) 0.98, 0.63, 9.85, 
+	 9 (ts=89358.900864146, wall=12:00:55.902) 0.98, 0.63, 9.77, 
+	10 (ts=89358.910460083, wall=12:00:55.913) 0.97, 0.65, 9.80, 
+	11 (ts=89358.920055344, wall=12:00:55.922) 0.99, 0.64, 9.83, 
+	12 (ts=89358.929651333, wall=12:00:55.931) 0.97, 0.64, 9.79, 
+	13 (ts=89358.939248156, wall=12:00:55.941) 0.97, 0.64, 9.81, 
+	14 (ts=89358.948844146, wall=12:00:55.951) 0.99, 0.64, 9.82, 
+	15 (ts=89358.958439354, wall=12:00:55.960) 0.96, 0.65, 9.80, 
+	16 (ts=89358.968035344, wall=12:00:55.970) 1.00, 0.64, 9.81, 
+	17 (ts=89358.977632219, wall=12:00:55.981) 0.99, 0.65, 9.83, 
+	18 (ts=89358.987228156, wall=12:00:55.990) 0.98, 0.64, 9.85, 
+	19 (ts=89358.996823364, wall=12:00:55.999) 0.98, 0.63, 9.71, 
+	20 (ts=89359.006419406, wall=12:00:56.008) 0.98, 0.63, 9.84, 
+	21 (ts=89359.016016229, wall=12:00:56.018) 0.99, 0.64, 9.83, 
+	22 (ts=89359.025612166, wall=12:00:56.029) 0.96, 0.65, 9.73, 
+	23 (ts=89359.035207427, wall=12:00:56.037) 0.98, 0.64, 9.86, 
+	24 (ts=89359.044803416, wall=12:00:56.046) 0.98, 0.63, 9.78, 
+	25 (ts=89359.054400239, wall=12:00:56.056) 0.97, 0.64, 9.78, 
+	26 (ts=89359.063996229, wall=12:00:56.066) 0.98, 0.64, 9.85, 
+	27 (ts=89359.073591437, wall=12:00:56.075) 0.96, 0.64, 9.78, 
+	28 (ts=89359.083187427, wall=12:00:56.085) 0.98, 0.63, 9.81, 
+	29 (ts=89359.092784302, wall=12:00:56.094) 0.98, 0.63, 9.81, 
+	30 (ts=89359.102380239, wall=12:00:56.105) 0.96, 0.65, 9.83, 
+	31 (ts=89359.111975448, wall=12:00:56.114) 1.01, 0.63, 9.80, 
+	32 (ts=89359.121571489, wall=12:00:56.123) 0.95, 0.65, 9.80, 
+	33 (ts=89359.131168312, wall=12:00:56.133) 0.97, 0.64, 9.77, 
+	34 (ts=89359.140764250, wall=12:00:56.143) 0.98, 0.63, 9.81, 
+	35 (ts=89359.150359510, wall=12:00:56.152) 0.98, 0.64, 9.83, 
+	36 (ts=89359.159955500, wall=12:00:56.162) 0.97, 0.64, 9.80, 
+	37 (ts=89359.169552323, wall=12:00:56.171) 0.98, 0.64, 9.79, 
+	38 (ts=89359.179148312, wall=12:00:56.182) 0.96, 0.63, 9.82, 
+	39 (ts=89359.188743521, wall=12:00:56.190) 0.97, 0.62, 9.81, 
+	40 (ts=89359.198339510, wall=12:00:56.200) 0.98, 0.64, 9.79, 
+	41 (ts=89359.207936385, wall=12:00:56.210) 0.98, 0.64, 9.83, 
+	42 (ts=89359.217532323, wall=12:00:56.220) 0.98, 0.64, 9.78, 
+	43 (ts=89359.227127531, wall=12:00:56.229) 0.99, 0.63, 9.82, 
+	44 (ts=89359.236723573, wall=12:00:56.239) 0.98, 0.65, 9.82, 
+	45 (ts=89359.246320396, wall=12:00:56.249) 0.97, 0.65, 9.75, 
+	46 (ts=89359.255916333, wall=12:00:56.259) 0.98, 0.63, 9.81, 
+	47 (ts=89359.265511541, wall=12:00:56.267) 0.98, 0.64, 9.83, 
+	48 (ts=89359.275107583, wall=12:00:56.277) 0.96, 0.64, 9.77, 
+	49 (ts=89359.284704406, wall=12:00:56.286) 0.95, 0.65, 9.85, 
+	50 (ts=89359.294300344, wall=12:00:56.297) 0.99, 0.64, 9.74, 
+Active sensors:
+lsm6dsm Accelerometer Non-wakeup (handle=0x0000000b, connections=4)
+mmc5603x Magnetometer Non-wakeup (handle=0x00000015, connections=2)
+lsm6dsm Gyroscope Non-wakeup (handle=0x00000029, connections=1)
+gravity  Non-wakeup (handle=0x0000005b, connections=1)
+linear_acceleration (handle=0x00000065, connections=1)
+Rotation Vector  Non-wakeup (handle=0x0000006f, connections=1)
+sns_smd  Wakeup (handle=0x000000ac, connections=1)
+pedometer  Non-wakeup (handle=0x000000bf, connections=1)
+Device Orientation  Wakeup (handle=0x00000110, connections=1)
+camera_protect  Wakeup (handle=0x00000426, connections=1)
+stk_stk2232 wise Light Sensor Non-wakeup (handle=0x000007ef, connections=2)
+Socket Buffer size = 984 events
+WakeLock Status: not held 
+Mode : NORMAL
+Sensor Privacy: disabled
+10 open event connections
+Connection Number: 0 
+	Operating Mode: NORMAL
+	 com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint | WakeLockRefCount 0 | uid 10251 | cache size 0 | max cache size 0 | has sensor access: true
+	 pedometer  Non-wakeup 0x000000bf | first flush pending: false | pending flush events 0 
+Connection Number: 1 
+	Operating Mode: NORMAL
+	 hjoe | WakeLockRefCount 0 | uid 10138 | cache size 0 | max cache size 0 | has sensor access: true
+	 sns_smd  Wakeup 0x000000ac | first flush pending: false | pending flush events 0 
+Connection Number: 2 
+	Operating Mode: NORMAL
+	 com.android.server.wm.WindowOrientationListener$OrientationSensorJudge | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0 | has sensor access: true
+	 Device Orientation  Wakeup 0x00000110 | first flush pending: false | pending flush events 0 
+Connection Number: 3 
+	Operating Mode: NORMAL
+	 org.lineageos.platform.internal.display.AmbientLuxObserver | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0 | has sensor access: true
+	 stk_stk2232 wise Light Sensor Non-wakeup 0x000007ef | first flush pending: false | pending flush events 0 
+Connection Number: 4 
+	Operating Mode: NORMAL
+	 com.android.server.power.FaceDownDetector | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0 | has sensor access: true
+	 lsm6dsm Accelerometer Non-wakeup 0x0000000b | first flush pending: false | pending flush events 0 
+Connection Number: 5 
+	Operating Mode: NORMAL
+	 com.android.server.display.AutomaticBrightnessController$2 | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0 | has sensor access: true
+	 stk_stk2232 wise Light Sensor Non-wakeup 0x000007ef | first flush pending: false | pending flush events 0 
+Connection Number: 6 
+	Operating Mode: NORMAL
+	 org.lineageos.camerahelper.FallSensor | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0 | has sensor access: true
+	 camera_protect  Wakeup 0x00000426 | first flush pending: false | pending flush events 0 
+Connection Number: 7 
+	Operating Mode: NORMAL
+	 com.alibaba.ariver.commonability.map.app.core.SensorEventHelper | WakeLockRefCount 0 | uid 10251 | cache size 0 | max cache size 0 | has sensor access: true
+	 mmc5603x Magnetometer Non-wakeup 0x00000015 | first flush pending: false | pending flush events 0 
+	 lsm6dsm Accelerometer Non-wakeup 0x0000000b | first flush pending: false | pending flush events 0 
+Connection Number: 8 
+	Operating Mode: NORMAL
+	 com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener | WakeLockRefCount 0 | uid 10138 | cache size 0 | max cache size 0 | has sensor access: true
+	 lsm6dsm Accelerometer Non-wakeup 0x0000000b | first flush pending: false | pending flush events 0 
+Connection Number: 9 
+	Operating Mode: NORMAL
+	 com.alipay.android.phone.nfc.core.NFCSensorInfoCollector | WakeLockRefCount 0 | uid 10251 | cache size 0 | max cache size 0 | has sensor access: true
+	 Rotation Vector  Non-wakeup 0x0000006f | first flush pending: false | pending flush events 0 
+	 mmc5603x Magnetometer Non-wakeup 0x00000015 | first flush pending: false | pending flush events 0 
+	 lsm6dsm Accelerometer Non-wakeup 0x0000000b | first flush pending: false | pending flush events 0 
+	 linear_acceleration 0x00000065 | first flush pending: false | pending flush events 0 
+	 gravity  Non-wakeup 0x0000005b | first flush pending: false | pending flush events 0 
+	 lsm6dsm Gyroscope Non-wakeup 0x00000029 | first flush pending: false | pending flush events 0 
+0 open direct connections
+Previous Registrations:
+11:57:03 - 0x000007ef pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 - 0x0000005b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 - 0x00000029 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 - 0x0000000b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 + 0x0000005b pid=16078 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 + 0x000007ef pid=16078 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 + 0x00000029 pid=16078 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 + 0x0000000b pid=16078 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+11:56:58 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:58 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:57 + 0x00000015 pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:57 + 0x0000000b pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:57 + 0x0000006f pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:57 + 0x00000015 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:57 + 0x0000000b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:57 + 0x00000065 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:57 + 0x0000005b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:57 + 0x00000029 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x0000006f pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x00000015 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:50 - 0x00000065 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x0000005b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x0000000b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:50 - 0x00000029 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x00000015 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:50 - 0x0000000b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:49 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:49 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:38 + 0x000000bf pid=16078 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+11:56:38 - 0x000000bf pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+11:56:38 - 0x000000bf pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+11:56:38 + 0x000000bf pid=16078 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+11:56:36 - 0x0000001f pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+11:56:35 + 0x0000001f pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+11:56:35 + 0x00000015 pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:35 + 0x0000000b pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+11:56:27 + 0x0000006f pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:27 + 0x00000015 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:27 + 0x0000000b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:27 + 0x00000065 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:27 + 0x0000005b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:27 + 0x00000029 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x0000006f pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x00000065 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x0000005b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x00000029 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x00000015 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:25 - 0x0000000b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:18 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:18 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:18 + 0x0000006f pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:18 + 0x00000015 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:18 + 0x0000000b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:18 + 0x00000065 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:18 + 0x0000005b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:17 + 0x00000029 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x0000006f pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x00000065 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x0000005b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x00000029 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x00000015 pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 - 0x0000000b pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:11 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:11 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:56:04 + 0x0000006f pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:04 + 0x00000015 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:04 + 0x0000000b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:04 + 0x00000065 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:04 + 0x0000005b pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:56:04 + 0x00000029 pid=16078 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+11:55:58 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:55:58 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:53:45 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   10000us batchingPeriod= 5000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+11:53:44 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+11:53:44 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:53:44 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:53:44 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+11:53:42 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+11:53:42 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+11:53:42 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+11:53:42 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+11:53:42 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+11:53:42 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+11:53:42 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+11:53:42 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+11:51:28 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+11:51:28 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+11:51:28 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+11:51:28 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+11:51:28 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+11:51:28 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:51:28 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:51:28 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+11:51:28 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+11:46:13 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:46:13 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+11:43:38 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   10000us batchingPeriod= 5000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+11:43:38 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+11:43:37 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+11:43:35 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+11:43:35 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+11:43:35 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+11:43:35 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+11:43:35 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+11:43:35 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+11:43:35 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+11:43:35 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+11:14:57 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+11:14:57 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+11:14:46 + 0x0000006f pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+11:14:46 + 0x00000065 pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+11:12:10 + 0x000000bf pid=16078 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+11:12:08 - 0x000000bf pid=16078 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+11:12:08 + 0x000000bf pid=16078 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+11:00:07 - 0x00000029 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:59:57 + 0x00000029 pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:59:36 - 0x00000029 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:59:26 + 0x00000029 pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:59:08 - 0x00000029 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:58:58 + 0x00000029 pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:58:57 - 0x00000029 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:58:47 + 0x00000029 pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:53:14 + 0x000000ac pid=26072 uid=10138 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+10:53:14 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+10:53:14 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:53:14 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:53:14 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:53:13 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+10:53:13 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:53:13 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:53:13 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:53:13 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:53:13 - 0x000007ef pid=    0 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:53:10 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+10:53:03 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:53:03 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:53:03 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:53:03 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:53:03 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:53:03 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:53:03 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:53:03 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:52:22 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:18 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:18 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:15 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:15 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:14 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+10:52:14 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:52:14 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:52:14 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:52:14 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:52:14 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:52:14 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:52:12 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorTimestampCalibrator$CalibrationSensorListener)
+10:52:11 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:52:11 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=2147483647us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+10:52:11 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorTimestampCalibrator$CalibrationSensorListener)
+10:52:11 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   10000us batchingPeriod= 5000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+10:52:11 - 0x000000ac pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+10:52:11 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:52:11 - 0x000000ac pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (sns_smd  Wakeup            , com.android.server.DeviceIdleController$MotionListener)
+10:52:10 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:52:08 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:52:08 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:52:08 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:52:08 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:52:08 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:52:08 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:52:08 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:52:08 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:47:53 + 0x000000bf pid=30039 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+10:47:52 - 0x000000bf pid=30039 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:47:52 + 0x000000bf pid=30039 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:42:53 + 0x000000bf pid=19042 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+10:42:52 - 0x000000bf pid=19042 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:42:52 + 0x000000bf pid=19042 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:37:53 + 0x000000bf pid= 6756 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+10:37:53 - 0x000000bf pid= 6756 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:37:53 + 0x000000bf pid= 6756 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+10:37:05 - 0x00000015 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, unknown_package_pid_26072)
+10:37:05 - 0x000000a1 pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope-Uncalibrated Non-wakeup, unknown_package_pid_26072)
+10:37:05 - 0x0000008d pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer-Uncalibrated Non-wakeup, unknown_package_pid_26072)
+10:37:05 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, unknown_package_pid_26072)
+10:37:05 - 0x0000000b pid=26072 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.libs.location.validation.platform.SensorListenerAdapter)
+10:36:35 + 0x00000015 pid=26072 uid=10138 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, unknown_package_pid_26072)
+10:36:35 + 0x000000a1 pid=26072 uid=10138 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope-Uncalibrated Non-wakeup, unknown_package_pid_26072)
+10:36:35 + 0x0000008d pid=26072 uid=10138 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer-Uncalibrated Non-wakeup, unknown_package_pid_26072)
+10:36:35 + 0x0000000b pid=26072 uid=10138 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, unknown_package_pid_26072)
+10:36:35 + 0x0000000b pid=26072 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.libs.location.validation.platform.SensorListenerAdapter)
+10:36:14 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.AnyMotionDetector$1)
+10:36:11 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   40000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.AnyMotionDetector$1)
+10:36:06 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.AnyMotionDetector$1)
+10:36:03 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   40000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.AnyMotionDetector$1)
+10:34:48 + 0x000000ac pid= 1451 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (sns_smd  Wakeup            , com.android.server.DeviceIdleController$MotionListener)
+10:33:44 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:33:44 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:33:44 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:33:44 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+10:33:44 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:33:44 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:33:44 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:33:44 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:33:43 - 0x000007ef pid=    0 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:33:38 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+10:33:34 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+10:33:34 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+10:33:34 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+10:33:34 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+10:33:33 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+10:33:33 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+10:33:33 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+10:33:33 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+10:31:35 + 0x000000ac pid=26072 uid=10138 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+10:24:09 - 0x00000029 pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:23:59 + 0x00000029 pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:11:51 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+10:11:51 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+10:11:05 + 0x000000bf pid= 8359 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+10:11:05 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+10:11:05 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+10:11:04 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+10:11:01 - 0x0000006f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:11:01 - 0x00000065 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:11:01 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:11:01 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:11:01 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:11:01 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x0000006f pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x00000065 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:10:59 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+10:09:17 - 0x00000029 pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:09:08 + 0x00000029 pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:07:41 - 0x00000029 pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:07:31 + 0x00000029 pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:06:15 - 0x00000029 pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+10:06:05 + 0x00000029 pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:59:41 - 0x00000029 pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:59:32 + 0x00000029 pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:55:56 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+09:55:56 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+09:55:56 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+09:55:56 - 0x0000006f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 - 0x00000065 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:55:56 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:55:56 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:55:56 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+09:55:55 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+09:55:55 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+09:55:55 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+09:55:55 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+09:39:21 + 0x000000ac pid= 5672 uid=10138 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+09:39:21 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+09:35:27 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:35:27 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:35:27 + 0x0000006f pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:35:27 + 0x00000065 pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:30:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:39 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:39 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:29 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:29 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:19 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:19 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:09 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:30:09 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:59 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:59 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:39 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:39 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:29 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:29 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:22 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=2147483647us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+09:29:22 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:29:19 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:19 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:18 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:29:18 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:29:15 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:29:09 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:29:09 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:59 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:59 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:39 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:39 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:29 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:29 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:19 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:19 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:09 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:28:09 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:59 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:59 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:39 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:39 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:29 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:29 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:19 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:19 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:09 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:27:09 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:59 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:59 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:39 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:39 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:33 + 0x000000bf pid= 8359 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+09:26:33 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+09:26:33 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:33 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:29 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:29 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:24 - 0x000007ef pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:24 - 0x0000001f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+09:26:24 + 0x0000001f pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+09:26:24 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:26:24 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:26:23 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:23 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:23 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:23 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:23 + 0x000007ef pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:23 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:22 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:26:19 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:19 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:18 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:26:18 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:26:09 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:09 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:26:05 - 0x0000001f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+09:26:05 + 0x0000001f pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.amap.api.mapcore.util.aa)
+09:26:05 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:26:05 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alibaba.ariver.commonability.map.app.core.SensorEventHelper)
+09:25:59 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:59 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:54 + 0x0000006f pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:54 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:54 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:54 + 0x00000065 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:54 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:54 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x0000006f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x00000065 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:53 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:49 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:49 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:45 - 0x000007ef pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 + 0x000007ef pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:45 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:42 + 0x0000006f pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:42 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:42 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:42 + 0x00000065 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:42 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:42 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:40 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+09:25:40 - 0x00000097 pid=14122 uid=10311 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+09:25:28 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+09:25:28 + 0x00000097 pid=14122 uid=10311 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Game Rotation Vector  Non-wakeup, rc0)
+09:25:23 - 0x0000006f pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:23 - 0x00000065 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:23 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:23 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:23 - 0x00000015 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:23 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:18 + 0x000000bf pid= 8359 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+09:25:18 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+09:25:18 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:17 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer)
+09:25:17 - 0x000007ef pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:17 - 0x0000005b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:17 - 0x00000029 pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:17 - 0x0000000b pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:16 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:16 + 0x000007ef pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:16 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:16 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.mobileaix.feature.sensor.SensorFeatureTask)
+09:25:14 + 0x0000006f pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:14 + 0x00000015 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (mmc5603x Magnetometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:14 + 0x0000000b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:14 + 0x00000065 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:14 + 0x0000005b pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (gravity  Non-wakeup        , com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:14 + 0x00000029 pid= 8359 uid=10251 samplingPeriod=   10000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Gyroscope Non-wakeup, com.alipay.android.phone.nfc.core.NFCSensorInfoCollector)
+09:25:10 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+09:24:35 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+09:24:35 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:31 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:31 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:28 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:28 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:25 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:24:24 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, org.lineageos.platform.internal.display.AmbientLuxObserver)
+09:24:17 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:24:17 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:24:17 + 0x0000006f pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:24:17 + 0x00000065 pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:24:00 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   10000us batchingPeriod= 5000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+09:24:00 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:23:59 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+09:23:58 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+09:23:57 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+09:23:57 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+09:23:57 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+09:23:57 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+09:23:57 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:23:57 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+09:23:57 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+09:22:56 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+09:05:45 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:05:45 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:05:45 + 0x0000006f pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:05:45 + 0x00000065 pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:05:24 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:05:24 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:05:18 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+09:05:18 - 0x0000000b pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+09:05:18 - 0x00000426 pid= 9278 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+09:05:18 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+09:05:18 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+09:05:17 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+09:05:17 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+09:05:14 + 0x0000006f pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)
+09:05:14 + 0x00000065 pid=10877 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+09:04:54 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:50 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:50 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:47 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:47 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:44 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+09:04:44 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=2147483647us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.BatchSignalCollector$BatchSensorEventListener)
+09:04:44 - 0x000000ac pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+09:04:44 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   10000us batchingPeriod= 5000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.gms.personalsafety.ars.datacollection.SensorStreamer$SensorEventListener)
+09:04:43 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:04:42 - 0x000007ef pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+09:04:41 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.BrightnessTracker$SensorListener)
+09:04:40 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:04:40 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:04:37 - 0x01000001 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+09:04:37 + 0x000007ef pid=    0 uid=10175 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.biometrics.log.ALSProbe$1)
+09:04:37 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+09:04:37 + 0x0000000b pid= 1451 uid= 1000 samplingPeriod=  200000us batchingPeriod= 2000000us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.android.server.power.FaceDownDetector)
+09:04:37 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+09:04:37 + 0x00000426 pid= 9278 uid= 1000 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (camera_protect  Wakeup     , org.lineageos.camerahelper.FallSensor)
+09:04:37 + 0x000007ef pid= 1451 uid= 1000 samplingPeriod=  250000us batchingPeriod=       0us result=OK (sensor, package): (stk_stk2232 wise Light Sensor Non-wakeup, com.android.server.display.AutomaticBrightnessController$2)
+08:28:08 + 0x000000bf pid= 8359 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+08:28:08 - 0x000000bf pid= 8359 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+08:28:08 + 0x000000bf pid= 8359 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+08:10:20 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+08:10:20 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+08:10:20 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+08:10:14 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+08:10:14 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+07:58:51 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+07:58:51 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+07:58:51 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+07:58:45 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+07:58:45 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+07:19:56 - 0x00000052 pid= 5103 uid=10175 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+07:19:56 - 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+07:19:56 + 0x01000001 pid= 5103 uid=10175 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (UDFPS Sensor               , com.android.systemui.doze.DozeSensors$TriggerSensor)
+07:19:50 + 0x00000110 pid= 1451 uid= 1000 samplingPeriod=   66667us batchingPeriod=       0us result=OK (sensor, package): (Device Orientation  Wakeup , com.android.server.wm.WindowOrientationListener$OrientationSensorJudge)
+07:19:50 + 0x00000052 pid= 5103 uid=10175 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (proximity                  , com.android.systemui.util.sensors.ThresholdSensorImpl$1)
+05:47:40 + 0x000000bf pid=31649 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+05:44:45 - 0x000000bf pid=31649 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+05:44:45 + 0x000000bf pid=31649 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+05:03:05 + 0x000000ac pid= 5672 uid=10138 samplingPeriod=       0us batchingPeriod=       0us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+05:03:05 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+05:03:01 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+05:03:01 - 0x0000000b pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+05:02:58 + 0x0000000b pid= 5672 uid=10138 samplingPeriod=   20000us batchingPeriod=       0us result=OK (sensor, package): (lsm6dsm Accelerometer Non-wakeup, com.google.android.location.collectionlib.SensorScanner$SensorEventListenerAdapter)
+05:02:58 - 0x000000ac pid= 5672 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (sns_smd  Wakeup            , hjoe)
+03:09:20 + 0x000000bf pid=23514 uid=10251 samplingPeriod= 5000000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint)
+03:05:58 - 0x000000bf pid=23514 uid=10251 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+03:05:58 + 0x000000bf pid=23514 uid=10251 samplingPeriod=  200000us batchingPeriod=       0us result=OK (sensor, package): (pedometer  Non-wakeup      , com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener)
+01:00:51 - 0x00000065 pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (linear_acceleration        , com.google.ccc.abuse.droidguard.events.b)
+01:00:51 - 0x0000006f pid=10877 uid=10138 samplingPeriod=   N/A  us batchingPeriod=   N/A  us result=OK (sensor, package): (Rotation Vector  Non-wakeup, com.google.ccc.abuse.droidguard.events.b)

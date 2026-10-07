@@ -1,0 +1,624 @@
+Captured at: 12:10:31.637
+Sensor Device:
+Total 41 h/w sensors, 41 running 0 disabled clients:
+0x00000001) active-count = 3; sampling_period(ms) = {66.7, 200.0, 200.0}, selected = 66.67 ms; batching_period(ms) = {100.0, 0.0, 0.0}, selected = 100.00 ms
+0x00000003) active-count = 1; sampling_period(ms) = {200.0}, selected = 200.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x00000013) active-count = 1; sampling_period(ms) = {200.0}, selected = 200.00 ms; batching_period(ms) = {0.0}, selected = 0.00 ms
+0x00000015) active-count = 2; sampling_period(ms) = {5000.0, 200.0}, selected = 200.00 ms; batching_period(ms) = {0.0, 0.0}, selected = 0.00 ms
+Sensor List:
+0x00000001) BMI160 Accelerometer      | BOSCH           | ver: 2062200 | type: android.sensor.accelerometer(1) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (2000, 0) events | non-wakeUp | 
+0x00000002) BMI160 Accelerometer Uncalibrated | BOSCH           | ver: 2062200 | type: android.sensor.accelerometer_uncalibrated(35) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (2000, 0) events | non-wakeUp | 
+0x00000003) YAS537 Magnetometer       | Yamaha          | ver: 35193090 | type: android.sensor.magnetic_field(2) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (1000, 0) events | non-wakeUp | 
+0x00000004) YAS537 Magnetometer Uncalibrated | Yamaha          | ver: 35193090 | type: android.sensor.magnetic_field_uncalibrated(14) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (1000, 0) events | non-wakeUp | 
+0x00000005) BMI160 Gyroscope          | BOSCH           | ver: 2062200 | type: android.sensor.gyroscope(4) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=250.00Hz | FIFO (max,reserved) = (2500, 0) events | non-wakeUp | 
+0x00000006) BMI160 Gyroscope Uncalibrated | BOSCH           | ver: 2062200 | type: android.sensor.gyroscope_uncalibrated(16) | perm: n/a | flags: 0x00000000
+	continuous | minRate=1.00Hz | maxRate=250.00Hz | FIFO (max,reserved) = (2500, 0) events | non-wakeUp | 
+0x00000007) stk3x1x alsprx            | Sensortek       | ver: 2 | type: android.sensor.proximity(8) | perm: n/a | flags: 0x00000003
+	on-change | minRate=0.02Hz | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | wakeUp | 
+0x00000008) stk3x1x alsprx            | Sensortek       | ver: 1 | type: android.sensor.light(5) | perm: n/a | flags: 0x00000002
+	on-change | minRate=0.02Hz | minDelay=0us | FIFO (max,reserved) = (200, 0) events | non-wakeUp | 
+0x00000009) BMI160 Accelerometer -Wakeup Secondary | BOSCH           | ver: 2062200 | type: android.sensor.accelerometer(1) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (2000, 0) events | wakeUp | 
+0x0000000a) BMI160 Accelerometer Uncalibrated -Wakeup Secondary | BOSCH           | ver: 2062200 | type: android.sensor.accelerometer_uncalibrated(35) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (2000, 0) events | wakeUp | 
+0x0000000b) YAS537 Magnetometer -Wakeup Secondary | Yamaha          | ver: 35193090 | type: android.sensor.magnetic_field(2) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (1000, 0) events | wakeUp | 
+0x0000000c) YAS537 Magnetometer Uncalibrated -Wakeup Secondary | Yamaha          | ver: 35193090 | type: android.sensor.magnetic_field_uncalibrated(14) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (1000, 0) events | wakeUp | 
+0x0000000d) BMI160 Gyroscope -Wakeup Secondary | BOSCH           | ver: 2062200 | type: android.sensor.gyroscope(4) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=250.00Hz | FIFO (max,reserved) = (2500, 0) events | wakeUp | 
+0x0000000e) BMI160 Gyroscope Uncalibrated -Wakeup Secondary | BOSCH           | ver: 2062200 | type: android.sensor.gyroscope_uncalibrated(16) | perm: n/a | flags: 0x00000001
+	continuous | minRate=1.00Hz | maxRate=250.00Hz | FIFO (max,reserved) = (2500, 0) events | wakeUp | 
+0x0000000f) stk3x1x alsprx -Non Wakeup Secondary | Sensortek       | ver: 2 | type: android.sensor.proximity(8) | perm: n/a | flags: 0x00000002
+	on-change | minRate=0.02Hz | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | non-wakeUp | 
+0x00000010) stk3x1x alsprx -Wakeup Secondary | Sensortek       | ver: 1 | type: android.sensor.light(5) | perm: n/a | flags: 0x00000003
+	on-change | minRate=0.02Hz | minDelay=0us | FIFO (max,reserved) = (200, 0) events | wakeUp | 
+0x00000011) Gravity                   | QTI             | ver: 2 | type: android.sensor.gravity(9) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (5469, 0) events | non-wakeUp | 
+0x00000012) Linear Acceleration       | QTI             | ver: 2 | type: android.sensor.linear_acceleration(10) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (5469, 0) events | non-wakeUp | 
+0x00000013) Rotation Vector           | QTI             | ver: 2 | type: android.sensor.rotation_vector(11) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 0) events | non-wakeUp | 
+0x00000014) Step Detector             | QTI             | ver: 2 | type: android.sensor.step_detector(18) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000006
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | non-wakeUp | 
+0x00000015) Step Counter              | QTI             | ver: 2 | type: android.sensor.step_counter(19) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000002
+	on-change | minRate=0.00Hz | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | non-wakeUp | 
+0x00000016) Significant Motion Detector | QTI             | ver: 2 | type: android.sensor.significant_motion(17) | perm: n/a | flags: 0x00000005
+	one-shot | maxDelay=0us | minDelay=-1us | no batching | wakeUp | 
+0x00000017) Game Rotation Vector      | QTI             | ver: 2 | type: android.sensor.game_rotation_vector(15) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 300) events | non-wakeUp | 
+0x00000018) GeoMagnetic Rotation Vector | QTI             | ver: 2 | type: android.sensor.geomagnetic_rotation_vector(20) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (3786, 0) events | non-wakeUp | 
+0x00000019) Orientation               | QTI             | ver: 2 | type: android.sensor.orientation(3) | perm: n/a | flags: 0x00000000
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 0) events | non-wakeUp | 
+0x0000001a) Tilt Detector             | QTI             | ver: 2 | type: android.sensor.tilt_detector(22) | perm: n/a | flags: 0x00000007
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (24613, 0) events | wakeUp | 
+0x0000001b) Gravity -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.gravity(9) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (5469, 0) events | wakeUp | 
+0x0000001c) Linear Acceleration -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.linear_acceleration(10) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (5469, 0) events | wakeUp | 
+0x0000001d) Rotation Vector -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.rotation_vector(11) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 0) events | wakeUp | 
+0x0000001e) Step Detector -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.step_detector(18) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000007
+	special-trigger | maxDelay=0us | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | wakeUp | 
+0x0000001f) Step Counter -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.step_counter(19) | perm: android.permission.ACTIVITY_RECOGNITION | flags: 0x00000003
+	on-change | minRate=0.00Hz | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | wakeUp | 
+0x00000020) Game Rotation Vector -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.game_rotation_vector(15) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 300) events | wakeUp | 
+0x00000021) GeoMagnetic Rotation Vector -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.geomagnetic_rotation_vector(20) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=100.00Hz | FIFO (max,reserved) = (3786, 0) events | wakeUp | 
+0x00000022) Orientation -Wakeup Secondary | QTI             | ver: 2 | type: android.sensor.orientation(3) | perm: n/a | flags: 0x00000001
+	continuous | minRate=5.00Hz | maxRate=200.00Hz | FIFO (max,reserved) = (7032, 0) events | wakeUp | 
+0x00000023) AMD                       | QTI             | ver: 2 | type:   com.qti.sensor.amd(33171006) | perm: n/a | flags: 0x00000002
+	on-change | minRate=0.00Hz | minDelay=0us | no batching | non-wakeUp | 
+0x00000024) RMD                       | QTI             | ver: 2 | type:   com.qti.sensor.rmd(33171007) | perm: n/a | flags: 0x00000002
+	on-change | minRate=0.00Hz | minDelay=0us | no batching | non-wakeUp | 
+0x00000025) Basic Gestures            | QTI             | ver: 2 | type: com.qti.sensor.basic_gestures(33171000) | perm: n/a | flags: 0x00000003
+	on-change | minRate=0.00Hz | minDelay=0us | no batching | wakeUp | 
+0x00000026) Facing                    | QTI             | ver: 2 | type: com.qti.sensor.facing(33171002) | perm: n/a | flags: 0x00000003
+	on-change | minRate=0.00Hz | minDelay=0us | no batching | wakeUp | 
+0x00000027) Pedometer                 | QTI             | ver: 2 | type: com.qti.sensor.pedometer(33171009) | perm: n/a | flags: 0x00000002
+	on-change | minRate=0.00Hz | minDelay=0us | FIFO (max,reserved) = (8204, 100) events | non-wakeUp | 
+0x00000028) Motion Accel              | QTI             | ver: 2 | type: com.qti.sensor.motion_accel(33171011) | perm: n/a | flags: 0x00000006
+	special-trigger | maxDelay=0us | minDelay=0us | no batching | non-wakeUp | 
+0x00000029) Coarse Motion Classifier  | QTI             | ver: 3 | type:   com.qti.sensor.cmc(33171012) | perm: n/a | flags: 0x00000003
+	on-change | minRate=0.00Hz | minDelay=0us | FIFO (max,reserved) = (2344, 0) events | wakeUp | 
+0x5f636779) Corrected Gyroscope Sensor | AOSP            | ver: 1 | type: android.sensor.gyroscope(4) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=250.00Hz | no batching | non-wakeUp | 
+0x5f676172) Game Rotation Vector Sensor | AOSP            | ver: 3 | type: android.sensor.game_rotation_vector(15) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f676273) Gyroscope Bias (debug)    | AOSP            | ver: 1 | type: android.sensor.accelerometer(1) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f67656f) GeoMag Rotation Vector Sensor | AOSP            | ver: 3 | type: android.sensor.geomagnetic_rotation_vector(20) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f677276) Gravity Sensor            | AOSP            | ver: 3 | type: android.sensor.gravity(9) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f6c696e) Linear Acceleration Sensor | AOSP            | ver: 3 | type: android.sensor.linear_acceleration(10) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f726f76) Rotation Vector Sensor    | AOSP            | ver: 3 | type: android.sensor.rotation_vector(11) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+0x5f797072) Orientation Sensor        | AOSP            | ver: 1 | type: android.sensor.orientation(3) | perm: n/a | flags: 0x00000000
+	continuous | maxDelay=0us | maxRate=200.00Hz | no batching | non-wakeUp | 
+Fusion States:
+9-axis fusion disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+game fusion(no mag) disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+geomag fusion (no gyro) disabled (0 clients), gyro-rate= 200.00Hz, q=< 0, 0, 0, 0 > (0), b=< 0, 0, 0 >
+Recent Sensor events:
+Linear Acceleration: last 10 events
+	 1 (ts=2583.448506743, wall=08:00:16.022) 0.00, -0.01, -0.01, 
+	 2 (ts=2583.468343169, wall=08:00:16.042) 0.00, -0.01, 0.01, 
+	 3 (ts=2583.488210112, wall=08:00:16.063) 0.00, -0.01, 0.01, 
+	 4 (ts=2583.508077056, wall=08:00:16.082) 0.00, -0.00, -0.00, 
+	 5 (ts=2583.527943999, wall=08:00:16.108) 0.00, 0.01, -0.00, 
+	 6 (ts=2583.547810942, wall=08:00:16.121) 0.00, -0.02, 0.01, 
+	 7 (ts=2583.567647368, wall=08:00:16.141) -0.00, -0.01, 0.00, 
+	 8 (ts=2583.587514312, wall=08:00:16.161) -0.00, 0.00, 0.00, 
+	 9 (ts=2583.607381255, wall=08:00:16.181) 0.00, -0.01, -0.01, 
+	10 (ts=2583.627217681, wall=08:00:16.202) 0.00, 0.01, -0.00, 
+Orientation: last 10 events
+	 1 (ts=2583.448506743, wall=08:00:16.023) 154.40, 3.64, 4.65, 
+	 2 (ts=2583.468343169, wall=08:00:16.043) 154.40, 3.64, 4.65, 
+	 3 (ts=2583.488210112, wall=08:00:16.063) 154.40, 3.64, 4.65, 
+	 4 (ts=2583.508077056, wall=08:00:16.082) 154.40, 3.65, 4.65, 
+	 5 (ts=2583.527943999, wall=08:00:16.108) 154.40, 3.64, 4.64, 
+	 6 (ts=2583.547810942, wall=08:00:16.122) 154.40, 3.64, 4.65, 
+	 7 (ts=2583.567647368, wall=08:00:16.142) 154.40, 3.65, 4.65, 
+	 8 (ts=2583.587514312, wall=08:00:16.162) 154.40, 3.65, 4.65, 
+	 9 (ts=2583.607381255, wall=08:00:16.182) 154.40, 3.65, 4.65, 
+	10 (ts=2583.627217681, wall=08:00:16.204) 154.40, 3.65, 4.65, 
+GeoMagnetic Rotation Vector: last 10 events
+	 1 (ts=2583.480275542, wall=08:00:16.024) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 2 (ts=2583.500417144, wall=08:00:16.045) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 3 (ts=2583.520558745, wall=08:00:16.064) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 4 (ts=2583.540700347, wall=08:00:16.085) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 5 (ts=2583.560841948, wall=08:00:16.108) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 6 (ts=2583.580983550, wall=08:00:16.125) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 7 (ts=2583.601125151, wall=08:00:16.145) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 8 (ts=2583.621266753, wall=08:00:16.165) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	 9 (ts=2583.641408355, wall=08:00:16.185) -0.05, 0.02, -0.98, 0.22, 3.14, 
+	10 (ts=2583.661580474, wall=08:00:16.206) -0.05, 0.02, -0.98, 0.22, 3.14, 
+Game Rotation Vector: last 10 events
+	 1 (ts=16721.319121196, wall=11:55:53.893) -0.02, -0.01, 0.72, 0.69, 
+	 2 (ts=16721.338988139, wall=11:55:53.913) -0.02, -0.01, 0.72, 0.69, 
+	 3 (ts=16721.358855083, wall=11:55:53.932) -0.02, -0.01, 0.72, 0.69, 
+	 4 (ts=16721.378722026, wall=11:55:53.952) -0.02, -0.01, 0.72, 0.69, 
+	 5 (ts=16721.398588969, wall=11:55:53.972) -0.02, -0.01, 0.72, 0.69, 
+	 6 (ts=16721.418425395, wall=11:55:53.992) -0.02, -0.01, 0.72, 0.69, 
+	 7 (ts=16721.438292339, wall=11:55:54.012) -0.02, -0.01, 0.72, 0.69, 
+	 8 (ts=16721.458159282, wall=11:55:54.032) -0.02, -0.01, 0.72, 0.69, 
+	 9 (ts=16721.478026225, wall=11:55:54.052) -0.02, -0.01, 0.72, 0.69, 
+	10 (ts=16721.497862651, wall=11:55:54.074) -0.02, -0.01, 0.72, 0.69, 
+Step Counter: last 50 events
+	 1 (ts=4760.098634952, wall=08:36:32.646) 29, 
+	 2 (ts=4760.103094588, wall=08:36:32.648) 29, 
+	 3 (ts=4925.887665931, wall=08:39:18.454) 29, 
+	 4 (ts=4925.910934160, wall=08:39:18.459) 29, 
+	 5 (ts=4925.935664525, wall=08:39:18.484) 29, 
+	 6 (ts=4925.941013170, wall=08:39:18.487) 29, 
+	 7 (ts=5255.175983305, wall=08:44:47.725) 29, 
+	 8 (ts=5255.182260597, wall=08:44:47.729) 29, 
+	 9 (ts=5255.205308722, wall=08:44:47.753) 29, 
+	10 (ts=5255.211652941, wall=08:44:47.755) 29, 
+	11 (ts=5527.055233774, wall=08:49:19.606) 29, 
+	12 (ts=5527.062716847, wall=08:49:19.606) 29, 
+	13 (ts=5527.080954868, wall=08:49:19.627) 29, 
+	14 (ts=5527.085341431, wall=08:49:19.629) 29, 
+	15 (ts=6057.049435135, wall=08:58:09.614) 29, 
+	16 (ts=6057.058725135, wall=08:58:09.614) 29, 
+	17 (ts=6057.060738729, wall=08:58:09.614) 29, 
+	18 (ts=6110.702244229, wall=08:59:03.246) 29, 
+	19 (ts=6927.039113970, wall=09:12:39.586) 29, 
+	20 (ts=6927.044015636, wall=09:12:39.588) 29, 
+	21 (ts=6927.064102095, wall=09:12:39.612) 29, 
+	22 (ts=6927.069267928, wall=09:12:39.614) 29, 
+	23 (ts=6982.189608740, wall=09:13:34.738) 29, 
+	24 (ts=6982.196975459, wall=09:13:34.740) 29, 
+	25 (ts=6982.232030719, wall=09:13:34.785) 29, 
+	26 (ts=6982.244062646, wall=09:13:34.787) 29, 
+	27 (ts=7113.951199831, wall=09:15:46.786) 31, 
+	28 (ts=7114.928433718, wall=09:15:47.786) 33, 
+	29 (ts=7114.928433718, wall=09:15:48.128) 33, 
+	30 (ts=7115.584518064, wall=09:15:48.129) 33, 
+	31 (ts=7115.604286137, wall=09:15:48.150) 33, 
+	32 (ts=7115.607415512, wall=09:15:48.152) 33, 
+	33 (ts=7119.601425512, wall=09:15:53.150) 35, 
+	34 (ts=7512.248246510, wall=09:22:26.151) 36, 
+	35 (ts=7513.479569752, wall=09:22:27.151) 37, 
+	36 (ts=7515.043504078, wall=09:22:28.151) 40, 
+	37 (ts=7515.981736500, wall=09:22:29.151) 41, 
+	38 (ts=7516.763335191, wall=09:22:30.151) 43, 
+	39 (ts=7516.763335192, wall=09:22:43.010) 43, 
+	40 (ts=7530.467288323, wall=09:22:43.013) 43, 
+	41 (ts=7530.494999521, wall=09:22:43.042) 43, 
+	42 (ts=7530.499623062, wall=09:22:43.044) 43, 
+	43 (ts=7780.348602342, wall=09:26:52.893) 43, 
+	44 (ts=12384.851169905, wall=10:43:37.394) 43, 
+	45 (ts=12971.251323005, wall=10:53:25.392) 44, 
+	46 (ts=12971.251323006, wall=12:05:21.723) 44, 
+	47 (ts=17289.181243139, wall=12:05:21.767) 44, 
+	48 (ts=17289.242256941, wall=12:05:21.790) 44, 
+	49 (ts=17289.246471732, wall=12:05:21.791) 44, 
+	50 (ts=17327.905604281, wall=12:06:01.790) 45, 
+Step Detector: last 10 events
+	 1 (ts=3124.445343135, wall=08:09:17.525) 1.00, 
+	 2 (ts=3124.933624385, wall=08:09:18.461) 1.00, 
+	 3 (ts=7512.248246510, wall=09:22:25.313) 1.00, 
+	 4 (ts=7513.479569752, wall=09:22:26.245) 1.00, 
+	 5 (ts=7514.007310230, wall=09:22:27.184) 1.00, 
+	 6 (ts=7514.515733082, wall=09:22:27.184) 1.00, 
+	 7 (ts=7515.043504078, wall=09:22:28.124) 1.00, 
+	 8 (ts=7515.981736500, wall=09:22:29.059) 1.00, 
+	 9 (ts=7516.450865709, wall=09:22:29.997) 1.00, 
+	10 (ts=7516.763335191, wall=09:22:29.997) 1.00, 
+Rotation Vector: last 10 events
+	 1 (ts=17597.043264368, wall=12:10:29.726) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 2 (ts=17597.241872767, wall=12:10:29.924) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 3 (ts=17597.440511683, wall=12:10:30.123) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 4 (ts=17597.639120081, wall=12:10:30.323) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 5 (ts=17597.837758997, wall=12:10:30.520) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 6 (ts=17598.036367396, wall=12:10:30.718) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 7 (ts=17598.234975794, wall=12:10:30.917) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 8 (ts=17598.433584192, wall=12:10:31.117) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	 9 (ts=17598.632223109, wall=12:10:31.315) 0.02, -0.05, 0.91, 0.42, 3.14, 
+	10 (ts=17598.830831507, wall=12:10:31.513) 0.02, -0.05, 0.91, 0.42, 3.14, 
+Gravity: last 10 events
+	 1 (ts=2583.448506743, wall=08:00:16.022) 0.79, -0.62, 9.75, 
+	 2 (ts=2583.468343169, wall=08:00:16.042) 0.79, -0.62, 9.75, 
+	 3 (ts=2583.488210112, wall=08:00:16.063) 0.79, -0.62, 9.75, 
+	 4 (ts=2583.508077056, wall=08:00:16.082) 0.79, -0.62, 9.75, 
+	 5 (ts=2583.527943999, wall=08:00:16.108) 0.79, -0.62, 9.75, 
+	 6 (ts=2583.547810942, wall=08:00:16.122) 0.79, -0.62, 9.75, 
+	 7 (ts=2583.567647368, wall=08:00:16.141) 0.79, -0.62, 9.75, 
+	 8 (ts=2583.587514312, wall=08:00:16.162) 0.79, -0.62, 9.75, 
+	 9 (ts=2583.607381255, wall=08:00:16.182) 0.79, -0.62, 9.75, 
+	10 (ts=2583.627217681, wall=08:00:16.202) 0.79, -0.62, 9.75, 
+stk3x1x alsprx: last 45 events
+	 1 (ts=157.333145634, wall=07:19:49.877) 8.03, 0.00, 0.00, 
+	 2 (ts=157.494766728, wall=07:19:50.038) 3.98, 0.00, 0.00, 
+	 3 (ts=159.997055546, wall=07:19:52.541) 3.98, 0.00, 0.00, 
+	 4 (ts=168.118889351, wall=07:20:00.663) 8.03, 0.00, 0.00, 
+	 5 (ts=168.421013374, wall=07:20:00.965) 12.01, 0.00, 0.00, 
+	 6 (ts=168.810051460, wall=07:20:01.354) 16.00, 0.00, 0.00, 
+	 7 (ts=173.959953804, wall=07:20:06.504) 19.98, 0.00, 0.00, 
+	 8 (ts=174.111015816, wall=07:20:06.655) 16.00, 0.00, 0.00, 
+	 9 (ts=174.564201851, wall=07:20:07.108) 19.98, 0.00, 0.00, 
+	10 (ts=174.715294380, wall=07:20:07.260) 16.00, 0.00, 0.00, 
+	11 (ts=174.866325874, wall=07:20:07.410) 19.98, 0.00, 0.00, 
+	12 (ts=176.477687368, wall=07:20:09.022) 19.98, 0.00, 0.00, 
+	13 (ts=176.629390249, wall=07:20:09.173) 16.00, 0.00, 0.00, 
+	14 (ts=176.779841909, wall=07:20:09.327) 19.98, 0.00, 0.00, 
+	15 (ts=3155.254522169, wall=08:09:47.799) 8.03, 0.00, 0.00, 
+	16 (ts=3155.370855177, wall=08:09:47.914) 3.98, 0.00, 0.00, 
+	17 (ts=3155.572362745, wall=08:09:48.116) 8.03, 0.00, 0.00, 
+	18 (ts=3155.773900831, wall=08:09:48.317) 3.98, 0.00, 0.00, 
+	19 (ts=3158.074708752, wall=08:09:50.618) 8.03, 0.00, 0.00, 
+	20 (ts=17269.125734930, wall=12:05:01.671) 8.03, 0.00, 0.00, 
+	21 (ts=17270.000857001, wall=12:05:02.545) 3.98, 0.00, 0.00, 
+	22 (ts=17270.202303534, wall=12:05:02.746) 8.03, 0.00, 0.00, 
+	23 (ts=17271.613314276, wall=12:05:04.157) 8.03, 0.00, 0.00, 
+	24 (ts=17272.267000800, wall=12:05:04.811) 3.98, 0.00, 0.00, 
+	25 (ts=17272.417330389, wall=12:05:04.961) 8.03, 0.00, 0.00, 
+	26 (ts=17273.374025946, wall=12:05:05.918) 3.98, 0.00, 0.00, 
+	27 (ts=17273.525087958, wall=12:05:06.069) 8.03, 0.00, 0.00, 
+	28 (ts=17276.042834248, wall=12:05:08.587) 3.98, 0.00, 0.00, 
+	29 (ts=17276.193896259, wall=12:05:08.738) 8.03, 0.00, 0.00, 
+	30 (ts=17276.496020283, wall=12:05:09.040) 3.98, 0.00, 0.00, 
+	31 (ts=17276.647173847, wall=12:05:09.192) 8.03, 0.00, 0.00, 
+	32 (ts=17276.798113789, wall=12:05:09.342) 12.01, 0.00, 0.00, 
+	33 (ts=17277.150622334, wall=12:05:09.695) 8.03, 0.00, 0.00, 
+	34 (ts=17277.452746357, wall=12:05:09.997) 12.01, 0.00, 0.00, 
+	35 (ts=17278.294878925, wall=12:05:10.839) 8.03, 0.00, 0.00, 
+	36 (ts=17278.862658466, wall=12:05:11.407) 12.01, 0.00, 0.00, 
+	37 (ts=17279.013689960, wall=12:05:11.558) 8.03, 0.00, 0.00, 
+	38 (ts=17279.164782490, wall=12:05:11.708) 12.01, 0.00, 0.00, 
+	39 (ts=17279.315813984, wall=12:05:11.860) 8.03, 0.00, 0.00, 
+	40 (ts=17280.927386250, wall=12:05:13.471) 3.98, 0.00, 0.00, 
+	41 (ts=17281.078234638, wall=12:05:13.622) 8.03, 0.00, 0.00, 
+	42 (ts=17282.639513935, wall=12:05:15.186) 12.01, 0.00, 0.00, 
+	43 (ts=17283.330767597, wall=12:05:15.875) 8.03, 0.00, 0.00, 
+	44 (ts=17283.445239033, wall=12:05:15.989) 12.01, 0.00, 0.00, 
+	45 (ts=17283.898608173, wall=12:05:16.443) 8.03, 0.00, 0.00, 
+stk3x1x alsprx: last 9 events
+	 1 (ts=301.622341327, wall=07:22:14.271) 5.00, 0.00, 0.00, 
+	 2 (ts=1392.174332044, wall=07:40:24.737) 5.00, 0.00, 0.00, 
+	 3 (ts=1392.277339180, wall=07:40:24.822) 5.00, 0.00, 0.00, 
+	 4 (ts=8522.067925693, wall=09:39:14.615) 5.00, 0.00, 0.00, 
+	 5 (ts=8522.202522515, wall=09:39:14.749) 5.00, 0.00, 0.00, 
+	 6 (ts=15969.256143035, wall=11:43:21.806) 5.00, 0.00, 0.00, 
+	 7 (ts=15969.398568017, wall=11:43:21.966) 5.00, 0.00, 0.00, 
+	 8 (ts=15975.613342032, wall=11:43:28.158) 5.00, 0.00, 0.00, 
+	 9 (ts=15975.688971329, wall=11:43:28.234) 5.00, 0.00, 0.00, 
+BMI160 Gyroscope Uncalibrated: last 10 events
+	 1 (ts=2583.448506743, wall=08:00:16.025) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 2 (ts=2583.468343169, wall=08:00:16.042) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 3 (ts=2583.488210112, wall=08:00:16.063) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 4 (ts=2583.508077056, wall=08:00:16.082) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 5 (ts=2583.527943999, wall=08:00:16.108) -0.00, 0.00, -0.00, -0.00, 0.00, 0.00, 
+	 6 (ts=2583.547810942, wall=08:00:16.121) -0.00, 0.00, -0.00, -0.00, 0.00, 0.00, 
+	 7 (ts=2583.567647368, wall=08:00:16.141) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 8 (ts=2583.587514312, wall=08:00:16.161) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	 9 (ts=2583.607381255, wall=08:00:16.181) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+	10 (ts=2583.627217681, wall=08:00:16.204) -0.00, 0.00, 0.00, -0.00, 0.00, 0.00, 
+BMI160 Gyroscope: last 10 events
+	 1 (ts=2583.448506743, wall=08:00:16.024) -0.00, 0.00, -0.00, 
+	 2 (ts=2583.468343169, wall=08:00:16.042) -0.00, 0.00, -0.00, 
+	 3 (ts=2583.488210112, wall=08:00:16.063) -0.00, 0.00, -0.00, 
+	 4 (ts=2583.508077056, wall=08:00:16.082) -0.00, 0.00, -0.00, 
+	 5 (ts=2583.527943999, wall=08:00:16.108) 0.00, 0.00, -0.00, 
+	 6 (ts=2583.547810942, wall=08:00:16.121) 0.00, -0.00, -0.00, 
+	 7 (ts=2583.567647368, wall=08:00:16.141) 0.00, 0.00, -0.00, 
+	 8 (ts=2583.587514312, wall=08:00:16.161) -0.00, -0.00, -0.00, 
+	 9 (ts=2583.607381255, wall=08:00:16.181) -0.00, 0.00, -0.00, 
+	10 (ts=2583.627217681, wall=08:00:16.204) -0.00, 0.00, 0.00, 
+YAS537 Magnetometer: last 10 events
+	 1 (ts=17597.191518763, wall=12:10:29.736) 11.57, -10.18, -167.28, 
+	 2 (ts=17597.392904261, wall=12:10:29.937) 10.37, -11.08, -166.98, 
+	 3 (ts=17597.594350794, wall=12:10:30.139) 10.71, -10.37, -166.98, 
+	 4 (ts=17597.795766810, wall=12:10:30.340) 11.31, -9.28, -168.22, 
+	 5 (ts=17597.997152308, wall=12:10:30.541) 11.27, -10.15, -168.52, 
+	 6 (ts=17598.198568323, wall=12:10:30.743) 11.57, -10.33, -166.94, 
+	 7 (ts=17598.399984339, wall=12:10:30.944) 11.61, -8.75, -169.12, 
+	 8 (ts=17598.601400355, wall=12:10:31.145) 11.91, -8.98, -166.94, 
+	 9 (ts=17598.802785853, wall=12:10:31.347) 11.31, -9.13, -168.52, 
+	10 (ts=17599.004232386, wall=12:10:31.552) 10.37, -10.90, -167.28, 
+BMI160 Accelerometer Uncalibrated: last 10 events
+	 1 (ts=2583.436147124, wall=08:00:16.002) 0.77, -0.61, 9.52, 
+	 2 (ts=2583.456014067, wall=08:00:16.024) 0.78, -0.61, 9.51, 
+	 3 (ts=2583.475850493, wall=08:00:16.042) 0.78, -0.61, 9.52, 
+	 4 (ts=2583.495717437, wall=08:00:16.063) 0.78, -0.61, 9.53, 
+	 5 (ts=2583.515584380, wall=08:00:16.081) 0.78, -0.61, 9.52, 
+	 6 (ts=2583.535451323, wall=08:00:16.107) 0.78, -0.60, 9.51, 
+	 7 (ts=2583.555318267, wall=08:00:16.121) 0.78, -0.62, 9.52, 
+	 8 (ts=2583.575154692, wall=08:00:16.141) 0.77, -0.62, 9.52, 
+	 9 (ts=2583.595021636, wall=08:00:16.161) 0.77, -0.61, 9.52, 
+	10 (ts=2583.614888579, wall=08:00:16.181) 0.78, -0.62, 9.50, 
+BMI160 Accelerometer: last 50 events
+	 1 (ts=17597.099569300, wall=12:10:29.686) 0.72, -0.68, 9.51, 
+	 2 (ts=17597.139303187, wall=12:10:29.725) 0.71, -0.68, 9.51, 
+	 3 (ts=17597.179037073, wall=12:10:29.765) 0.70, -0.69, 9.51, 
+	 4 (ts=17597.218740442, wall=12:10:29.804) 0.71, -0.68, 9.52, 
+	 5 (ts=17597.258443812, wall=12:10:29.844) 0.71, -0.68, 9.49, 
+	 6 (ts=17597.298177698, wall=12:10:29.884) 0.71, -0.67, 9.50, 
+	 7 (ts=17597.337911585, wall=12:10:29.924) 0.71, -0.68, 9.51, 
+	 8 (ts=17597.377645472, wall=12:10:29.964) 0.70, -0.68, 9.50, 
+	 9 (ts=17597.417379359, wall=12:10:30.003) 0.71, -0.68, 9.51, 
+	10 (ts=17597.457082728, wall=12:10:30.043) 0.71, -0.68, 9.52, 
+	11 (ts=17597.496816614, wall=12:10:30.083) 0.71, -0.67, 9.50, 
+	12 (ts=17597.536550501, wall=12:10:30.123) 0.71, -0.68, 9.50, 
+	13 (ts=17597.576284388, wall=12:10:30.163) 0.71, -0.68, 9.51, 
+	14 (ts=17597.615987757, wall=12:10:30.203) 0.72, -0.68, 9.51, 
+	15 (ts=17597.655721644, wall=12:10:30.241) 0.71, -0.68, 9.50, 
+	16 (ts=17597.695425013, wall=12:10:30.281) 0.71, -0.68, 9.51, 
+	17 (ts=17597.735158900, wall=12:10:30.322) 0.71, -0.70, 9.51, 
+	18 (ts=17597.774892786, wall=12:10:30.360) 0.71, -0.68, 9.52, 
+	19 (ts=17597.814596155, wall=12:10:30.401) 0.72, -0.69, 9.51, 
+	20 (ts=17597.854330042, wall=12:10:30.440) 0.71, -0.69, 9.52, 
+	21 (ts=17597.894063929, wall=12:10:30.480) 0.71, -0.69, 9.51, 
+	22 (ts=17597.933797816, wall=12:10:30.520) 0.70, -0.69, 9.51, 
+	23 (ts=17597.973501185, wall=12:10:30.559) 0.70, -0.67, 9.51, 
+	24 (ts=17598.013235071, wall=12:10:30.599) 0.71, -0.68, 9.50, 
+	25 (ts=17598.052968958, wall=12:10:30.639) 0.71, -0.68, 9.51, 
+	26 (ts=17598.092672327, wall=12:10:30.678) 0.70, -0.68, 9.51, 
+	27 (ts=17598.132406214, wall=12:10:30.718) 0.71, -0.69, 9.51, 
+	28 (ts=17598.172109583, wall=12:10:30.758) 0.71, -0.69, 9.52, 
+	29 (ts=17598.211843470, wall=12:10:30.798) 0.71, -0.68, 9.51, 
+	30 (ts=17598.251577357, wall=12:10:30.839) 0.71, -0.68, 9.50, 
+	31 (ts=17598.291280726, wall=12:10:30.877) 0.71, -0.68, 9.50, 
+	32 (ts=17598.331014612, wall=12:10:30.917) 0.71, -0.68, 9.51, 
+	33 (ts=17598.370748499, wall=12:10:30.956) 0.71, -0.68, 9.50, 
+	34 (ts=17598.410482386, wall=12:10:30.996) 0.71, -0.68, 9.50, 
+	35 (ts=17598.450185755, wall=12:10:31.036) 0.71, -0.68, 9.51, 
+	36 (ts=17598.489889124, wall=12:10:31.076) 0.71, -0.68, 9.52, 
+	37 (ts=17598.529623011, wall=12:10:31.118) 0.71, -0.69, 9.52, 
+	38 (ts=17598.569356898, wall=12:10:31.155) 0.71, -0.68, 9.50, 
+	39 (ts=17598.609060267, wall=12:10:31.195) 0.72, -0.68, 9.51, 
+	40 (ts=17598.648794153, wall=12:10:31.234) 0.72, -0.68, 9.51, 
+	41 (ts=17598.688528040, wall=12:10:31.274) 0.71, -0.69, 9.50, 
+	42 (ts=17598.728261927, wall=12:10:31.314) 0.70, -0.68, 9.51, 
+	43 (ts=17598.767965296, wall=12:10:31.354) 0.72, -0.68, 9.51, 
+	44 (ts=17598.807699183, wall=12:10:31.394) 0.71, -0.69, 9.50, 
+	45 (ts=17598.847433069, wall=12:10:31.433) 0.70, -0.68, 9.51, 
+	46 (ts=17598.887166956, wall=12:10:31.473) 0.71, -0.68, 9.51, 
+	47 (ts=17598.926870325, wall=12:10:31.513) 0.71, -0.68, 9.51, 
+	48 (ts=17598.966573694, wall=12:10:31.552) 0.70, -0.68, 9.51, 
+	49 (ts=17599.006307581, wall=12:10:31.592) 0.71, -0.68, 9.51, 
+	50 (ts=17599.046041468, wall=12:10:31.631) 0.71, -0.68, 9.51, 
+Active sensors:
+BMI160 Accelerometer (handle=0x00000001, connections=3)
+YAS537 Magnetometer (handle=0x00000003, connections=1)
+Rotation Vector (handle=0x00000013, connections=1)
+Step Counter (handle=0x00000015, connections=2)
+Socket Buffer size = 984 events
+WakeLock Status: not held 
+Mode : NORMAL
+Sensor Privacy: disabled
+5 active connections
+Connection Number: 0 
+	Operating Mode: NORMAL
+	 com.android.server.policy.WindowOrientationListener | WakeLockRefCount 0 | uid 1000 | cache size 0 | max cache size 0
+	 BMI160 Accelerometer 0x00000001 | status: active | pending flush events 0 
+Connection Number: 1 
+	Operating Mode: NORMAL
+	 com.alibaba.ariver.commonability.map.app.core.SensorEventHelper | WakeLockRefCount 0 | uid 10167 | cache size 0 | max cache size 0
+	 YAS537 Magnetometer 0x00000003 | status: active | pending flush events 0 
+	 BMI160 Accelerometer 0x00000001 | status: active | pending flush events 0 
+Connection Number: 2 
+	Operating Mode: NORMAL
+	 com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint | WakeLockRefCount 0 | uid 10167 | cache size 0 | max cache size 0
+	 Step Counter 0x00000015 | status: active | pending flush events 0 
+Connection Number: 3 
+	Operating Mode: NORMAL
+	 com.loc.ep | WakeLockRefCount 0 | uid 10167 | cache size 0 | max cache size 0
+	 BMI160 Accelerometer 0x00000001 | status: active | pending flush events 0 
+	 Rotation Vector 0x00000013 | status: active | pending flush events 0 
+Connection Number: 4 
+	Operating Mode: NORMAL
+	 com.alipay.mobile.healthcommon.stepcounter.APStepProcessor | WakeLockRefCount 0 | uid 10167 | cache size 0 | max cache size 0
+	 Step Counter 0x00000015 | status: active | pending flush events 0 
+0 direct connections
+Previous Registrations:
+12:06:33 + 0x00000001 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+12:06:33 + 0x00000013 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+12:06:29 - 0x00000019 pid=16813 uid=10167 package=com.amap.api.mapcore.util.aa
+12:06:29 + 0x00000019 pid=16813 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+12:06:28 + 0x00000003 pid=16813 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+12:06:28 + 0x00000001 pid=16813 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+12:05:22 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+12:05:22 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+12:05:22 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer
+12:05:22 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer samplingPeriod=0us batchingPeriod=0us
+12:05:21 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+12:05:21 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+12:05:16 - 0x00000008 pid=27805 uid=10167 package=com.alipay.zoloz.toyger.liveness.photinus.c
+12:05:13 - 0x00000008 pid=27805 uid=10167 package=com.alipay.zoloz.toyger.workspace.g
+12:05:04 + 0x00000008 pid=27805 uid=10167 package=com.alipay.zoloz.toyger.liveness.photinus.c samplingPeriod=0us batchingPeriod=0us
+12:05:01 + 0x00000008 pid=27805 uid=10167 package=com.alipay.zoloz.toyger.workspace.g samplingPeriod=200000us batchingPeriod=0us
+11:56:06 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+11:56:06 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+11:55:54 - 0x00000017 pid=25401 uid=10172 package=rc0
+11:55:54 - 0x00000017 pid=25401 uid=10172 package=rc0
+11:46:18 + 0x00000017 pid=25401 uid=10172 package=rc0 samplingPeriod=20000us batchingPeriod=0us
+11:46:18 + 0x00000017 pid=25401 uid=10172 package=rc0 samplingPeriod=20000us batchingPeriod=0us
+11:43:28 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+11:43:28 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+11:43:28 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+11:43:28 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+11:43:27 - 0x00000016 pid= 1334 uid= 1000 package=com.android.server.DeviceIdleController
+11:43:21 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+11:43:21 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+11:43:21 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+11:43:21 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+11:43:21 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+11:25:57 + 0x00000016 pid= 1334 uid= 1000 package=com.android.server.DeviceIdleController samplingPeriod=0us batchingPeriod=0us
+10:54:57 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+10:54:47 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+10:53:20 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+10:53:02 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+10:43:37 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+10:43:37 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+10:33:43 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+10:33:33 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+09:55:56 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+09:39:23 - 0x00000017 pid=25401 uid=10172 package=rc0
+09:39:23 - 0x00000017 pid=25401 uid=10172 package=rc0
+09:39:14 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+09:39:14 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+09:39:14 - 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService
+09:39:14 + 0x00000007 pid= 1334 uid= 1000 package=com.android.server.power.PowerManagerService samplingPeriod=0us batchingPeriod=0us
+09:38:57 + 0x00000017 pid=25401 uid=10172 package=rc0 samplingPeriod=20000us batchingPeriod=0us
+09:38:57 + 0x00000017 pid=25401 uid=10172 package=rc0 samplingPeriod=20000us batchingPeriod=0us
+09:38:49 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+09:37:32 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+09:37:30 + 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener samplingPeriod=66667us batchingPeriod=100000us
+09:27:23 - 0x00000001 pid= 1334 uid= 1000 package=com.android.server.policy.WindowOrientationListener
+09:25:53 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+09:25:53 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+09:25:53 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer
+09:25:53 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer samplingPeriod=0us batchingPeriod=0us
+09:23:14 - 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:23:14 - 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:23:05 - 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+09:22:45 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+09:22:45 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+09:22:43 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer
+09:22:43 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer samplingPeriod=0us batchingPeriod=0us
+09:22:43 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+09:22:42 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+09:16:01 + 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+09:15:48 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+09:15:48 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+09:15:48 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+09:15:48 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+09:15:43 - 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+09:15:42 + 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+09:15:36 - 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+09:13:34 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+09:13:34 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+09:12:39 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+09:12:39 - 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+09:12:37 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+09:12:37 - 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener
+09:12:37 + 0x00000015 pid=27805 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener samplingPeriod=200000us batchingPeriod=0us
+09:12:21 - 0x00000001 pid=27805 uid=10167 package=com.loc.ep
+09:12:21 - 0x00000013 pid=27805 uid=10167 package=com.loc.ep
+09:12:19 + 0x00000014 pid=27805 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+09:10:01 + 0x00000001 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+09:10:01 + 0x00000013 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+09:09:57 - 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa
+09:09:57 + 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+09:09:57 + 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:09:57 + 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:08:47 - 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:08:47 - 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:06:20 - 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa
+09:06:20 + 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+09:06:20 + 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:06:20 + 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:06:17 - 0x00000001 pid=27805 uid=10167 package=com.loc.ep
+09:06:17 - 0x00000013 pid=27805 uid=10167 package=com.loc.ep
+09:06:17 + 0x00000001 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+09:06:17 + 0x00000013 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+09:06:16 - 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:06:16 - 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:06:15 - 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa
+09:06:15 + 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+09:06:14 + 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:06:14 + 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+09:02:25 - 0x00000001 pid=27805 uid=10167 package=com.loc.ep
+09:02:25 - 0x00000013 pid=27805 uid=10167 package=com.loc.ep
+09:02:24 - 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:02:24 - 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+09:00:17 + 0x00000001 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+09:00:16 + 0x00000013 pid=27805 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+08:59:42 - 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa
+08:59:42 + 0x00000019 pid=29232 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+08:59:42 + 0x00000003 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:59:42 + 0x00000001 pid=29232 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:59:03 + 0x00000015 pid=28540 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:49:43 - 0x00000003 pid=18420 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+08:49:43 - 0x00000001 pid=18420 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper
+08:49:34 - 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+08:49:20 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+08:49:20 - 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+08:49:19 - 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer
+08:49:19 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer samplingPeriod=0us batchingPeriod=0us
+08:49:19 + 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:49:19 - 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:44:47 + 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:44:47 - 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:39:28 + 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+08:39:19 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+08:39:19 - 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+08:39:18 - 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer
+08:39:18 + 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:39:18 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer samplingPeriod=0us batchingPeriod=0us
+08:39:18 - 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:39:13 - 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+08:39:13 + 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+08:39:10 - 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d
+08:36:32 + 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:36:32 - 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:36:30 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+08:36:30 - 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener
+08:36:30 + 0x00000015 pid=16695 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener samplingPeriod=200000us batchingPeriod=0us
+08:36:14 + 0x00000014 pid=16695 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+08:35:41 - 0x00000019 pid=18420 uid=10167 package=com.amap.api.mapcore.util.aa
+08:35:41 + 0x00000019 pid=18420 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+08:35:41 + 0x00000003 pid=18420 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:35:40 + 0x00000001 pid=18420 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:30:16 + 0x00000015 pid=17464 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:23:38 + 0x00000001 pid=10657 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+08:23:37 + 0x00000013 pid=10657 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+08:22:30 - 0x00000019 pid=12250 uid=10167 package=com.amap.api.mapcore.util.aa
+08:22:30 + 0x00000019 pid=12250 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+08:22:30 + 0x00000003 pid=12250 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:22:29 + 0x00000001 pid=12250 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:21:28 + 0x00000015 pid=11454 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:16:40 + 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:16:40 - 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:09:51 - 0x00000008 pid=27188 uid=10167 package=com.alipay.zoloz.toyger.workspace.g
+08:09:47 + 0x00000008 pid=27188 uid=10167 package=com.alipay.zoloz.toyger.workspace.g samplingPeriod=200000us batchingPeriod=0us
+08:09:33 + 0x00000015 pid=27188 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+08:09:33 - 0x00000015 pid=27188 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint
+08:09:32 + 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:09:32 - 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:06:41 + 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:06:41 - 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor
+08:06:39 + 0x00000015 pid=27188 uid=10167 package=com.alibaba.health.pedometer.core.trigger.SensorTriggerPoint samplingPeriod=5000000us batchingPeriod=0us
+08:06:39 - 0x00000015 pid=27188 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener
+08:06:39 + 0x00000015 pid=27188 uid=10167 package=com.alibaba.health.pedometer.core.datasource.sensor.core.DefaultStepSensorListener samplingPeriod=200000us batchingPeriod=0us
+08:06:33 - 0x00000001 pid=27188 uid=10167 package=com.loc.ep
+08:06:33 - 0x00000013 pid=27188 uid=10167 package=com.loc.ep
+08:06:31 + 0x00000014 pid=27188 uid=10167 package=com.alipay.android.phone.wallet.sportbiz.a.d samplingPeriod=0us batchingPeriod=0us
+08:03:21 + 0x00000001 pid=27188 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+08:03:21 + 0x00000013 pid=27188 uid=10167 package=com.loc.ep samplingPeriod=200000us batchingPeriod=0us
+08:02:46 - 0x00000019 pid=28779 uid=10167 package=com.amap.api.mapcore.util.aa
+08:02:46 + 0x00000019 pid=28779 uid=10167 package=com.amap.api.mapcore.util.aa samplingPeriod=200000us batchingPeriod=0us
+08:02:46 + 0x00000003 pid=28779 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:02:45 + 0x00000001 pid=28779 uid=10167 package=com.alibaba.ariver.commonability.map.app.core.SensorEventHelper samplingPeriod=200000us batchingPeriod=0us
+08:02:23 - 0x00000001 pid= 2678 uid=10151 package=android.view.OrientationEventListener
+08:02:20 + 0x00000001 pid= 2678 uid=10151 package=android.view.OrientationEventListener samplingPeriod=200000us batchingPeriod=0us
+08:02:09 + 0x00000015 pid=27918 uid=10167 package=com.alipay.mobile.healthcommon.stepcounter.APStepProcessor samplingPeriod=200000us batchingPeriod=0us
+08:00:16 - 0x00000019 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000018 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000017 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000015 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000014 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000013 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000012 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000011 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000006 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000005 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000002 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+08:00:16 - 0x00000001 pid=27008 uid=10168 package=com.locationspoofer.sensorprobe.SensorProbeActivity
+07:59:08 + 0x00000019 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us
+07:59:08 + 0x00000018 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us
+07:59:08 + 0x00000017 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us
+07:59:08 + 0x00000013 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us
+07:59:08 + 0x00000011 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us
+07:59:08 + 0x00000006 pid=27008 uid=10168 package=unknown_package_pid_27008 samplingPeriod=20000us batchingPeriod=0us

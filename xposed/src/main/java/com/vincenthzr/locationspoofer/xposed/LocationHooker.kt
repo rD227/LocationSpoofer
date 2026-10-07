@@ -387,14 +387,18 @@ class LocationHooker : XposedModule() {
         hookConnectivityLayer(classLoader)
         hookBluetoothLE(classLoader)
         SensorStepHooker.hookSensorStepSimulation(classLoader)
-        com.vincenthzr.locationspoofer.xposed.diagnostics.NativeSensorTrace.install(currentPackageName)
-        com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(classLoader)
+        if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS) {
+            com.vincenthzr.locationspoofer.xposed.diagnostics.NativeSensorTrace.install(currentPackageName)
+            com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(classLoader)
+        }
 
         readConfig()
     }
 
     internal fun hookAllMapSdks(cl: ClassLoader) {
-        com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(cl)
+        if (BuildConfig.STEP_PIPELINE_DIAGNOSTICS) {
+            com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(cl)
+        }
         try { hookAMapSDK(cl) } catch (_: Throwable) {}
         try { hookTencentSDK(cl) } catch (_: Throwable) {}
         try { hookBaiduSDK(cl) } catch (_: Throwable) {}
@@ -612,6 +616,7 @@ class LocationHooker : XposedModule() {
     }
 
     internal fun logOpenCellConfigLoaded(source: String, config: JSONObject) {
+        if (!BuildConfig.DEBUG && !BuildConfig.STEP_PIPELINE_DIAGNOSTICS) return
         val cellArray = config.optJSONArray("cell_json")
         val cellCount = cellArray?.length() ?: 0
         val btArray = config.optJSONArray("bluetooth_json")

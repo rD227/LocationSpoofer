@@ -93,8 +93,8 @@ class LocationRepository(
         speedMs: Double = 0.0,
         stopAtDestination: Boolean = false,
         enableStepSimulation: Boolean = true,
-        stepCadenceSpm: Int = 165,
-        isAutoCadence: Boolean = true
+        stepCadenceSpm: Int = settingsManager.stepCadenceSpm,
+        isAutoCadence: Boolean = settingsManager.isAutoCadence
     ) {
         SpoofingState.isActive = true
         SpoofingState.latitude = lat
@@ -233,8 +233,8 @@ class LocationRepository(
         speedMs: Double = 0.0,
         stopAtDestination: Boolean = false,
         enableStepSimulation: Boolean = true,
-        stepCadenceSpm: Int = 165,
-        isAutoCadence: Boolean = true
+        stepCadenceSpm: Int = settingsManager.stepCadenceSpm,
+        isAutoCadence: Boolean = settingsManager.isAutoCadence
     ) {
         SpoofingState.latitude = lat
         SpoofingState.longitude = lng

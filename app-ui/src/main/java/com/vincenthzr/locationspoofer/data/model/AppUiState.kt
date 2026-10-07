@@ -111,9 +111,9 @@ data class AppState(
     /** 是否开启步频模拟 */
     val enableStepSimulation: Boolean = true,
     /** 步频设定 (SPM, 步/分钟) */
-    val stepCadenceSpm: Int = 165,
-    /** 是否根据速度自动计算最佳步频 */
-    val isAutoCadence: Boolean = true,
+    val stepCadenceSpm: Int = 130,
+    /** 是否根据速度自动计算步频；默认使用固定的手动步频 */
+    val isAutoCadence: Boolean = false,
     /** 是否使用真实路线规划 */
     val useRealRoute: Boolean = false,
     /** 到达终点后是否停下 */

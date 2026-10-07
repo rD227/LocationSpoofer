@@ -198,6 +198,14 @@ class SettingsRepository(private val settingsManager: SettingsManager) {
         get() = settingsManager.customSpeedMs
         set(value) { settingsManager.customSpeedMs = value }
 
+    var stepCadenceSpm: Int
+        get() = settingsManager.stepCadenceSpm
+        set(value) { settingsManager.stepCadenceSpm = value }
+
+    var isAutoCadence: Boolean
+        get() = settingsManager.isAutoCadence
+        set(value) { settingsManager.isAutoCadence = value }
+
     var gaitTemplate: String
         get() = settingsManager.gaitTemplate
         set(value) {

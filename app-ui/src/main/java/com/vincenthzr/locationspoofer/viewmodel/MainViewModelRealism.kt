@@ -19,6 +19,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.time.Duration.Companion.milliseconds
 
 // 运动真实度设置（issue #67 / #68）：随机强度、速度浮动范围、个人步态录制
 
@@ -136,7 +137,7 @@ private suspend fun recordGaitSensors(
         var elapsed = 0L
         while (elapsed < totalMs) {
             onProgress(elapsed.toFloat() / totalMs)
-            delay(200)
+            delay(200.milliseconds)
             elapsed += 200
         }
         onProgress(1f)

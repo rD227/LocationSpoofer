@@ -180,10 +180,13 @@ internal fun MainViewModel.setEnableStepSimulation(enable: Boolean) {
 }
 
 internal fun MainViewModel.setStepCadenceSpm(spm: Int) {
-    _uiState.update { it.copy(stepCadenceSpm = spm.coerceIn(80, 240)) }
+    val value = spm.coerceIn(80, 240)
+    settingsRepository.stepCadenceSpm = value
+    _uiState.update { it.copy(stepCadenceSpm = value) }
 }
 
 internal fun MainViewModel.setIsAutoCadence(auto: Boolean) {
+    settingsRepository.isAutoCadence = auto
     _uiState.update { it.copy(isAutoCadence = auto) }
 }
 

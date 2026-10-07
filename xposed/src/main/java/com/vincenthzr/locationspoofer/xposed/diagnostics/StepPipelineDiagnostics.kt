@@ -23,12 +23,14 @@ internal object StepPipelineDiagnostics {
     private val sourceObservers = ConcurrentHashMap<Class<*>, Boolean>()
     private val replyObservers = ConcurrentHashMap<Class<*>, Boolean>()
     private val replyDepth = ThreadLocal<Int>()
+    private val sportStates = setOf("moving", "start", "stop", "pause", "resume", "autopause", "autoresume")
 
     private class Window {
         var lastReport = Long.MIN_VALUE
         var calls = 0L
         var rejected = 0L
         var firstSeen = Long.MIN_VALUE
+        var accepted = 0L
     }
 
     private class MotionWindow {
@@ -46,6 +48,8 @@ internal object StepPipelineDiagnostics {
         installSportState(loader)
         installSportSync(loader)
         installSportSources(loader)
+        installSportRecords(loader)
+        installSportStepSignals(loader)
         val targets = mapOf(
             "com.alibaba.health.pedometer.core.datasource.sensor.model.StepSensorEvent" to listOf("convert"),
             "com.alibaba.health.pedometer.core.datasource.sensor.core.SensorPedometer" to
@@ -186,17 +190,92 @@ internal object StepPipelineDiagnostics {
         Log.i(TAG, "[StepPipeline] Observing SportState#STEP_MOVE methods=${handles.size} read-only=true")
     }
 
-    private inline fun reportWindow(key: String, message: (Window) -> String) {
+    private inline fun reportWindow(key: String, force: Boolean = false, message: (Window) -> String) {
         val window = windows.getOrPut(key) { Window() }
         synchronized(window) {
             ++window.calls
             val now = SystemClock.elapsedRealtime()
             if (window.firstSeen == Long.MIN_VALUE) window.firstSeen = now
-            if (window.lastReport == Long.MIN_VALUE || now - window.lastReport >= 30_000L) {
+            if (force || window.lastReport == Long.MIN_VALUE || now - window.lastReport >= 30_000L) {
                 window.lastReport = now
                 Log.i(TAG, message(window))
             }
         }
+    }
+
+    /** Correlate the sport record's two step sources with its own active duration. */
+    private fun installSportRecords(loader: ClassLoader) {
+        val targets = mapOf(
+            "com.alipay.android.phone.wallet.sportbiz.manager.StepDataManager" to
+                listOf("fetchStep", "onSportStateChange"),
+            "com.alipay.android.phone.wallet.sportbiz.collector.StepCollector" to listOf("getAccelStep"),
+            "com.alipay.android.phone.wallet.sportbiz.manager.RecordDataManager" to listOf("saveData"),
+            "com.alipay.android.phone.wallet.sportbiz.utils.JSONParseUtils" to listOf("parseRecordJsonObject")
+        )
+        val recordType = "com.alipay.android.phone.wallet.sportbiz.activity.record.APSRecord"
+        for ((name, methods) in targets) {
+            val type = XposedHelpers.findClassIfExists(name, loader) ?: continue
+            if (installed.putIfAbsent(type, true) != null) continue
+            for (method in methods) {
+                val handles = XposedHelpers.hookAllMethods(type, method) { chain, _ ->
+                    val result = chain.proceed(chain.args.toTypedArray())
+                    runCatching {
+                        val record = chain.args.firstOrNull { it?.javaClass?.name == recordType }
+                        // Do not read identifiers, coordinates, extraParams or arbitrary JSON.
+                        val state = if (record != null) {
+                            knownSportState(XposedHelpers.getObjectField(record, "status"))
+                        } else {
+                            chain.args.filterIsInstance<String>().firstOrNull { knownSportState(it) != null }
+                        }
+                        val owner = System.identityHashCode(chain.thisObject)
+                        val key = "sport:record:$name:$method:$owner"
+                        val transition = method == "onSportStateChange" ||
+                            (record != null && state != null && state != "moving")
+                        reportWindow(key, force = transition) { window ->
+                            val numericResult = if (result is Number || result is Boolean) result else null
+                            "[StepPipeline] SportRecord ${type.simpleName}.$method calls=${window.calls} " +
+                                "instance=$owner state=$state result=$numericResult " +
+                                "owner=${snapshot(chain.thisObject)} record=${snapshot(record)} numeric-only=true"
+                        }
+                    }
+                    result
+                }
+                Log.i(TAG, "[StepPipeline] Observing SportRecord ${type.simpleName}#$method methods=${handles.size} numeric-only=true")
+            }
+        }
+    }
+
+    private fun knownSportState(value: Any?): String? = (value as? String)?.takeIf {
+        it in sportStates
+    }
+
+    /** Observe the executed algorithm, including any runtime patch, rather than assuming APK code. */
+    private fun installSportStepSignals(loader: ClassLoader) {
+        val type = XposedHelpers.findClassIfExists(
+            "com.alipay.android.phone.wallet.sportbiz.collector.StepHelper", loader) ?: return
+        if (installed.putIfAbsent(type, true) != null) return
+        val handles = XposedHelpers.hookAllMethods(type, "isValidStepSignal") { chain, _ ->
+            val result = chain.proceed(chain.args.toTypedArray())
+            runCatching {
+                val key = "sport:signal:${System.identityHashCode(chain.thisObject)}"
+                val window = windows.getOrPut(key) { Window() }
+                synchronized(window) {
+                    ++window.calls
+                    if (result == true) ++window.accepted
+                    val now = SystemClock.elapsedRealtime()
+                    if (window.firstSeen == Long.MIN_VALUE) window.firstSeen = now
+                    if (window.lastReport == Long.MIN_VALUE || now - window.lastReport >= 30_000L) {
+                        window.lastReport = now
+                        val elapsed = now - window.firstSeen
+                        // Cumulative counts and their wall-clock interval; no acceleration samples.
+                        Log.i(TAG, "[StepPipeline] SportSignal samples=${window.calls} accepted=${window.accepted} " +
+                            "elapsed_ms=$elapsed numeric-only=true")
+                    }
+                }
+            }
+            result
+        }
+        Log.i(TAG, "[StepPipeline] Observing SportSignal#isValidStepSignal methods=${handles.size} numeric-only=true")
     }
 
     /** Compare this APK's local source counts with its sync result, without altering either. */
@@ -226,25 +305,37 @@ internal object StepPipelineDiagnostics {
         val rpc = XposedHelpers.findClassIfExists(
             "com.alibaba.health.pedometer.intergation.rpc.RpcClient", loader) ?: return
         if (installed.putIfAbsent(rpc, true) != null) return
-        val handles = XposedHelpers.hookAllMethods(rpc, "a") { chain, method ->
-            val scoped = (sportSyncDepth.get() ?: 0) > 0 &&
-                (method as? Method)?.returnType?.name == "com.alibaba.health.pedometer.intergation.rpcPB.StepCounterSyncResultPB"
-            val result = chain.proceed(chain.args.toTypedArray())
-            if (method.parameterCount == 0 && (method as? Method)?.returnType == List::class.java) runCatching {
-                reportWindow("sport:source-list") { window ->
-                    val sources = result as? List<*>
-                    val counts = sources?.take(16)?.mapNotNull { snapshot(it) }?.joinToString()
-                    "[StepPipeline] SportSources collected calls=${window.calls} sources=${sources?.size} counts=[$counts] read-only=true"
+        // Installed APKs use a()/a(String, List) in 10.3.76, but h()/k(String, List)
+        // in 12.12.16. Match the verified return shapes rather than an obfuscated name.
+        val syncResultType = "com.alibaba.health.pedometer.intergation.rpcPB.StepCounterSyncResultPB"
+        val methodNames = rpc.declaredMethods.filter { method ->
+            method.returnType.name == syncResultType ||
+                (method.parameterCount == 0 && List::class.java.isAssignableFrom(method.returnType))
+        }.map { it.name }.distinct()
+        val observedMethodCount = methodNames.sumOf { name ->
+            val handles = XposedHelpers.hookAllMethods(rpc, name) { chain, method ->
+                val scoped = (sportSyncDepth.get() ?: 0) > 0 &&
+                    (method as? Method)?.returnType?.name == syncResultType
+                val result = chain.proceed(chain.args.toTypedArray())
+                if (method.parameterCount == 0 && (method as? Method)?.returnType?.let {
+                        List::class.java.isAssignableFrom(it)
+                    } == true) runCatching {
+                    reportWindow("sport:source-list") { window ->
+                        val sources = result as? List<*>
+                        val counts = sources?.take(16)?.mapNotNull { snapshot(it) }?.joinToString()
+                        "[StepPipeline] SportSources collected calls=${window.calls} sources=${sources?.size} counts=[$counts] read-only=true"
+                    }
                 }
-            }
-            if (scoped) runCatching {
-                reportWindow("sport:sync-result") { window ->
-                    "[StepPipeline] SportSync result calls=${window.calls} metadata=${snapshot(result)} read-only=true"
+                if (scoped) runCatching {
+                    reportWindow("sport:sync-result") { window ->
+                        "[StepPipeline] SportSync result calls=${window.calls} metadata=${snapshot(result)} read-only=true"
+                    }
                 }
+                result
             }
-            result
+            handles.size
         }
-        Log.i(TAG, "[StepPipeline] Observing SportSync#result methods=${handles.size} numeric-only=true")
+        Log.i(TAG, "[StepPipeline] Observing SportSync#result methods=$observedMethodCount numeric-only=true")
     }
 
     /** Observe the SDK's own source registration and permission decisions; never initialize it. */
@@ -369,11 +460,19 @@ internal object StepPipelineDiagnostics {
             type.name != "com.alibaba.health.pedometer.core.datasource.sensor.model.StepInfoRecord" &&
             type.name != "com.alibaba.health.pedometer.core.datasource.feature.PedometerStatus" &&
             type.name != "com.alibaba.health.pedometer.intergation.rpcPB.StepDataPB" &&
-            type.name != "com.alibaba.health.pedometer.intergation.rpcPB.StepCounterSyncResultPB") return null
+            type.name != "com.alibaba.health.pedometer.intergation.rpcPB.StepCounterSyncResultPB" &&
+            type.name != "com.alipay.android.phone.wallet.sportbiz.manager.StepDataManager" &&
+            type.name != "com.alipay.android.phone.wallet.sportbiz.collector.StepCollector" &&
+            type.name != "com.alipay.android.phone.wallet.sportbiz.manager.RecordDataManager" &&
+            type.name != "com.alipay.android.phone.wallet.sportbiz.activity.record.APSRecord") return null
         val available = fields.getOrPut(type) {
             type.declaredFields.filter { it.name in setOf("count", "timestamp", "timeInMillis", "receiveTimeMillis",
                 "dailyCount", "dailyCountOffset", "finalDailyCount", "uploadedDailyCount", "baseStep", "lastStep",
-                "stepCount", "accuracy", "success", "statusCode", "userDailyCount", "code") }
+                "stepCount", "accuracy", "success", "statusCode", "userDailyCount", "code",
+                "initStep", "latestCount", "outStepCount", "lastPauseStep", "interval",
+                "lastUploadStep", "lastUploadTime", "latestStepUpdateTime", "accelStep", "step",
+                "duration", "sportDuration", "frozeDuration", "startTime", "endTime",
+                "distance", "sportDistance", "gpsScore", "lbsCheckCode") }
                 .onEach { it.isAccessible = true }.associateBy { it.name }
         }
         return available.entries.joinToString(",", prefix = "${type.simpleName}{", postfix = "}") { (name, field) ->
