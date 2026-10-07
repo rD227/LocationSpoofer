@@ -407,7 +407,7 @@ fun RouteConfigDialog(
                                 if (!uiState.isAutoCadence) {
                                     var cadenceSlider by remember(uiState.stepCadenceSpm) {
                                         mutableFloatStateOf(
-                                            uiState.stepCadenceSpm.toFloat()
+                                            uiState.stepCadenceSpm.coerceIn(80, 240).toFloat()
                                         )
                                     }
                                     Column(
@@ -443,8 +443,8 @@ fun RouteConfigDialog(
                                                 cadenceSlider = it
                                                 onStepCadenceChange(it.toInt())
                                             },
-                                            valueRange = 60f..240f,
-                                            steps = 179,
+                                            valueRange = 80f..240f,
+                                            steps = 159,
                                             colors = SliderDefaults.colors(
                                                 thumbColor = AccentBlue,
                                                 activeTrackColor = AccentBlue,

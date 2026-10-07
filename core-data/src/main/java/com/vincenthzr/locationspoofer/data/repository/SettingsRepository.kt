@@ -190,6 +190,14 @@ class SettingsRepository(private val settingsManager: SettingsManager) {
             settingsManager.speedFluctuationPct = value
         }
 
+    var routeSimMode: String
+        get() = settingsManager.routeSimMode
+        set(value) { settingsManager.routeSimMode = value }
+
+    var customSpeedMs: Double
+        get() = settingsManager.customSpeedMs
+        set(value) { settingsManager.customSpeedMs = value }
+
     var gaitTemplate: String
         get() = settingsManager.gaitTemplate
         set(value) {

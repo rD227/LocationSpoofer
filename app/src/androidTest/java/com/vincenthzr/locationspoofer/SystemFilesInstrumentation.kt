@@ -17,6 +17,7 @@ class SystemFilesInstrumentation : Instrumentation() {
     private var moduleRuntime = false
     private var moduleHotReload = false
     private var deployHotReload = false
+    private var reloadProcess: String? = null
 
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
@@ -24,12 +25,13 @@ class SystemFilesInstrumentation : Instrumentation() {
         moduleRuntime = arguments?.getString("check") == "module-runtime"
         moduleHotReload = arguments?.getString("check") == "module-hot-reload"
         deployHotReload = arguments?.getString("check") == "module-hot-reload-active"
+        reloadProcess = arguments?.getString("reload-process")
         start()
     }
 
     override fun onStart() {
         if (deployHotReload) {
-            val output = reloadRunningModule()
+            val output = reloadRunningModule(reloadProcess)
             finish(if (output.getString("result") == "PASS") -1 else 0, output)
             return
         }

@@ -93,13 +93,17 @@ internal fun MainViewModel.deleteSavedRoute(route: com.vincenthzr.locationspoofe
 /** 设置循环模式速度 */
 
 internal fun MainViewModel.setRouteSimMode(mode: SimMode) {
+    settingsRepository.routeSimMode = mode.name
     _uiState.update { it.copy(routeSimMode = mode) }
 }
 
 /** 设置自定义速度 (m/s) */
 
 internal fun MainViewModel.setCustomSpeedMs(speed: Double) {
-    _uiState.update { it.copy(customSpeedMs = speed.coerceIn(0.1, 100.0)) }
+    if (!speed.isFinite()) return
+    val bounded = speed.coerceIn(0.1, 100.0)
+    settingsRepository.customSpeedMs = bounded
+    _uiState.update { it.copy(customSpeedMs = bounded) }
 }
 
 /** 获取实际生效的速度 (m/s) */
@@ -176,7 +180,7 @@ internal fun MainViewModel.setEnableStepSimulation(enable: Boolean) {
 }
 
 internal fun MainViewModel.setStepCadenceSpm(spm: Int) {
-    _uiState.update { it.copy(stepCadenceSpm = spm) }
+    _uiState.update { it.copy(stepCadenceSpm = spm.coerceIn(80, 240)) }
 }
 
 internal fun MainViewModel.setIsAutoCadence(auto: Boolean) {

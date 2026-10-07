@@ -2,6 +2,7 @@ package com.vincenthzr.locationspoofer.utils
 
 import android.content.Context
 import android.location.Geocoder
+import android.provider.Settings
 import com.vincenthzr.locationspoofer.data.model.RoutePoint
 import com.vincenthzr.locationspoofer.data.state.SpoofingState
 import com.vincenthzr.locationspoofer.utils.CoordinateUtils
@@ -248,7 +249,13 @@ class ConfigManager(private val context: Context, private val rootManager: RootM
 
     private suspend fun write(json: JSONObject): Boolean = writeMutex.withLock { writeLocked(json) }
 
+    private fun currentBootCount(): Long? = runCatching {
+        Settings.Global.getInt(context.contentResolver, Settings.Global.BOOT_COUNT).toLong()
+            .takeIf { it >= 0 }
+    }.getOrNull()
+
     private fun writeLocked(json: JSONObject): Boolean {
+        publishStepCounterClock(json, lastJson, System.currentTimeMillis(), currentBootCount())
         // Remember the desired state even if a stop/pause happens while the service is disconnected.
         // Reconnection must never replay an older active session over a newer stop request.
         if (!transportPrefs.edit().putString("desired_config", json.toString()).commit()) {
@@ -272,6 +279,13 @@ class ConfigManager(private val context: Context, private val rootManager: RootM
         notifyFailure: Boolean = true
     ): Boolean {
         return try {
+            // Migrate a saved pre-clock snapshot on reconnect as well as on user changes.
+            val clock = StepCounterClock.decode(json.optString(StepCounterClock.CONFIG_KEY))
+            val bootCount = currentBootCount()
+            if (clock == null || (bootCount != null && clock.bootCount != bootCount)) {
+                publishStepCounterClock(json, lastJson, System.currentTimeMillis(), bootCount)
+                check(transportPrefs.edit().putString("desired_config", json.toString()).commit())
+            }
             val prefs = service.getRemotePreferences(FrameworkConfigChannel.GROUP)
             publisher.publish(json.toString(), object : FrameworkConfigStore {
                 override fun commit(snapshot: String): Boolean =

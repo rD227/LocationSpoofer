@@ -112,6 +112,27 @@ object MotionRealism {
                 level.cadenceVariation * cadenceNoise.integral(elapsedSec)
             )
 
+        /** Reduce variation near the cadence limits, preserving an analytic, shared integral. */
+        private fun cadenceVariationScale(base: Double, minimum: Double, maximum: Double): Double {
+            val amplitude = CADENCE_SHARE_OF_SPEED * fluctuation + level.cadenceVariation
+            if (amplitude <= 0) return 1.0
+            return minOf(1.0, (base - minimum) / (base * amplitude),
+                (maximum - base) / (base * amplitude)).coerceIn(0.0, 1.0)
+        }
+
+        fun boundedCadence(baseCadenceSpm: Double, elapsedSec: Double,
+                           minimum: Double = 80.0, maximum: Double = 240.0): Double {
+            val base = baseCadenceSpm.coerceIn(minimum, maximum)
+            return base + cadenceVariationScale(base, minimum, maximum) * (cadence(base, elapsedSec) - base)
+        }
+
+        fun boundedSteps(baseCadenceSpm: Double, elapsedSec: Double,
+                         minimum: Double = 80.0, maximum: Double = 240.0): Double {
+            val base = baseCadenceSpm.coerceIn(minimum, maximum)
+            val uniform = base * elapsedSec / 60.0
+            return uniform + cadenceVariationScale(base, minimum, maximum) * (steps(base, elapsedSec) - uniform)
+        }
+
         /**
          * 加速度计读数（含重力，m/s²），坐标约定：Z 竖直、Y 前后、X 左右。
          * 有录制的步态模板时按模板回放，否则用内置的步行 / 跑步波形；两者都会叠加逐步的力度差异和传感器噪声。
@@ -126,7 +147,10 @@ object MotionRealism {
             val stepPhase = stepsFloat - stepIndex
             val strength = 1 + level.stepAmplitudeVariation * hashUnit(startTimestamp xor STEP_SALT, stepIndex)
             val out = if (template != null) {
-                template.sample(stepsFloat / 2.0, strength)
+                val gravity = template.gravity()
+                template.sampleDynamicAcceleration(stepsFloat / 2.0, strength).also { out ->
+                    for (i in 0..2) out[i] += gravity[i]
+                }
             } else {
                 proceduralGait(stepPhase, stepsFloat, stepIndex, speed, strength)
             }
@@ -141,6 +165,14 @@ object MotionRealism {
             val out = accelerometer(stepsFloat, speed, template, noise)
             val gravity = template?.gravity() ?: floatArrayOf(0f, 0f, GRAVITY)
             for (i in 0..2) out[i] -= gravity[i]
+            return out
+        }
+
+        /** Dynamic acceleration is unchanged; gravity follows the shared pocket attitude. */
+        fun orientedAccelerometer(stepsFloat: Double, speed: Double, template: GaitTemplate?, noise: Random): FloatArray {
+            val out = linearAcceleration(stepsFloat, speed, template, noise)
+            val gravity = GaitAttitude.sample(stepsFloat, speed, template).gravity()
+            for (i in 0..2) out[i] += gravity[i]
             return out
         }
 

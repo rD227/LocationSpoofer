@@ -39,6 +39,30 @@ class GaitTemplate(
     private val mean = floatArrayOf(x.average().toFloat(), y.average().toFloat(), z.average().toFloat())
     val hasGyroscope: Boolean get() = gyroX != null
 
+    // Integrate the zero-mean periodic angular rates once. Removing the cycle mean prevents
+    // a repeated short recording from accumulating an arbitrary compass drift forever.
+    private val attitudeIntegrals by lazy {
+        if (!hasGyroscope) null else listOf(gyroX!!, gyroY!!, gyroZ!!).map { axis ->
+            val bias = axis.average()
+            val dt = 120.0 / cadenceSpm / SAMPLES
+            DoubleArray(SAMPLES + 1).also { curve ->
+                for (i in 0 until SAMPLES) {
+                    curve[i + 1] = curve[i] + (axis[i] + axis[(i + 1) % SAMPLES] - 2 * bias) * dt / 2
+                }
+                val centre = curve.take(SAMPLES).average()
+                for (i in curve.indices) curve[i] -= centre
+            }
+        }
+    }
+
+    internal fun sampleAttitudeAngles(stridePhase: Double): DoubleArray? {
+        val curves = attitudeIntegrals ?: return null
+        val pos = (stridePhase - floor(stridePhase)) * SAMPLES
+        val i = pos.toInt().coerceIn(0, SAMPLES - 1)
+        val fraction = pos - i
+        return DoubleArray(3) { curves[it][i] * (1 - fraction) + curves[it][i + 1] * fraction }
+    }
+
     /** Mean gravity direction in the recorded device axes; magnitude is one g. */
     fun gravity(): FloatArray {
         val norm = sqrt(mean.sumOf { it.toDouble() * it })
@@ -72,6 +96,10 @@ class GaitTemplate(
             mean[a] + ((v - mean[a]) * strength).toFloat()
         }
     }
+
+    /** Remove the recorded cycle mean before adding a unit-gravity simulation baseline. */
+    internal fun sampleDynamicAcceleration(stridePhase: Double, strength: Double): FloatArray =
+        sample(stridePhase, strength).also { out -> for (i in 0..2) out[i] -= mean[i] }
 
     fun encode(): String = buildString {
         append(if (hasGyroscope) VERSION else LEGACY_VERSION).append(';').append(cadenceSpm).append(';').append(strideCount)

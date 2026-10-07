@@ -24,14 +24,18 @@ private suspend fun moduleService(): XposedService {
 }
 
 /** Deploy installed code without changing the user's current simulation or rebooting. */
-internal fun Instrumentation.reloadRunningModule(): Bundle {
+internal fun Instrumentation.reloadRunningModule(processName: String? = null): Bundle {
     val output = Bundle()
     try {
         runBlocking {
             val service = moduleService()
             check(service.apiVersion >= 102)
-            val targets = service.runningTargets
-            check(targets.map { it.processName }.toSet() == setOf("system", "com.android.phone", "com.android.bluetooth"))
+            val targets = service.runningTargets.filter { processName == null || it.processName == processName }
+            if (processName == null) {
+                check(targets.map { it.processName }.toSet() == setOf("system", "com.android.phone", "com.android.bluetooth"))
+            } else {
+                check(targets.size == 1) { "Expected one running target for $processName, found ${targets.size}" }
+            }
             for (target in targets) {
                 val completion = CompletableDeferred<HotReloadResult>()
                 service.hotReloadModule(target, null) { _, result -> completion.complete(result) }
@@ -39,7 +43,8 @@ internal fun Instrumentation.reloadRunningModule(): Bundle {
                 output.putString(target.processName, "${result.status()}: ${result.message()}")
                 check(result.status() == HotReloadResult.Status.SUCCEEDED)
             }
-            check(service.runningTargets.associate { it.processName to it.pid } == targets.associate { it.processName to it.pid })
+            check(service.runningTargets.filter { processName == null || it.processName == processName }
+                .associate { it.processName to it.pid } == targets.associate { it.processName to it.pid })
         }
         output.putString("result", "PASS")
     } catch (error: Throwable) {

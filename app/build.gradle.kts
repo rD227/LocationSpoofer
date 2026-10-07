@@ -47,7 +47,8 @@ android {
                 isEnable = true
                 reset()
                 include("arm64-v8a", "armeabi-v7a")
-                isUniversalApk = false
+                // A 64-bit device may host 32-bit apps; native diagnostics need both ABIs.
+                isUniversalApk = providers.gradleProperty("nativeDiagnosticsUniversal").orNull == "true"
             }
         }
     }

@@ -145,6 +145,20 @@ class SettingsManager(context: Context) {
         get() = prefs.getInt("speed_fluctuation_pct", MotionRealism.DEFAULT_SPEED_FLUCTUATION_PCT)
         set(value) = prefs.edit().putInt("speed_fluctuation_pct", value).apply()
 
+    /** 上次在开始模拟窗口选择的速度档位。 */
+    var routeSimMode: String
+        get() = prefs.getString("route_sim_mode", "WALKING") ?: "WALKING"
+        set(value) = prefs.edit().putString("route_sim_mode", value).apply()
+
+    /** 自定义速度以 m/s 保存，不受界面关闭或进程重启影响。 */
+    var customSpeedMs: Double
+        get() = prefs.getString("custom_speed_ms", null)?.toDoubleOrNull()
+            ?.takeIf { it.isFinite() }?.coerceIn(0.1, 100.0) ?: 3.0
+        set(value) {
+            if (value.isFinite()) prefs.edit()
+                .putString("custom_speed_ms", value.coerceIn(0.1, 100.0).toString()).apply()
+        }
+
     /** 录制的个人步态模板（GaitTemplate.encode() 的结果），空串表示未录制 */
     var gaitTemplate: String
         get() = prefs.getString("gait_template", "") ?: ""

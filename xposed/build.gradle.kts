@@ -8,9 +8,15 @@ plugins {
 android {
     namespace = "com.vincenthzr.locationspoofer.xposed"
     compileSdk = 37
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
         minSdk = 26
+        // Opt-in, read-only SDK tracing for investigating downstream step statistics.
+        buildConfigField("boolean", "STEP_PIPELINE_DIAGNOSTICS",
+            (providers.gradleProperty("stepPipelineDiagnostics").orNull == "true").toString())
+        ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
+        externalNativeBuild { cmake { arguments += "-DANDROID_STL=c++_static" } }
     }
 
     // 与 app/build.gradle.kts 中的 scheme 维度保持一致。
@@ -33,6 +39,12 @@ android {
     }
     buildFeatures {
         buildConfig = true
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 }
 

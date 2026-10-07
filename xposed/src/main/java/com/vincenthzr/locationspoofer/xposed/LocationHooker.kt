@@ -160,6 +160,9 @@ class LocationHooker : XposedModule() {
     internal fun releaseReloadTimer(timer: java.util.Timer) { ownedReloadTimers.remove(timer) }
 
     override fun onHotReloading(param: XposedModuleInterface.HotReloadingParam): Boolean {
+        // Native trampolines retain this library until process exit; reload by cold-starting
+        // the diagnostic host instead of stacking hooks from a new module classloader.
+        if (com.vincenthzr.locationspoofer.xposed.diagnostics.NativeSensorTrace.loaded) return false
         val loader = currentClassLoader ?: return false
         if (currentPackageName.isBlank()) return false
         // A new module instance receives this bootstrap-owned state. Never pass this module or
@@ -384,11 +387,14 @@ class LocationHooker : XposedModule() {
         hookConnectivityLayer(classLoader)
         hookBluetoothLE(classLoader)
         SensorStepHooker.hookSensorStepSimulation(classLoader)
+        com.vincenthzr.locationspoofer.xposed.diagnostics.NativeSensorTrace.install(currentPackageName)
+        com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(classLoader)
 
         readConfig()
     }
 
     internal fun hookAllMapSdks(cl: ClassLoader) {
+        com.vincenthzr.locationspoofer.xposed.diagnostics.StepPipelineDiagnostics.install(cl)
         try { hookAMapSDK(cl) } catch (_: Throwable) {}
         try { hookTencentSDK(cl) } catch (_: Throwable) {}
         try { hookBaiduSDK(cl) } catch (_: Throwable) {}

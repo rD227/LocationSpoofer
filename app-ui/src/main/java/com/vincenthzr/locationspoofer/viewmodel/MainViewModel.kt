@@ -10,6 +10,7 @@ import com.vincenthzr.locationspoofer.data.model.AppState
 import com.vincenthzr.locationspoofer.data.model.AppMapType
 import com.vincenthzr.locationspoofer.data.model.MapEngine
 import com.vincenthzr.locationspoofer.data.model.RootSolution
+import com.vincenthzr.locationspoofer.data.model.SimMode
 import com.vincenthzr.locationspoofer.vendor.VendorScheme
 import com.vincenthzr.locationspoofer.utils.GaitTemplate
 import com.vincenthzr.locationspoofer.data.motion.MotionController
@@ -81,6 +82,9 @@ class MainViewModel(
             debugDumpSystemServices = settingsRepository.debugDumpSystemServices,
             realismLevel = settingsRepository.realismLevel,
             speedFluctuationPct = settingsRepository.speedFluctuationPct,
+            routeSimMode = runCatching { SimMode.valueOf(settingsRepository.routeSimMode) }
+                .getOrDefault(SimMode.WALKING),
+            customSpeedMs = settingsRepository.customSpeedMs,
             gaitTemplateCadence = GaitTemplate.decode(settingsRepository.gaitTemplate)?.cadenceSpm,
             gaitTemplateStrides = GaitTemplate.decode(settingsRepository.gaitTemplate)?.strideCount ?: 0,
             gaitTemplateHasGyroscope = GaitTemplate.decode(settingsRepository.gaitTemplate)?.hasGyroscope ?: false,
