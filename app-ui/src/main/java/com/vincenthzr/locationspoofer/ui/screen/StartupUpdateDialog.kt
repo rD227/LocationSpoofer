@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.vincenthzr.locationspoofer.data.model.GithubRelease
+import com.vincenthzr.locationspoofer.utils.GithubUpdateSource
 import com.vincenthzr.locationspoofer.ui.R
 import com.vincenthzr.locationspoofer.ui.theme.AccentBlue
 import com.vincenthzr.locationspoofer.ui.theme.noRippleClickable
@@ -69,8 +70,6 @@ fun StartupUpdateDialog(
                     }
 
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        // 更新只会下载与当前安装一致的方案变体
-                        com.vincenthzr.locationspoofer.ui.screen.settings.SchemeBadge()
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
@@ -101,11 +100,7 @@ fun StartupUpdateDialog(
                         }
                     }
                 } else {
-                    Text(
-                        text = stringResource(R.string.new_version_prompt_desc),
-                        fontSize = 13.5.sp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
+                    ReleaseNotesFallback(latestRelease.htmlUrl ?: GithubUpdateSource.LATEST_PAGE)
                 }
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.06f))

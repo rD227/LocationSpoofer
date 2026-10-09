@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.vincenthzr.locationspoofer.ui.BuildConfig
 import com.vincenthzr.locationspoofer.ui.R
 import com.vincenthzr.locationspoofer.data.model.GithubRelease
+import com.vincenthzr.locationspoofer.utils.GithubUpdateSource
 import com.vincenthzr.locationspoofer.ui.theme.AccentBlue
 import com.vincenthzr.locationspoofer.ui.theme.AccentGreen
 import com.vincenthzr.locationspoofer.ui.theme.AppColors
@@ -150,6 +151,10 @@ fun UpdateScreen(
                         onBack()
                     }
                 )
+            }
+
+            if (uiState.error != null && !uiState.isLoading) {
+                item { ReleaseNotesFallback() }
             }
 
             // Beta 测试版通道开关
@@ -321,7 +326,6 @@ private fun CurrentVersionHeroCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    // 当前安装的是哪个模拟方案变体，更新时只会拉取同一变体的安装包
                     com.vincenthzr.locationspoofer.ui.screen.settings.SchemeBadge()
                     Box(
                         modifier = Modifier
@@ -632,7 +636,11 @@ private fun ReleaseItemCard(
             HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.06f))
 
             // 更新说明详情（结构化渲染）
-            RenderMarkdownContent(markdown = release.body)
+            if (release.body.isNotBlank()) {
+                RenderMarkdownContent(markdown = release.body)
+            } else {
+                ReleaseNotesFallback(release.htmlUrl ?: GithubUpdateSource.LATEST_PAGE)
+            }
 
             // 操作按键（历史版本仅提供下载操作，不显示忽略）
             if (!isCurrentVersion && (release.downloadUrl != null || release.downloadUrl32Bit != null)) {

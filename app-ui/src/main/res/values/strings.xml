@@ -639,4 +639,6 @@ Error details: %s</string>
     <string name="collection_route_delete_title">Delete collected route</string>
     <string name="collection_route_delete_message">Delete “%1$s” and all its collected samples?</string>
     <string name="local_collection_records_count">%1$d points · %2$d routes</string>
+    <string name="release_notes_unavailable">Release notes are unavailable. Open the release page in your browser to read them.</string>
+    <string name="view_release_in_browser">View release notes in browser</string>
 </resources>

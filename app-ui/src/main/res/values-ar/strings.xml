@@ -449,4 +449,6 @@
     <string name="collection_stopping">جارٍ إنهاء الجمع…</string>
     <string name="collection_no_saved_points">لم يتم حفظ أي نقاط. تحقق من الموقع وأذونات الجمع ثم حاول مجددًا.</string>
     <string name="collection_info_save_failed">تعذر حفظ تفاصيل النقطة. حاول مجددًا.</string>
+    <string name="release_notes_unavailable">تعذر تحميل ملاحظات الإصدار. افتح صفحة الإصدار في المتصفح لقراءتها.</string>
+    <string name="view_release_in_browser">عرض ملاحظات الإصدار في المتصفح</string>
 </resources>

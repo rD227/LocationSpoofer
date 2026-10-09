@@ -639,4 +639,6 @@
     <string name="collection_route_delete_title">删除采集路线</string>
     <string name="collection_route_delete_message">删除“%1$s”及其全部采样数据？</string>
     <string name="local_collection_records_count">%1$d 个点位 · %2$d 条路线</string>
+    <string name="release_notes_unavailable">暂时无法读取更新日志，请在浏览器中查看发布介绍。</string>
+    <string name="view_release_in_browser">在浏览器查看更新日志</string>
 </resources>

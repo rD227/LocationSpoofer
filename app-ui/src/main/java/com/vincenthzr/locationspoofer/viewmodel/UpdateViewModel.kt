@@ -5,8 +5,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vincenthzr.locationspoofer.data.model.GithubRelease
-import com.vincenthzr.locationspoofer.ui.BuildConfig
+import com.vincenthzr.locationspoofer.utils.GithubUpdateSource
 import com.vincenthzr.locationspoofer.utils.UpdateManager
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
+import org.json.JSONObject
 
 data class UpdateUiState(
     val isLoading: Boolean = false,
@@ -40,69 +42,43 @@ class UpdateViewModel(private val context: Context) : ViewModel() {
         _uiState.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val request = Request.Builder()
-                    .url("https://api.github.com/repos/HuangZhuoRui/LocationSpoofer/releases")
-                    .header("Accept", "application/vnd.github.v3+json")
-                    .build()
-
-                val response = okHttpClient.newCall(request).execute()
-                if (!response.isSuccessful) {
-                    throw Exception("Failed to fetch updates: ${response.code}")
+                fun fetchJson(url: String): String {
+                    val request = Request.Builder()
+                        .url(url)
+                        .header("Accept", "application/vnd.github+json")
+                        .build()
+                    return okHttpClient.newCall(request).execute().use { response ->
+                        check(response.isSuccessful) { "Failed to fetch updates: ${response.code}" }
+                        response.body?.string() ?: error("Empty release response")
+                    }
                 }
 
-                val jsonStr = response.body?.string() ?: "[]"
-                val jsonArray = JSONArray(jsonStr)
-                val releaseList = mutableListOf<GithubRelease>()
-
-                for (i in 0 until jsonArray.length()) {
-                    val obj = jsonArray.getJSONObject(i)
-                    val tagName = obj.optString("tag_name", "Unknown")
-                    val body = obj.optString("body", "")
-                    val publishedAt = obj.optString("published_at", "")
-                    val isPrerelease = obj.optBoolean("prerelease", false)
-
-                    var downloadUrl: String? = null
-                    var downloadUrl32Bit: String? = null
-                    val assets = obj.optJSONArray("assets")
-                    if (assets != null) {
-                        for (j in 0 until assets.length()) {
-                            val asset = assets.getJSONObject(j)
-                            val assetName = asset.optString("name", "")
-                            if (assetName.endsWith(".apk") && isAssetForCurrentScheme(assetName)) {
-                                val url = asset.optString("browser_download_url")
-                                if (assetName.contains("armeabi-v7a") || assetName.contains("32")) {
-                                    downloadUrl32Bit = url
-                                } else if (assetName.contains("arm64-v8a")) {
-                                    downloadUrl = url
-                                } else {
-                                    // 通用安装包，如果没有专门的64位，就默认用通用包作为主链接
-                                    if (downloadUrl == null) {
-                                        downloadUrl = url
-                                    }
-                                }
-                            }
-                        }
+                val latest = GithubUpdateSource.parseRelease(
+                    JSONObject(fetchJson("${GithubUpdateSource.API_URL}/latest")),
+                    isLatest = true
+                )
+                // 历史记录不可用时，仍保留已获取的最新稳定版和更新说明。
+                val history = try {
+                    val array = JSONArray(fetchJson(GithubUpdateSource.API_URL))
+                    (0 until array.length()).mapNotNull { index ->
+                        val obj = array.getJSONObject(index)
+                        if (obj.optBoolean("draft") || obj.optString("tag_name") == latest.versionName) null
+                        else GithubUpdateSource.parseRelease(obj)
                     }
-
-                    if (downloadUrl == null && downloadUrl32Bit != null) {
-                        downloadUrl = downloadUrl32Bit
-                    }
-
-                    releaseList.add(
-                        GithubRelease(
-                            tagName,
-                            body,
-                            downloadUrl,
-                            downloadUrl32Bit,
-                            publishedAt,
-                            isPrerelease
-                        )
-                    )
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (_: Exception) {
+                    emptyList()
                 }
+                // Beta 开关仍按发布时间选择候选版本；稳定版始终以 /latest 为准。
+                val releaseList = history.filter { it.isPrerelease && it.publishedAt > latest.publishedAt } +
+                    latest + history.filterNot { it.isPrerelease && it.publishedAt > latest.publishedAt }
 
                 withContext(Dispatchers.Main) {
                     _uiState.update { it.copy(isLoading = false, releases = releaseList) }
                 }
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     _uiState.update { it.copy(isLoading = false, error = e.message) }
@@ -167,14 +143,4 @@ class UpdateViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
-}
-
-/**
- * 同一个 Release 里同时挂着两个模拟方案的 APK，文件名形如 LocationSpoofer-<scheme>-<abi>-<tag>.apk
- * （见 .github/workflows/release.yml），只挑和当前安装的方案一致的那一个。
- * 引入 scheme 变体之前的旧 Release 文件名里没有方案标记，那时发布的都是非全局（scoped）方案。
- */
-private fun isAssetForCurrentScheme(assetName: String): Boolean {
-    val markedGlobal = assetName.contains("-global-")
-    return if (BuildConfig.GLOBAL_SCHEME) markedGlobal else !markedGlobal
 }
